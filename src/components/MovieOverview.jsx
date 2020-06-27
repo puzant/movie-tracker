@@ -16,7 +16,6 @@ class MovieOverview extends Component {
 
   render() { 
     let { movie } = this.props
-    // let { genres } = this.props.genres
 
     return ( 
       <div className="movie-overview-container">
