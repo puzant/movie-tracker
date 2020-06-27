@@ -6,8 +6,6 @@ import queryString from 'query-string'
 import Movie from './Movie'
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 
