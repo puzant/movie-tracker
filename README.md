@@ -1,6 +1,6 @@
 # Movie Tracker App
 
-[preview](src/app-preview.jpg)
+![preview](src/app-preview.png)
 
 Built using Reactjs for rendering the view, & with Redux to handle the State 
 
