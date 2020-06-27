@@ -8,8 +8,6 @@ import {connect} from 'react-redux'
 import * as actions from '../redux/actionCreators.js';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 
