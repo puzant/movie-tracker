@@ -22,12 +22,10 @@ class App extends Component {
   }
 
   handleChange(e) {
-    // console.log(this.state.name)
     this.setState({ name: e.target.value })
   }
 
   render() {
-
     return (
       <Router>
          <div className="main-app-container">
