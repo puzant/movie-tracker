@@ -1,3 +1,15 @@
+# Movie Tracker App
+
+[preview](src/app-preview.jpg)
+
+Built using Reactjs for rendering the view, & with Redux to handle the State 
+
+- This App consists of 3 sections
+  - Discover Movies 
+  - Movie OverView
+  - Movie Search Results
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
