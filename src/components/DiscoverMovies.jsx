@@ -25,8 +25,8 @@ class DiscoverMovies extends Component {
     this.props.sortMovies(movies)
   }
 
-  handleFilter(movies) {
-    this.props.filterMovies(movies)
+  handleFilter(movies, filterType) {
+    this.props.filterMovies(movies, filterType)
   }
 
   render() {     
@@ -48,8 +48,12 @@ class DiscoverMovies extends Component {
           </div>
 
           <div className="filter-movies-container">
-            <img onClick={() => this.handleFilter(movies)} className="filter-logo" src={filterLogo} alt=""/>
-            <span className="filter-text">Filter</span>
+            <img  className="filter-logo" src={filterLogo} alt=""/>
+            <span className="filter-text dropbtn">Filter</span>
+              <div className="dropdown-content">
+                <a onClick={() => this.handleFilter(movies, "highestRating")} href="#">Highest Rating</a>
+                <a onClick={() => this.handleFilter(movies, "adult")} href="#">Adult</a>
+              </div>
           </div>
         </div>
 
