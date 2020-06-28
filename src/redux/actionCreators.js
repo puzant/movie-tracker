@@ -80,6 +80,9 @@ export function fetchMovieById(movieId) {
       .then(function(response) {
         dispatch(fetchMovieSuccess(response.data))
       })
+      .then(function(error) {
+        dispatch(fetchMoviesError())
+      })
   }
 }
 
@@ -88,6 +91,9 @@ export function fetchMovieByQuery(query) {
     return axios.get(`https://api.themoviedb.org/3/search/movie?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&query=${query}&page=1&include_adult=false`)
       .then(function(response) {
         dispatch(fetchMovieByQuerySucess(response.data))
+      })
+      .then(function(error) {
+        dispatch(fetchMoviesError())
       })
   }
 }
