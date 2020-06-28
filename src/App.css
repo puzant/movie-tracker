@@ -337,6 +337,10 @@ a {
   transition: .5s;
 }
 
+.dropdown-content a:hover {
+  cursor: pointer;
+}
+
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .filter-movies-container:hover .dropdown-content {
