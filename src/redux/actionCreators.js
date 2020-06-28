@@ -44,11 +44,12 @@ export function fetchMoviesError(error) {
   }
 }
 
-export function filterMovies(movies) {
+export function filterMovies(movies, filterType) {
   return {
     type: actions.FILTER_MOVIES, 
     payload: {
-      movies: movies
+      movies: movies,
+      filterType: filterType
     }
   }
 }
