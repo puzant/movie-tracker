@@ -29,11 +29,11 @@ export default function moviesReducer(state = initialState, action) {
       }
     case actions.FILTER_MOVIES:
       let filterMovies;
-      if(action.payload.filterType === 'highestRating') {
+      if(action.payload.filterType === actions.BY_HIGHEST_ORDER) {
          filterMovies =  action.payload.movies.filter(function(movie) {
           return movie.vote_average > 6.9;
         })
-      } else if(action.payload.filterType == 'adult') {
+      } else if(action.payload.filterType === actions.BY_ADULT) {
         filterMovies = action.payload.movies.filter(function(movie) {
           return movie.adult
         })
