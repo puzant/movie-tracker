@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Movie from './Movie'
-import loader from '../loader-dotted.gif'
-import sortLogo from '../sort.svg'
-import filterLogo from '../filter.svg'
+import loader from '../assets/loader-dotted.gif'
+import sortLogo from '../assets/sort.svg'
+import filterLogo from '../assets/filter.svg'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as actions from '../redux/actionCreators.js';
