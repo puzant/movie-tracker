@@ -5,7 +5,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import css from './App.css'
+import css from './assets/App.css'
 import DiscoverMovies from './components/DiscoverMovies'
 import MovieOverview from './components/MovieOverview'
 import SearchResults from './components/SearchResults'
