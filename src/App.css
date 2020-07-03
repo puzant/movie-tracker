@@ -146,6 +146,7 @@
 
 .movie-container:hover {
   cursor: pointer;
+  background-color: rgb(235, 231, 231);
 }
 
 .movie-title-rating {
@@ -171,10 +172,15 @@
   text-overflow: ellipsis;
 }
 
+.movie-genres-text {
+  margin-top: 10px;
+}
+
 .overview-text, 
 .rating-text,
 .movie-home-page-text, 
-.language-text {
+.language-text,
+.movie-genres-text {
   color: #a0d2eb;
   font-weight: bold;
 }
@@ -220,7 +226,6 @@ a {
 /** movie over page css **/
 .movie-overview-container {
   display: flex;
-  /* flex-wrap: wrap; */
   width: 80%;
   padding: 20px;
   margin: 30px auto;
@@ -240,7 +245,7 @@ a {
 }
 
 .movie-info-description {
-  padding: 20px;
+  margin-left: 20px;
 }
 
 .movie-overview-title {
@@ -254,7 +259,7 @@ a {
 }
 
 .movie-overview {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .movie-home-page {
@@ -345,4 +350,22 @@ a {
 
 .filter-movies-container:hover .dropdown-content {
   display: block;
+}
+
+.load-more-movies-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.load-more-btn {
+  background: #a0d2eb;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.load-more-btn:hover {
+  cursor: pointer;
 }
