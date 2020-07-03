@@ -66,7 +66,7 @@ class MovieOverview extends Component {
 
           <div className="movie-language">
             <span className="language-text">Language: </span>
-            <span>{this.movieLanguage()}</span>
+            <span>{movie.original_language && this.movieLanguage()}</span>
           </div>
 
         </div>
