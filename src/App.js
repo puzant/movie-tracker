@@ -39,7 +39,7 @@ class App extends Component {
              <div className="movies-search-bar">
                <input onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
                <Link to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
-                <button onClick={this.handleRedirect} className="btn-search">Search</button>
+                <button className="btn-search">Search</button>
                </Link>
              </div>
            </div>
