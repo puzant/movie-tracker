@@ -14,9 +14,22 @@ class MovieOverview extends Component {
     this.props.fetchMovieById(params.movieId)
   }
 
+  movieLanguage() {
+    switch(this.props.movie.original_language) {
+      case "en":
+        return "English"
+      case "fr":
+        return "French"
+      case "jp":
+        return "japanese"
+      case "ko":
+        return "korean"
+    }
+  }
+
   render() { 
     let { movie } = this.props
-
+    
     return ( 
       <div className="movie-overview-container">
         
@@ -53,7 +66,7 @@ class MovieOverview extends Component {
 
           <div className="movie-language">
             <span className="language-text">Language: </span>
-            <span>{movie.original_language == 'en' ? "English" : movie.original_language}</span>
+            <span>{this.movieLanguage()}</span>
           </div>
 
         </div>
