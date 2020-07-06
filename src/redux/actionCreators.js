@@ -44,6 +44,15 @@ export function fetchMoviesError(error) {
   }
 }
 
+export function fetchMovieReviewsSuccess(reviews) {
+  return {
+    type: actions.GET_MOVIE_REVIEWS_SUCCESS,
+    payload: {
+      reviews: reviews
+    }
+  }
+}
+
 export function filterMovies(movies, filterType) {
   return {
     type: actions.FILTER_MOVIES, 
@@ -66,7 +75,7 @@ export function sortMovies(movies) {
 export function fetchMovies() {
   return dispatch => {
     dispatch(fetchMoviesPending());
-    return axios.get("https://api.themoviedb.org/3/discover/movie?api_key=63d59f2df02d27e6739533218ba6c9d9")
+    return axios.get("https://api.themoviedb.org/3/discover/movie?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
       .then(function(response) {
         dispatch(fetchMoviesSuccess(response.data.results))
       })
@@ -94,6 +103,15 @@ export function fetchMovieByQuery(query) {
       })
       .then(function(error) {
         dispatch(fetchMoviesError())
+      })
+  }
+}
+
+export function fetchMovieReviews(movieId) {
+  return dispatch => {
+    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&page=1`)
+      .then(function(response) {
+        dispatch(fetchMovieReviewsSuccess(response.data.results))
       })
   }
 }

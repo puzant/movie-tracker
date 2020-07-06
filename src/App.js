@@ -5,7 +5,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import css from './App.css'
+import css from './assets/App.css'
 import DiscoverMovies from './components/DiscoverMovies'
 import MovieOverview from './components/MovieOverview'
 import SearchResults from './components/SearchResults'
@@ -39,7 +39,7 @@ class App extends Component {
              <div className="movies-search-bar">
                <input onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
                <Link to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
-                <button onClick={this.handleRedirect} className="btn-search">Search</button>
+                <button className="btn-search">Search</button>
                </Link>
              </div>
            </div>
