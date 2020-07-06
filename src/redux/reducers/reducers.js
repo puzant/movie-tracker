@@ -5,6 +5,7 @@ const initialState = {
   movies: [],
   movie: [],
   searchResults: [],
+  movieReviews: [],
   error: false
 }
 
@@ -59,6 +60,11 @@ export default function moviesReducer(state = initialState, action) {
       return {
         ...state,
         searchResults: action.payload.searchResults.results
+      }
+    case actions.GET_MOVIE_REVIEWS_SUCCESS:
+      return {
+        ...state,
+        movieReviews: action.payload.reviews
       }
     default: 
       return state
