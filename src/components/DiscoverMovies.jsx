@@ -6,17 +6,10 @@ import filterLogo from '../assets/filter.svg'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as actions from '../redux/actionCreators.js';
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class DiscoverMovies extends Component {  
-
-  constructor(props) {
-    super(props);
-  } 
-
+  
   componentDidMount() {
     this.props.fetchMovies()
   }
