@@ -7,6 +7,12 @@ export function fetchMoviesPending() {
   }
 }
 
+export function fetcMorehMoviesPending() {
+  return {
+    type: actions.GET_MORE_MOVIES_PENDING
+  }
+}
+
 export function fetchMoviesSuccess(movies) {
   return {
     type: actions.GET_MOVIES_SUCCESS,
@@ -94,6 +100,7 @@ export function fetchMovies() {
 
 export function fetchMoreMovies(pageNumber) {
   return dispatch => {
+    dispatch(fetcMorehMoviesPending())
     return axios
       .get(`https://api.themoviedb.org/3/discover/movie?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNumber}`)
         .then(function(response) {
