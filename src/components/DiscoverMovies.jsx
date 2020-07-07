@@ -17,9 +17,7 @@ class DiscoverMovies extends Component {
     // Binds our scroll event handler
     window.onscroll = debounce(() => {
       if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        let loadingMoreMovies = true
         this.props.fetchMoreMovies(pagesCounter)
-        loadingMoreMovies = false
         pagesCounter++
       }
     }, 100);
@@ -86,7 +84,7 @@ class DiscoverMovies extends Component {
         </div>
 
         <div className="load-more-movies">
-          {!this.loadingMoreMovies && <img className="movies-loader" src={loader} alt=""/>}
+          {this.props.loadMorePendingState && this.props.movies && <img className="movies-loader" src={loader} alt=""/>}
         </div>
 
         {this.props.error && <div className="movies-error">
@@ -102,6 +100,7 @@ const mapStateToProps = (state) => {
   return {
     movies: state.movies,
     pendingState: state.pending,
+    loadMorePendingState: state.loadMorePending,
     errorState: state.error,
   }
 }
