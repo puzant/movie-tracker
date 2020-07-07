@@ -1,5 +1,7 @@
 export const GET_MOVIES_PENDING = "getMoviesPending"
+export const GET_MORE_MOVIES_PENDING = "getMoreMoviesPending"
 export const GET_MOVIES_SUCCESS = "getMoviesSuccess"
+export const GET_MORE_MOVIES_SUCCESS = "getMoreMovies"
 export const GET_MOVIES_ERROR = "getMoviesError"
 export const FILTER_MOVIES = "filterMovies"
 export const SORT_MOVIES = "sortMovies"

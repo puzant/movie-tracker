@@ -205,7 +205,8 @@
   font-weight: bold;
 }
 
-.movie-loader-container {
+.movie-loader-container,
+.load-more-movies {
   margin: auto;
 }
 
