@@ -22,6 +22,13 @@ export default function moviesReducer(state = initialState, action) {
         pending: false,
         movies: action.payload.movies
       }
+    case actions.GET_MORE_MOVIES_SUCCESS:
+      const newMoviesList = action.payload.movies
+      const {movies} = state
+      return {
+        ...state,
+        movies: [...movies, ...newMoviesList]
+      }
     case actions.GET_MOVIES_ERROR:
       return {
         ...state,
