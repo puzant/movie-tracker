@@ -2,6 +2,7 @@ import * as actions from '../actionTypes'
 
 const initialState = {
   pending: false,
+  loadMorePending: false,
   movies: [],
   movie: [],
   searchResults: [],
@@ -16,6 +17,11 @@ export default function moviesReducer(state = initialState, action) {
         ...state,
         pending: true
       }
+    case actions.GET_MORE_MOVIES_PENDING:
+      return {
+        ...state,
+        loadMorePending: true
+      }
     case actions.GET_MOVIES_SUCCESS:
       return {
         ...state,
@@ -27,6 +33,7 @@ export default function moviesReducer(state = initialState, action) {
       const {movies} = state
       return {
         ...state,
+        loadMorePending: false,
         movies: [...movies, ...newMoviesList]
       }
     case actions.GET_MOVIES_ERROR:
