@@ -7,8 +7,23 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import * as actions from '../redux/actionCreators.js';
 import { Link } from "react-router-dom";
+import debounce from "lodash.debounce";
 
 class DiscoverMovies extends Component {  
+
+  constructor(props) {
+    super(props);
+    let pagesCounter = 2
+    // Binds our scroll event handler
+    window.onscroll = debounce(() => {
+      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+        let loadingMoreMovies = true
+        this.props.fetchMoreMovies(pagesCounter)
+        loadingMoreMovies = false
+        pagesCounter++
+      }
+    }, 100);
+  }
   
   componentDidMount() {
     this.props.fetchMovies()
@@ -68,6 +83,10 @@ class DiscoverMovies extends Component {
 
         <div className="movie-loader-container">
           {this.props.pendingState && <img className="movies-loader" src={loader} />}
+        </div>
+
+        <div className="load-more-movies">
+          {!this.loadingMoreMovies && <img className="movies-loader" src={loader} alt=""/>}
         </div>
 
         {this.props.error && <div className="movies-error">
