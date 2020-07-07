@@ -16,6 +16,15 @@ export function fetchMoviesSuccess(movies) {
   }
 }
 
+export function fetchMoreMoviesSuccess(movies) {
+  return {
+    type: actions.GET_MORE_MOVIES_SUCCESS,
+    payload: {
+      movies: movies
+    }
+  }
+}
+
 export function fetchMovieSuccess(movie) {
   return {
     type: actions.GET_MOVIE_SUCCESS,
@@ -75,11 +84,25 @@ export function sortMovies(movies) {
 export function fetchMovies() {
   return dispatch => {
     dispatch(fetchMoviesPending());
-    return axios.get("https://api.themoviedb.org/3/discover/movie?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
-      .then(function(response) {
-        dispatch(fetchMoviesSuccess(response.data.results))
-      })
-  };
+    return axios
+      .get("https://api.themoviedb.org/3/discover/movie?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1")
+        .then(function(response) {
+          dispatch(fetchMoviesSuccess(response.data.results))
+        })
+    };
+}
+
+export function fetchMoreMovies(pageNumber) {
+  return dispatch => {
+    return axios
+      .get(`https://api.themoviedb.org/3/discover/movie?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNumber}`)
+        .then(function(response) {
+          dispatch(fetchMoreMoviesSuccess(response.data.results))
+        })
+        .then(function(error) {
+          dispatch(fetchMoviesError(error))
+        })
+    }
 }
 
 
@@ -90,7 +113,7 @@ export function fetchMovieById(movieId) {
         dispatch(fetchMovieSuccess(response.data))
       })
       .then(function(error) {
-        dispatch(fetchMoviesError())
+        dispatch(fetchMoviesError(error))
       })
   }
 }
@@ -102,7 +125,7 @@ export function fetchMovieByQuery(query) {
         dispatch(fetchMovieByQuerySucess(response.data))
       })
       .then(function(error) {
-        dispatch(fetchMoviesError())
+        dispatch(fetchMoviesError(error))
       })
   }
 }
