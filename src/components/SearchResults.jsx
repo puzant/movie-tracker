@@ -4,6 +4,7 @@ import * as actions from '../redux/actionCreators.js';
 import {connect} from 'react-redux'
 import queryString from 'query-string'
 import Movie from './Movie'
+import emptyResultsLogo from '../assets/empty-results.png'
 import {
   Link
 } from "react-router-dom";
@@ -20,7 +21,7 @@ class SearchResults extends Component {
     return ( 
       <div className="search-results-container">
 
-        {searchResults === 0 ? <div className="no-results"><img src="https://i.pinimg.com/originals/20/d3/8b/20d38b1d0d3304dd80adc2e4029278ac.png" alt=""/></div> : ""}
+        {searchResults == 0 ? <div className="no-results"><img src={emptyResultsLogo} alt=""/></div> : ""}
 
         {searchResults.map(movie => (
           <Link to={`/movie-overview/${movie.id}`} key={movie.id}>
