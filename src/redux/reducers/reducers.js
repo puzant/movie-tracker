@@ -15,12 +15,13 @@ const initialState = {
 
 const moviesReducer = handleActions(
   {
-    [actions.GET_MOVIES_PENDING]: state => ({...state, pending: true,}),
+    [actions.GET_MOVIES_PENDING]: state => ({...state, pending: true, error: false}),
     [actions.GET_MORE_MOVIES_PENDING]: state => ({...state, loadMorePending: true}),
     [actions.GET_MOVIES_SUCCESS]: (state, {payload}) => {
       return ({
         ...state,
         pending: false,
+        error: false,
         movies: payload.movies
       })
     },
