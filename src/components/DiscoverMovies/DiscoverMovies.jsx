@@ -9,6 +9,7 @@ import * as actions from '../../redux/actions/actionCreators'
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import './style.css'
+import PropTypes from 'prop-types';
 
 class DiscoverMovies extends Component {  
 
@@ -154,6 +155,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch)
+}
+
+DiscoverMovies.propTypes = {
+  movies: PropTypes.array,
+  pendingState: PropTypes.bool,
+  loadMorePendingState: PropTypes.bool,
+  errorState: PropTypes.bool,
+  genres: PropTypes.array,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiscoverMovies)
