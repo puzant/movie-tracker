@@ -1,6 +1,5 @@
 import { createAction } from 'redux-actions';
 import * as actions from './actionTypes'
-import axios from 'axios';
 import api from '../../api/api'
 /*
  |--------------------------------------------------------------------------
@@ -32,6 +31,7 @@ export function fetchMovies() {
 
  const fetcMorehMoviesPending = createAction(actions.GET_MORE_MOVIES_PENDING)
  const fetchMoreMoviesSuccess = createAction(actions.GET_MORE_MOVIES_SUCCESS, (movies) => ({movies}))
+ const fetchMoreMoviesError = createAction(actions.GET_MORE_MOVIES_ERROR, (error) => ({error}))
 
  export function fetchMoreMovies(pageNumber) {
   return dispatch => {
@@ -41,7 +41,7 @@ export function fetchMovies() {
           dispatch(fetchMoreMoviesSuccess(response.data.results))
         })
         .then((error) => {
-          dispatch(fetchMoviesError(error))
+          dispatch(fetchMoreMoviesError(error))
         })
     }
 }
