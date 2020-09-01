@@ -134,15 +134,22 @@ export function fetchUpcomingMovies() {
     return axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=63d59f2df02d27e6739533218ba6c9d9&language=en-US&page=1")
       .then((response) => {
         //  TODO: create action for the upcoming movies
+      }).catch((error) => {
+        //  TODO: create a new action for catching errors
       })
   }
 }
 
+/*
+ |--------------------------------------------------------------------------
+ | Movies Fileters Functionallities
+ |--------------------------------------------------------------------------
+ */
 
-// const filterMovies = createAction(actions.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
-// const sortMovies = createAction(actions.SORT_MOVIES, (movies) => ({movies}))
-// const filterMoviesBasedByGenres = createAction(actions.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
 
+const filter = createAction(actions.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
+const sort = createAction(actions.SORT_MOVIES, (movies) => ({movies}))
+const filterByGenres = createAction(actions.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
 
 export function filterMovies(movies, filterType) {
   return {
