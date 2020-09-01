@@ -1,4 +1,4 @@
-import * as actions from '../actionTypes'
+import * as actions from '../actions/actionTypes'
 import _ from 'lodash'
 import { handleActions } from 'redux-actions'
 
