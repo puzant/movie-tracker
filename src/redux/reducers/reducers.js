@@ -10,13 +10,14 @@ const initialState = {
   genres: [],
   searchResults: [],
   movieReviews: [],
-  error: false
+  error: false,
+  loadMoreMoviesError: false
 }
 
 const moviesReducer = handleActions(
   {
     [actions.GET_MOVIES_PENDING]: state => ({...state, pending: true, error: false}),
-    [actions.GET_MORE_MOVIES_PENDING]: state => ({...state, loadMorePending: true}),
+    [actions.GET_MORE_MOVIES_PENDING]: state => ({...state, loadMoreMoviesError: false, loadMorePending: true}),
     [actions.GET_MOVIES_SUCCESS]: (state, {payload}) => {
       return ({
         ...state,
@@ -30,11 +31,13 @@ const moviesReducer = handleActions(
       const {movies} = state
       return ({
         ...state,
+        loadMoreMoviesError: false,
         loadMorePending: false,
         movies: [...movies, ...newMoviesList]
       })
     },
     [actions.GET_MOVIES_ERROR]: (state) => ({...state, pending: false, error: true}),
+    [actions.GET_MORE_MOVIES_ERROR]: (state,) => ({...state, loadMoreMoviesError: true, loadMorePending: false}),
     [actions.FILTER_MOVIES]: (state, {payload}) => {
       let filterMovies;
       if(payload.filterType === actions.BY_HIGHEST_ORDER) {
