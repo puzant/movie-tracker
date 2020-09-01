@@ -5,7 +5,7 @@ import sortLogo from '../../assets/sort.svg'
 import filterLogo from '../../assets/filter.svg'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import * as actions from '../../redux/actionCreators.js';
+import * as actions from '../../redux/actions/actionCreators'
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import './style.css'
