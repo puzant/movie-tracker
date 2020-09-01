@@ -10,4 +10,5 @@ export const GET_MOVIE_BY_QUERY_SUCCESS = "getMovieByQuerySuccess"
 export const BY_HIGHEST_ORDER = "highestRating"
 export const BY_ADULT = "adult"
 export const GET_MOVIE_REVIEWS_SUCCESS = "getMovieReviewsSuccess"
-
+export const GET_GENRES = "getGenres"
+export const FILTER_BASED_ON_GENRES = "filterBasedOnGenres"
