@@ -152,12 +152,8 @@ const sort = createAction(actions.SORT_MOVIES, (movies) => ({movies}))
 const filterByGenres = createAction(actions.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
 
 export function filterMovies(movies, filterType) {
-  return {
-    type: actions.FILTER_MOVIES, 
-    payload: {
-      movies: movies,
-      filterType: filterType
-    }
+  return dispatch => {
+    dispatch(filter(movies, filterType))
   }
 }
 
