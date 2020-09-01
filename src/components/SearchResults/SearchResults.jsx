@@ -8,6 +8,7 @@ import emptyResultsLogo from '../../assets/empty-results.png'
 import {
   Link
 } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 class SearchResults extends Component {
 
@@ -51,6 +52,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actions, dispatch)
+}
+
+SearchResults.propTypes = {
+  searchResults: PropTypes.array
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults)
