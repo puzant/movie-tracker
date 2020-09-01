@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux'
-import * as actions from '../../redux/actionCreators.js';
+import * as actions from '../../redux/actions/actionCreators.js';
 import {connect} from 'react-redux'
 
 class MovieOverview extends Component {
