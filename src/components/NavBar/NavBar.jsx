@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  NavLink,
   Redirect
 } from "react-router-dom";
 
@@ -30,11 +30,11 @@ class NavBar extends Component {
     const NavItem = () => (
       <div className="navigation-items">
         <li className="nav-item">
-        <Link to="/">Discover Movies</Link>
+        <NavLink exact activeStyle={{ fontWeight: "bold", color: "#111"}} to="/">Discover Movies</NavLink>
         </li>
 
         <li className="nav-item">
-          <Link to="/upcoming-movies">Upcoming Movies</Link>
+          <NavLink exact activeStyle={{fontWeight: "bold", color: "#111"}} to="/upcoming-movies">Upcoming Movies</NavLink>
         </li>
       </div>
     )
@@ -48,9 +48,9 @@ class NavBar extends Component {
   
              <div className="movies-search-bar">
                <input value={this.state.name} onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
-               <Link to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
+               <NavLink to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
                 <button className="btn-search">Search</button>
-               </Link>
+               </NavLink>
              </div>
            </div>
         
@@ -58,6 +58,7 @@ class NavBar extends Component {
             <Route path="/" exact component={DiscoverMovies} />
             <Route path="/movie-overview/:movieId" exact component={MovieOverview} />
             <Route path="/search-results/" exact component={SearchResults} />
+            <Route path="/upcoming-movies/" exact  />
             {/* Anything that dosen't match the above routes, redirect to / */}
             <Redirect from='*' to='/' />
           </Switch>
