@@ -165,10 +165,7 @@ export function sortMovies(movies) {
 
 
 export function filterMoviesBasedByGenres(genersId) {
-  return {
-    type: actions.FILTER_BASED_ON_GENRES,
-    payload: {
-      genersId: genersId
-    }
+  return dispatch => {
+    dispatch(filterByGenres(genersId))
   }
 }
