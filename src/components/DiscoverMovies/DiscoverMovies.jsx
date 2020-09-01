@@ -67,11 +67,10 @@ class DiscoverMovies extends Component {
     )
 
     const MoviesError = (props) => (
-      props.error ? 
+      props.error &&
       <div className="movies-error">
         <div className="error-text">There was error while fetching the movies</div>
-      </div> :
-      null
+      </div> 
     )
 
     let {genres} = this.props
