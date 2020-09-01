@@ -73,65 +73,34 @@
 
 /** App CSS ends here */
 
-.discover-movies-container {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
+
+
+
+
+
+
+
+.movie-genre {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  color: rgba(0, 0, 0, 0.87);
+  margin: 4px;
+  padding: 8px;
+  border-radius: 15px;
+  transition: .5s;
 }
 
-.movies-list-controllers {
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
-  align-items: center;
-  width: 85%;
-}
-
-.movies-number {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.movies-error {
-  border-radius: 5px;
-  color: #fff;
-  border: 1px solid rgb(220, 54, 54);
-  background: rgb(216, 120, 120);
-  padding: 10px;
-  width: 80%;
-  margin: auto;
-}
-
-.sort-filter-movies-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sort-movies-container, 
-.sort-filter-container {
-  display: flex;
-  margin: auto;
-  padding: 10px;
-  margin-right: 10px;
-  width: 50px;
-}
-
-.sort-text, .filter-text {
-  margin-left: 5px;
-}
-
-.sort-logo,
-.filter-logo:hover {
+.movie-genre:hover {
   cursor: pointer;
+  background: rgb(245, 240, 240);
 }
 
-.movies-list-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+
+
+
+
+
+
+
 
 /** DiscoverMovies CSS ends here **/
 
@@ -205,10 +174,6 @@
   font-weight: bold;
 }
 
-.movie-loader-container,
-.load-more-movies {
-  margin: auto;
-}
 
 .movies-loader {
   width: 75px;
@@ -293,12 +258,9 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-bottom: 10px;
   }
 
-  .movies-list-controllers {
-    display: flex;
-    flex-direction: column;
-  }
 
   .movie-overview-container {
     display: flex;
@@ -312,48 +274,21 @@ a {
   .no-results img {
     width: 100%;
     max-width: 100%;
-  height: auto;
+    height: auto;
   }
 
+ 
+
+  
+  
+
 }
 
-.dropbtn {
-  cursor: pointer;
-}
 
-.filter-movies-container {
-  position: relative;
-  display: inline-block;
-}
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  left: -5px;
-  border-radius: 5px;
-}
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  transition: .5s;
-}
 
-.dropdown-content a:hover {
-  cursor: pointer;
-}
 
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.filter-movies-container:hover .dropdown-content {
-  display: block;
-}
 
 .load-more-movies-container {
   display: flex;
@@ -371,4 +306,8 @@ a {
 
 .load-more-btn:hover {
   cursor: pointer;
+}
+
+.selected-genre {
+  background: rgb(245, 240, 240);
 }
