@@ -1,0 +1,148 @@
+.discover-movies-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movies-list-controllers {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  width: 85%;
+}
+
+.movies-number {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.sort-filter-movies-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort-movies-container, 
+.sort-filter-container {
+  display: flex;
+  margin: auto;
+  padding: 10px;
+  margin-right: 10px;
+  width: 50px;
+}
+
+.sort-text, .filter-text {
+  margin-left: 5px;
+}
+
+.sort-logo,
+.filter-logo:hover {
+  cursor: pointer;
+}
+
+.filter-movies-container:hover .dropdown-content {
+  display: block;
+}
+
+.filter-movies-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  left: -5px;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: .5s;
+}
+
+.dropdown-content a:hover {
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.movies-genres-selector-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  width: 85%;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.genres-text {
+  font-weight: bold;
+}
+
+.genres-filter-container {
+  width: 100%;
+  overflow: scroll;
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+
+.movies-list-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  height: 100%;
+}
+
+.movie-loader-container,
+.load-more-movies {
+  margin: auto;
+}
+
+.movies-error {
+  border-radius: 5px;
+  color: #fff;
+  border: 1px solid rgb(220, 54, 54);
+  background: rgb(216, 120, 120);
+  padding: 10px;
+  width: 80%;
+  margin: auto;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .genres-filter-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  .movies-list-controllers {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .movies-genres-selector-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+}
