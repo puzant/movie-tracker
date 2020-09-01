@@ -158,11 +158,8 @@ export function filterMovies(movies, filterType) {
 }
 
 export function sortMovies(movies) {
-  return {
-    type: actions.SORT_MOVIES, 
-    payload: {
-      movies: movies
-    }
+  return dispatch => {
+    dispatch(sort(movies))
   }
 }
 
