@@ -148,6 +148,7 @@ const mapStateToProps = (state) => {
     movies: state.movies,
     pendingState: state.pending,
     loadMorePendingState: state.loadMorePending,
+    loadMoreMoviesError: state.loadMoreMoviesError,
     errorState: state.error,
     genres: state.genres
   }
@@ -161,6 +162,7 @@ DiscoverMovies.propTypes = {
   movies: PropTypes.array,
   pendingState: PropTypes.bool,
   loadMorePendingState: PropTypes.bool,
+  loadMoreMoviesError: PropTypes.bool,
   errorState: PropTypes.bool,
   genres: PropTypes.array,
 }
