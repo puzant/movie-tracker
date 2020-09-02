@@ -126,14 +126,18 @@ export function fetchMovieReviews(movieId) {
  | Get Upcoming Movies
  |--------------------------------------------------------------------------
  */
+const fetchUpcomingMoviesPending = createAction(actions.GET_UPCOMING_MOVIES_PENDING)
+const fetchUpcomingMoviesSuccess = createAction(actions.GET_UPCOMING_MOVIES_SUCCESS, (upcomingMoveis) => ({upcomingMoveis}))
+const fetchUpcomingMoviesError   = createAction(actions.GET_UPCOMING_MOVIES_ERROR, (error) => ({error}))
 
 export function fetchUpcomingMovies() {
   return dispatch => {
+    dispatch(fetchUpcomingMoviesPending())
     return api.getUpcomingMovies()
       .then((response) => {
-        //  TODO: create action for the upcoming movies
+        dispatch(fetchUpcomingMoviesSuccess(response.data.results))
       }).catch((error) => {
-        //  TODO: create a new action for catching errors
+        dispatch(fetchUpcomingMoviesError(error))
       })
   }
 }
