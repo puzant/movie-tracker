@@ -11,7 +11,10 @@ const initialState = {
   searchResults: [],
   movieReviews: [],
   error: false,
-  loadMoreMoviesError: false
+  loadMoreMoviesError: false,
+  upcomingMovies: [],
+  upcomingMoviesPending: false,
+  upcomingMoviesError: false,
 }
 
 const moviesReducer = handleActions(
@@ -64,6 +67,15 @@ const moviesReducer = handleActions(
     [actions.GET_MOVIE_SUCCESS]: (state, {payload}) => ({...state, movie: payload.movie}),
     [actions.GET_MOVIE_BY_QUERY_SUCCESS]: (state, {payload}) => ({...state, searchResults: payload.searchResults.results}),
     [actions.GET_MOVIE_REVIEWS_SUCCESS]: (state, {payload}) => ({...state, movieReviews: payload.reviews}),
+    [actions.GET_UPCOMING_MOVIES_PENDING]: (state) => ({...state, upcomingMoviesPending: true, upcomingMoviesError: false}),
+    [actions.GET_UPCOMING_MOVIES_SUCCESS]: (state, {payload}) => {
+      return ({
+        ...state,
+        upcomingMovies: payload.upcomingMoveis,
+        upcomingMoviesPending: false,
+        upcomingMoviesError: false
+      })
+    },
     [actions.GET_GENRES]: (state, {payload}) => ({...state, genres: payload.genres}),
     [actions.FILTER_BASED_ON_GENRES]: (state, {payload}) => {
       let filteredMoviesByGenres = []
