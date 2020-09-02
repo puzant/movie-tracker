@@ -59,8 +59,8 @@ class NavBar extends Component {
           <Switch>
             <Route path="/" exact component={DiscoverMovies} />
             <Route path="/movie-overview/:movieId" exact component={MovieOverview} />
-            <Route path="/search-results/" exact component={SearchResults} />
-            <Route path="/upcoming-movies/" exact component={UpcomingMovies} />
+            <Route path="/search-results" exact component={SearchResults} />
+            <Route path="/upcoming-movies" exact component={UpcomingMovies} />
             {/* Anything that dosen't match the above routes, redirect to / */}
             <Redirect from='*' to='/' />
           </Switch>
