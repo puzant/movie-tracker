@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 class SearchResults extends Component {
 
   componentDidMount() {
-    const value = queryString.parse(this.props.location.search  )
+    const value = queryString.parse(this.props.location.search)
     this.props.fetchMovieByQuery(value.search)
   }
 
