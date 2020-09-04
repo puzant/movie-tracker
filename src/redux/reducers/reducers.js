@@ -68,6 +68,7 @@ const moviesReducer = handleActions(
     [actions.GET_MOVIE_BY_QUERY_SUCCESS]: (state, {payload}) => ({...state, searchResults: payload.searchResults.results}),
     [actions.GET_MOVIE_REVIEWS_SUCCESS]: (state, {payload}) => ({...state, movieReviews: payload.reviews}),
     [actions.GET_UPCOMING_MOVIES_PENDING]: (state) => ({...state, upcomingMoviesPending: true, upcomingMoviesError: false}),
+    [actions.GET_UPCOMING_MOVIES_ERROR]: (state) => ({...state, upcomingMoviesError: true, upcomingMoviesPending: false}),
     [actions.GET_UPCOMING_MOVIES_SUCCESS]: (state, {payload}) => {
       return ({
         ...state,
