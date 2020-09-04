@@ -1,6 +1,6 @@
 import React from 'react';
 
-  const MoviePoster = (props) => (
+  const MoviePoster = (props = {}) => (
     <div className="movie-poster">
       <img 
         src={props.poster 
