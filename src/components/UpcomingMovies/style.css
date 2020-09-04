@@ -1,4 +1,10 @@
-.upcoming-movies-container {
+.upcoming-movies-main-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.upcoming-movies-sub-container {
   display: flex;
   justify-content: center;
   flex-direction: row;
