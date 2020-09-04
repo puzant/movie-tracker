@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import './style.css'
 import PropTypes from 'prop-types';
+import MoviesLoader from '../MoviesLoader/MoviesLoader'
+import MoviesError from '../MoviesError/MoviesError'
 
 class DiscoverMovies extends Component {  
 
@@ -55,23 +57,10 @@ class DiscoverMovies extends Component {
       </div>
     )
 
-    const MoviesLoader = (props) => (
-      <div className="movie-loader-container">
-          {props.pendingState && <img className="movies-loader" src={loader} />}
-      </div>
-    )
-
     const MoreMoviesLoader = (props) => (
       <div className="load-more-movies">
         {props.loadMorePendingState && props.movies && <img className="movies-loader" src={loader} alt=""/>}
       </div>
-    )
-
-    const MoviesError = (props) => (
-      props.error &&
-      <div className="movies-error">
-        <div className="error-text">There was error while fetching the movies</div>
-      </div> 
     )
 
     let {genres} = this.props
