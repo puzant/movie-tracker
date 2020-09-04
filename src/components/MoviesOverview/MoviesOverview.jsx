@@ -53,10 +53,10 @@ class MovieOverview extends Component {
               <span>{movie.vote_average} / 10</span>
             </div>
 
-            <div className="movie-home-page">
+            {movie.homepage && <div className="movie-home-page">
               <span className="movie-home-page-text">Home Page: </span>
               <span className="movie-website-link"> <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a></span>
-            </div>
+            </div>}
 
             <div className="movie-genres">
               <div className="movie-genres-text">Genres: </div>
