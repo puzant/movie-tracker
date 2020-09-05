@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
-
+import Routes from '../../Root/Routes'
 import '../../assets/App.css'
-import DiscoverMovies from '../DiscoverMovies/DiscoverMovies'
-import MovieOverview from '../MoviesOverview/MoviesOverview'
-import SearchResults from '../SearchResults/SearchResults'
-import UpcomingMovies from '../UpcomingMovies/UpcomingMovies'
-import ErrorPage from '../ErrorPage/ErrorPage'
+import { NavLink, BrowserRouter as Router } from "react-router-dom";
 
 class NavBar extends Component {
 
@@ -22,7 +12,7 @@ class NavBar extends Component {
     this.state = {
       name: "",
     }
-  } 
+  }
 
   handleChange(e) {
     this.setState({ name: e.target.value })
@@ -32,15 +22,8 @@ class NavBar extends Component {
     this.setState({ name: "" })
   }
 
-  shouldRednerSearchBar() {
-    
-  }
-
   render() { 
 
-    const { shouldRender } = this.state
-
-    const notFoundPage = () => <ErrorPage errorText="Page Not Found"/>
 
     const NavItem = () => (
       <div className="navigation-items">
@@ -54,12 +37,6 @@ class NavBar extends Component {
       </div>
     )
 
-    const Login = () => (
-      <div className="login-container">
-        <span>Login</span>
-      </div>
-    )
-
     return ( 
       <Router>
          <div className="main-app-container">
@@ -67,33 +44,21 @@ class NavBar extends Component {
 
              <NavItem /> 
   
-             <div className="sub-container">
               {
-               window.location.pathname == '/' ?
+               window.location.pathname == '/' &&
                 <div className="movies-search-bar">
                   <input value={this.state.name} onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
                   <NavLink to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
                     <button onClick={this.resetState} className="btn-search">Search</button>
                   </NavLink>
                 </div>
-                : 
-                null
-              }
-
-             {/* <Login /> */}
-             
-             </div>
+              }            
              
            </div>
-        
-          <Switch>
-            <Route path="/" exact component={DiscoverMovies} />
-            <Route path="/movie-overview/:movieId" exact component={MovieOverview} />
-            <Route path="/search-results" exact component={SearchResults} />
-            <Route path="/upcoming-movies" exact component={UpcomingMovies} />
-            <Route component={notFoundPage} />
-          </Switch>
-        </div>
+         </div>
+
+        <Routes />
+
       </Router>
      );
   }
