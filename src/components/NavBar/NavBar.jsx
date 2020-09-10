@@ -24,7 +24,6 @@ class NavBar extends Component {
 
   render() { 
 
-
     const NavItem = () => (
       <div className="navigation-items">
         <li className="nav-item">
