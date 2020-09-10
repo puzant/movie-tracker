@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/actionCreators.js';
 import {connect} from 'react-redux'
+import MoviesReviews from '../MovieReviews/MovieReviews'
 
 class MovieOverview extends Component {
 
   componentDidMount() {
     const { match: { params } } = this.props;
     this.props.fetchMovieById(params.movieId)
+    this.props.fetchMovieReviews(params.movieId)
   }
 
   movieLanguage() {
@@ -28,6 +30,15 @@ class MovieOverview extends Component {
   render() { 
 
     let { movie } = this.props
+
+    const RenderMovieRunTime = () => 
+      movie.runtime ? (
+        <div className="movie-runtime-cont">
+          <span className="movie-runtime-text">Run Time: </span>
+          <span>{ `${Math.floor(movie.runtime / 60)}h ${Math.floor(movie.runtime % 60)}m` }</span>
+        </div>
+      ) :
+      null
 
     return ( 
       <div className="movie-overview-parent-container">
@@ -70,8 +81,12 @@ class MovieOverview extends Component {
               <span>{movie.original_language && this.movieLanguage()}</span>
             </div>
 
+            <RenderMovieRunTime />
+
           </div>
         </div>
+
+        <MoviesReviews reviews={this.props.movieReviews} />
 
       </div>
 
@@ -82,6 +97,7 @@ class MovieOverview extends Component {
 const mapStateToProps = (state) => { 
   return {
     movie: state.movie,
+    movieReviews: state.movieReviews
   }
 }
 
