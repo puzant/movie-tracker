@@ -155,7 +155,9 @@
 .rating-text,
 .movie-home-page-text, 
 .language-text,
-.movie-genres-text {
+.movie-genres-text,
+.movie-runtime-text
+ {
   color: #a0d2eb;
   font-weight: bold;
 }
@@ -169,7 +171,8 @@
   margin-top: 14px;
 }
 
-.movie-overview-rating {
+.movie-overview-rating,
+.movie-runtime-cont {
   margin-top: 10px;
 }
 
