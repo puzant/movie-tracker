@@ -50,10 +50,6 @@
   display: inline-block;
 }
 
-.dropbtn {
-  cursor: pointer;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -117,13 +113,8 @@
 }
 
 .movies-error {
-  border-radius: 5px;
-  color: #fff;
-  border: 1px solid rgb(220, 54, 54);
-  background: rgb(216, 120, 120);
-  padding: 10px;
   width: 80%;
-  margin: auto;
+  margin: 50px auto;
 }
 
 
