@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
+import Avatar from '@material-ui/core/Avatar';
 
 const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
@@ -25,20 +26,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   userAvatar: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#'+randomColor,
-    borderRadius: '50%',
-    color: '#fff',
-    width: '32px',
-    height: '32px',
-    textTransform: 'uppercase'
   },
   userName: {
     fontWeight: 'bold',
     fontSize: '20px',
-    marginLeft: '10px',
+    marginLeft: '10px'
   },
   userReviewCont: {
     marginTop: '10px',
@@ -90,7 +83,7 @@ const MovieReviews = (props = {}) => {
         props.reviews.map((r) => (
           <div key={r.id} className={classes.reviewBox}>
             <div className={classes.userNameAvatarCont}>
-              <div className={classes.userAvatar}>{r.author[0]}</div>
+              <Avatar className={classes.userAvatar}>{r.author[0]}</Avatar>
               <div className={classes.userName}>{r.author}</div>
             </div>
             <div className={classes.userReviewCont}>
