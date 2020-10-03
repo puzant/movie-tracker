@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/actionCreators.js';
 import {connect} from 'react-redux'
 import MoviesReviews from '../MovieReviews/MovieReviews'
+import Loader from '../Loader/Loader'
 
 class MovieOverview extends Component {
 
@@ -43,7 +44,8 @@ class MovieOverview extends Component {
     return ( 
       <div className="movie-overview-parent-container">
 
-        <div className="movie-overview-container">
+        {movie && 
+          <div className="movie-overview-container">
         
           <div className="movie-poster">
             <img src={"http://image.tmdb.org/t/p/w185/" + movie.poster_path} alt=""/>
@@ -84,7 +86,9 @@ class MovieOverview extends Component {
             <RenderMovieRunTime />
 
           </div>
-        </div>
+        </div>}
+
+        {/* <Loader /> */}
 
         <MoviesReviews reviews={this.props.movieReviews} />
 
