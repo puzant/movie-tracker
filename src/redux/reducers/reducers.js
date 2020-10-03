@@ -1,6 +1,7 @@
 import * as actions from '../actions/actionTypes'
 import _ from 'lodash'
 import { handleActions } from 'redux-actions'
+import Constants from '../../constants/Constants'
 
 const initialState = {
   pending: false,
@@ -15,6 +16,23 @@ const initialState = {
   upcomingMovies: [],
   upcomingMoviesPending: false,
   upcomingMoviesError: false,
+}
+
+//  Key is the object property name to be accessed
+let sortInDescendingOrder = (data, key) => {
+  return data.sort((a,b) => {
+    return key == Constants.TMDB_API_DATA.RELEASE_DATE ?
+     new Date(b[key]) - new Date(a[key]) 
+     : b[key] - a[key]
+  })
+}
+
+let sortInAscendingOrder = (data, key) => {
+  return data.sort((a,b) => {
+    return key == Constants.TMDB_API_DATA.RELEASE_DATE ?
+     new Date(a[key]) - new Date(b[key]) 
+     : a[key] - b[key]
+  })
 }
 
 const moviesReducer = handleActions(
@@ -56,12 +74,44 @@ const moviesReducer = handleActions(
         }
     },
     [actions.SORT_MOVIES]: (state, {payload}) => {
-      let sortedMovies = payload.movies.sort((a,b) => {
-        return new Date(b.release_date) - new Date(a.release_date)
-      })
-      return {
-        ...state,
-        movies: sortedMovies
+      let sortedMovies
+      switch(payload.sortingType) {
+        case actions.SORT_BY_RELEASE_DATE_DESCENDING:
+          sortedMovies = sortInDescendingOrder(payload.movies, Constants.TMDB_API_DATA.RELEASE_DATE)
+          return {
+            ...state,
+            movies: sortedMovies
+          }
+        case actions.SORT_BY_RELEASE_DATE_ASCENDING:
+          sortedMovies = sortInAscendingOrder(payload.movies, Constants.TMDB_API_DATA.RELEASE_DATE)
+          return {
+            ...state,
+            movies: sortedMovies
+          }
+        case actions.SORT_BY_POPULARITY_DESCENDING:
+          sortedMovies = sortInDescendingOrder(payload.movies, Constants.TMDB_API_DATA.MOVIE_POPULARITY)
+          return {
+            ...state,
+            movies: sortedMovies
+          }
+        case actions.SORT_BY_POPULARITY_ASCENDING:
+          sortedMovies = sortInAscendingOrder(payload.movies, Constants.TMDB_API_DATA.MOVIE_POPULARITY)
+          return {
+            ...state,
+            movies: sortedMovies
+          }
+        case actions.SORT_BY_RATING_ASCENDING:
+          sortedMovies = sortInAscendingOrder(payload.movies, Constants.TMDB_API_DATA.VOTE_AVERAGE)
+          return {
+            ...state,
+            movies: sortedMovies
+          }
+        case actions.SORT_BY_RATING_DESCENDING:
+          sortedMovies = sortInDescendingOrder(payload.movies, Constants.TMDB_API_DATA.VOTE_AVERAGE)
+          return {
+            ...state,
+            movies: sortedMovies
+          }
       }
     },
     [actions.GET_MOVIE_SUCCESS]: (state, {payload}) => ({...state, movie: payload.movie}),
