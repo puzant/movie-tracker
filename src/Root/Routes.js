@@ -12,7 +12,7 @@ import ErrorPage from '../components/ErrorPage/ErrorPage'
 
 const notFoundPage = () => <ErrorPage errorText="Page Not Found"/>
 
-const Routes = (props = {}) => {
+const Routes = () => {
  
   return (
     <Switch>
