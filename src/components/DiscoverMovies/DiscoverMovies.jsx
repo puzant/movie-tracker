@@ -10,8 +10,13 @@ import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import './style.css'
 import PropTypes from 'prop-types';
-import MoviesLoader from '../MoviesLoader/MoviesLoader'
-import MoviesError from '../MoviesError/MoviesError'
+import Loader from '../Loader/Loader'
+import Error from '../Error/Error'
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import Constants from '../../constants/Constants'
 
 class DiscoverMovies extends Component {  
 
@@ -26,7 +31,9 @@ class DiscoverMovies extends Component {
       }
     }, 100);
     this.state = {
-      selectedGenres: []
+      selectedGenres: [],
+      filterMenuAnchorEl: null,
+      sortMenuAnchorEl: null
     }
   }
   
@@ -35,8 +42,8 @@ class DiscoverMovies extends Component {
     this.props.fetchMoviesGenres()
   }
 
-  handleSort(movies) {
-    this.props.sortMovies(movies)
+  handleSort(movies, sortingType) {
+    this.props.sortMovies(movies, sortingType)
   }
 
   handleFilter(movies, filterType) {
@@ -47,6 +54,22 @@ class DiscoverMovies extends Component {
     this.setState({ 
       selectedGenres: [...this.state.selectedGenres, id]
     }, () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres))
+  }
+
+  handleClosingFiltertMenu = () => {
+    this.setState({ filterMenuAnchorEl: null })
+  }
+
+  handleFilterMenuClick = (event) => {
+    this.setState({ filterMenuAnchorEl:  event.currentTarget})
+  }
+
+  handleClosingSortingtMenu = () => {
+    this.setState({ sortMenuAnchorEl: null })
+  }
+
+  handleSortingrMenuClick = (event) => {
+    this.setState({ sortMenuAnchorEl:  event.currentTarget})
   }
 
   render() {
@@ -63,8 +86,8 @@ class DiscoverMovies extends Component {
       </div>
     )
 
-    let {genres} = this.props
-    let { movies } = this.props
+    let {genres, movies} = this.props
+    const { filterMenuAnchorEl, sortMenuAnchorEl } = this.state
 
     return ( 
 
@@ -76,17 +99,42 @@ class DiscoverMovies extends Component {
 
           <div className="sort-filter-movies-container">
             <div className="sort-movies-container">
-              <img onClick={() => this.handleSort(movies)} className="sort-logo" src={sortLogo} alt=""/>
-              <span className="sort-text">Sort</span>
+              <img onClick={this.handleSortingrMenuClick} className="sort-logo" src={sortLogo} alt=""/>
+              <span className="sort-text">{Constants.SORTING_MENU_TEXT}</span>
+              <Menu 
+                id="sort-menu"
+                anchorEl={sortMenuAnchorEl}
+                keepMounted
+                open={Boolean(sortMenuAnchorEl)}
+                onClose={this.handleClosingSortingtMenu}>
+
+                {Constants.SORTING_OPTIONS.map((sortOpt) => (
+                  <MenuItem 
+                    onClick={() => {this.handleClosingSortingtMenu(); this.handleSort(movies, sortOpt.SORTING_NAME)}}>
+                    {sortOpt.TEXT_TITLE}
+                  </MenuItem>
+                ))}
+              </Menu>
           </div>
 
           <div className="filter-movies-container">
-            <img  className="filter-logo" src={filterLogo} alt=""/>
-            <span className="filter-text dropbtn">Filter</span>
-              <div className="dropdown-content">
-                <a onClick={() => this.handleFilter(movies, "highestRating")} href="#">Highest Rating</a>
-                <a onClick={() => this.handleFilter(movies, "adult")} href="#">Adult</a>
-              </div>
+            <img onClick={this.handleFilterMenuClick} className="filter-logo" src={filterLogo} alt=""/>
+            <span className="filter-text dropbtn">{Constants.FILTERING_MENU_TEXT}</span>
+              <Menu 
+                id="filter-menu"
+                anchorEl={filterMenuAnchorEl}
+                keepMounted
+                open={Boolean(filterMenuAnchorEl)}
+                onClose={this.handleClosingFiltertMenu}>
+
+                {Constants.FILTER_TYPES.map((filterType) =>(
+                  <MenuItem 
+                    onClick={() => {this.handleClosingFiltertMenu(); this.handleFilter(movies, filterType.FILTER_NAME)}}>
+                      {filterType.TEXT_TITLE}
+                  </MenuItem>
+                ))}
+
+              </Menu>
           </div>
         </div>
 
@@ -121,11 +169,11 @@ class DiscoverMovies extends Component {
           </div>
         
             
-        <MoviesLoader pendingState={this.props.pendingState} />
+        <Loader pendingState={this.props.pendingState} />
         
         <MoreMoviesLoader loadMorePendingState={this.props.loadMorePendingState} movies={this.props.movies} />
 
-        <MoviesError error={this.props.errorState} />
+        <Error errorText={Constants.ERROR_TEXT.FETCH_MOVIES_ERROR_TEXT} error={this.props.errorState} />
 
       </div>
      );
