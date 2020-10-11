@@ -3,6 +3,7 @@ import Routes from '../../Root/Routes'
 import '../../assets/App.css'
 import { NavLink, BrowserRouter as Router } from "react-router-dom";
 import Constants from '../../constants/Constants'
+import MenuDrawer from './MenuDrawer'
 
 class NavBar extends Component {
 
@@ -23,12 +24,16 @@ class NavBar extends Component {
     const NavItem = () => (
       <div className="navigation-items">
 
+        <div className="drawer-menu-btn">
+          <MenuDrawer />
+        </div>
+        
         {Constants.NAVBAR_ITEMS.map((item) => (
           <li className="nav-item">
-          <NavLink exact activeStyle={{fontWeight: "bold", color: "#82e0f5"}} to={item.routePath}>{item.navItemName}</NavLink>
-        </li>
+            <NavLink exact activeStyle={{fontWeight: "bold", color: "#82e0f5"}} to={item.routePath}>{item.navItemName}</NavLink>
+          </li>
         ))}
-        
+
       </div>
     )
 
@@ -36,6 +41,7 @@ class NavBar extends Component {
       <Router>
          <div className="main-app-container">
            <div className="main-app-navbar">
+             
              <NavItem />
               {window.location.pathname == '/' &&
                 <div className="movies-search-bar">
