@@ -150,7 +150,7 @@ export function fetchUpcomingMovies() {
 
 
 const filter = createAction(actions.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
-const sort = createAction(actions.SORT_MOVIES, (movies) => ({movies}))
+const sort = createAction(actions.SORT_MOVIES, (movies, sortingType) => ({movies, sortingType}))
 const filterByGenres = createAction(actions.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
 
 export function filterMovies(movies, filterType) {
@@ -159,9 +159,9 @@ export function filterMovies(movies, filterType) {
   }
 }
 
-export function sortMovies(movies) {
+export function sortMovies(movies, sortingType) {
   return dispatch => {
-    dispatch(sort(movies))
+    dispatch(sort(movies, sortingType))
   }
 }
 
