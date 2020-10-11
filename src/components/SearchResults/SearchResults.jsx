@@ -5,9 +5,7 @@ import {connect} from 'react-redux'
 import queryString from 'query-string'
 import Movie from '../Movie/Movie'
 import emptyResultsLogo from '../../assets/empty-results.png'
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 class SearchResults extends Component {
