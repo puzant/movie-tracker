@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 import Movie from '../Movie/Movie'
 import { Link } from "react-router-dom";
 import './style.css'
-import MoviesLoader from '../MoviesLoader/MoviesLoader'
-import MoviesError from '../MoviesError/MoviesError'
+import Loader from '../Loader/Loader'
+import Error from '../Error/Error'
+import Constants from '../../constants/Constants'
 
 class UpComingMovies extends Component {
   
@@ -30,9 +31,9 @@ class UpComingMovies extends Component {
           ))}
         </div>
 
-        <MoviesLoader pendingState={this.props.upcomingMoviesPending} />
+        <Loader pendingState={this.props.upcomingMoviesPending} />
 
-        <MoviesError error={this.props.upcomingMoviesError} />
+        <Error errorText={Constants.ERROR_TEXT.FETCH_UPCOMING_MOVIES_ERROR_TEXT} error={this.props.upcomingMoviesError} />
       
       </div>
 
