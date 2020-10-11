@@ -28,6 +28,7 @@ export default {
   NAVBAR_ITEMS: [
     {navItemName: 'Discover Movies', routePath: '/'},
     {navItemName: 'Upcoming Movies', routePath: '/upcoming-movies'},
-    {navItemName: 'TV Shows', routePath: '/tv'}
+    {navItemName: 'TV Shows', routePath: '/tv'},
+    {navItemName: 'Profile', routePath: '/profile'}
   ]
 }
