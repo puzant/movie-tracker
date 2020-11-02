@@ -128,12 +128,18 @@
 
   .movies-list-controllers {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .movies-genres-selector-container {
     display: flex;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: left;
+  }
+
+  .sort-movies-container,
+  .filter-movies-container {
+    font-size: 1.2rem;
   }
 }
