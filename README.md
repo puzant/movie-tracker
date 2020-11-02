@@ -8,6 +8,9 @@ Built using Reactjs for rendering the view, & with Redux to handle the State
   - Discover Movies 
   - Movie OverView
   - Movie Search Results
+  - Upcoming Movies
+  - Profile
+  - Login
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
