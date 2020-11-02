@@ -28,9 +28,12 @@ class NavBar extends Component {
           <MenuDrawer />
         </div>
         
-        {Constants.NAVBAR_ITEMS.map((item) => (
-          <li className="nav-item">
-            <NavLink exact activeStyle={{fontWeight: "bold", color: "#82e0f5"}} to={item.routePath}>{item.navItemName}</NavLink>
+        {Constants.NAVBAR_ITEMS.map((item, index) => (
+          !item.requireAuth && <li key={index} className="nav-item">
+            <NavLink exact activeStyle={{fontWeight: "bold", color: "#82e0f5"}} to={item.routePath}>
+              <span>{item.icon}</span>
+              <span>{item.navItemName}</span>
+            </NavLink>
           </li>
         ))}
 
@@ -43,13 +46,13 @@ class NavBar extends Component {
            <div className="main-app-navbar">
              
              <NavItem />
-              {window.location.pathname == '/' &&
-                <div className="movies-search-bar">
-                  <input value={this.state.name} onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
-                  <NavLink to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
-                    <button className="btn-search">Search</button>
-                  </NavLink>
-                </div>}            
+             
+              <div className="movies-search-bar">
+                <input value={this.state.name} onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
+                <NavLink to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
+                  <button disabled={this.state.name.length == 0} className="btn-search">Search</button>
+                </NavLink>
+              </div>       
              
            </div>
          </div>
