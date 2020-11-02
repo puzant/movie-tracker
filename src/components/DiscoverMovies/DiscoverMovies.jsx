@@ -74,9 +74,9 @@ class DiscoverMovies extends Component {
 
   render() {
 
-    const NumberOfMovies = (props) => (
-      <div className="movies-number-container">
-        <div className="movies-number">Number of movies: {props.moviesNumber}</div>
+    const DiscoverMoviesText = () => (
+      <div className="discover-movies-text">
+        <div className="movies-number">Discover New Movies</div>
       </div>
     )
 
@@ -95,9 +95,10 @@ class DiscoverMovies extends Component {
 
         <div className="movies-list-controllers">
 
-          <NumberOfMovies moviesNumber={this.props.movies.length} />
+          <DiscoverMoviesText />
 
           <div className="sort-filter-movies-container">
+
             <div className="sort-movies-container">
               <img onClick={this.handleSortingrMenuClick} className="sort-logo" src={sortLogo} alt=""/>
               <span className="sort-text">{Constants.SORTING_MENU_TEXT}</span>
@@ -108,8 +109,8 @@ class DiscoverMovies extends Component {
                 open={Boolean(sortMenuAnchorEl)}
                 onClose={this.handleClosingSortingtMenu}>
 
-                {Constants.SORTING_OPTIONS.map((sortOpt) => (
-                  <MenuItem 
+                {Constants.SORTING_OPTIONS.map((sortOpt, index) => (
+                  <MenuItem key={index}
                     onClick={() => {this.handleClosingSortingtMenu(); this.handleSort(movies, sortOpt.SORTING_NAME)}}>
                     {sortOpt.TEXT_TITLE}
                   </MenuItem>
@@ -128,7 +129,7 @@ class DiscoverMovies extends Component {
                 onClose={this.handleClosingFiltertMenu}>
 
                 {Constants.FILTER_TYPES.map((filterType) =>(
-                  <MenuItem 
+                  <MenuItem key={filterType.FILTER_NAME}
                     onClick={() => {this.handleClosingFiltertMenu(); this.handleFilter(movies, filterType.FILTER_NAME)}}>
                       {filterType.TEXT_TITLE}
                   </MenuItem>
