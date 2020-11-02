@@ -10,15 +10,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    // alignItems: 'center',
+    margin: 'auto',
+    width: '80%'
   },
   reviewBox: {
     display: 'flex',
     flexDirection: 'column',
     borderRadius: '5px',
-    width: '600px',
-    boxShadow: '-2px 4px 30px -1px rgba(0,0,0,0.75)',
+    width: 'auto',
+    boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)',
     padding: '20px',
-    margin: '10px'
+    margin: '10px auto',
+    backgroundColor: '#fafafa'
   },
   userNameAvatarCont: {
     display: 'flex',
@@ -39,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
   },
   moviesReviewCont: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flexStart',
+    flexDirection: 'column',
     flexWrap: 'wrap',
   },
   moviesReviewText: {
@@ -47,10 +52,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '24px',
     marginTop: '20px',
     marginBottom: '14px',
-    textAlign: 'center',
+    alignSelf: 'flex-start'
   },
   noReviewsText: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: '20px'
   },
   showMoreBtn: {
@@ -63,19 +68,17 @@ const useStyles = makeStyles((theme) => ({
 const MovieReviews = (props = {}) => {
 
   const classes = useStyles()
-
   const [hidden, setVisibility] = useState(true)
 
   return (
-
     <div className={classes.rootContainer}>
 
       <div className={classes.moviesReviewText}>Movie Reviews</div>
 
       {props.reviews.length == 0 &&
-        <span className={classes.noReviewsText}>
-          There are no reviews for this movie
-        </span>
+          <span className={classes.noReviewsText}>
+            There are no reviews for this movie
+          </span>
       }
 
       <div className={classes.moviesReviewCont}>
