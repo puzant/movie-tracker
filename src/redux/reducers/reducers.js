@@ -4,15 +4,19 @@ import { handleActions } from 'redux-actions'
 import Constants from '../../constants/Constants'
 
 const initialState = {
-  pending: false,
-  loadMorePending: false,
+  //  movies data props
   movies: [],
+  pending: false,
+  error: false,
+  loadMorePending: false,
+  loadMoreMoviesError: false,
+  //  movie summery data props
   movie: [],
+  moviePending: false,
   genres: [],
   searchResults: [],
   movieReviews: [],
-  error: false,
-  loadMoreMoviesError: false,
+  //  upcoming movies data props
   upcomingMovies: [],
   upcomingMoviesPending: false,
   upcomingMoviesError: false,
@@ -114,9 +118,17 @@ const moviesReducer = handleActions(
           }
       }
     },
-    [actions.GET_MOVIE_SUCCESS]: (state, {payload}) => ({...state, movie: payload.movie}),
+    [actions.GET_MOVIE_PENDING]: state => ({...state, moviePending: true}),
+    [actions.GET_MOVIE_SUCCESS]: (state, {payload}) => {
+      return ({
+        ...state, 
+        movie: payload.movie,
+        moviePending: false
+      })
+    },
     [actions.GET_MOVIE_BY_QUERY_SUCCESS]: (state, {payload}) => ({...state, searchResults: payload.searchResults.results}),
     [actions.GET_MOVIE_REVIEWS_SUCCESS]: (state, {payload}) => ({...state, movieReviews: payload.reviews}),
+    //  upcoming movies reducers
     [actions.GET_UPCOMING_MOVIES_PENDING]: (state) => ({...state, upcomingMoviesPending: true, upcomingMoviesError: false}),
     [actions.GET_UPCOMING_MOVIES_ERROR]: (state) => ({...state, upcomingMoviesError: true, upcomingMoviesPending: false}),
     [actions.GET_UPCOMING_MOVIES_SUCCESS]: (state, {payload}) => {
