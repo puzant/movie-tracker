@@ -1,3 +1,13 @@
+import React from 'react';
+import DiscoverIcon from '@material-ui/icons/Movie';
+import UpcomingIcon from '@material-ui/icons/Update';
+import TvICon from '@material-ui/icons/Tv';
+import ProfileIcon from '@material-ui/icons/AccountCircle'
+import UserLogIn from '@material-ui/icons/ExitToApp'
+import Favorite from '@material-ui/icons/Favorite'
+import Bookmark from '@material-ui/icons/Bookmark'
+import Star from '@material-ui/icons/Star'
+
 export default {
   ERROR_TEXT: {
     FETCH_MOVIES_ERROR_TEXT: 'There was an error while fetching the movies!',
@@ -26,9 +36,28 @@ export default {
     MOVIE_POPULARITY: 'popularity'
   },
   NAVBAR_ITEMS: [
-    {navItemName: 'Discover Movies', routePath: '/'},
-    {navItemName: 'Upcoming Movies', routePath: '/upcoming-movies'},
-    {navItemName: 'TV Shows', routePath: '/tv'},
-    {navItemName: 'Profile', routePath: '/profile'}
-  ]
+    {navItemName: 'Discover', routePath: '/', icon: <DiscoverIcon />, requireAuth: false},
+    {navItemName: 'Upcoming', routePath: '/upcoming-movies', icon: <UpcomingIcon />, requireAuth: false},
+    {navItemName: 'TV Shows', routePath: '/tv', icon: <TvICon />, requireAuth: false},
+    {navItemName: 'Login', routePath: '/login', icon: <UserLogIn />, requireAuth: false},
+    {navItemName: 'Profile', routePath: '/profile', icon: <ProfileIcon />, requireAuth: true},
+  ],
+  //  ISO 639-1 Code
+  MOVIE_LANGUAGE_CODE: {
+    ENGLISH: 'en',
+    FRENCH: 'fr',
+    JAPANESE: 'jp',
+    KOREAN: 'ko',
+  },
+  VALIDATION_TEXT: {
+    INCORRECT_USERNAME: "We couldn't find your username.",
+    INCORRECT_PASSWORD: "The entered password is incorrect",
+    EMPTY_USERNAME_FEILD: "Please enter a username",
+    EMPTY_PASSOWRD_FEILD: "Please enter a password",
+  },
+  MOVIE_OVERVIEW_USER_ACTIONS_ICONS: {
+    FAVORITE_MOVIE: <Favorite />,
+    WATCHLIST_MOVIE: <Bookmark />,
+    RATE_MOVIE: <Star />
+  }
 }
