@@ -10,6 +10,7 @@ export const GET_MORE_MOVIES_ERROR = "getMoreMoviesError"
 
 /** Actions for Movie */
 export const GET_MOVIE_SUCCESS = "getMovieSuccess"
+export const GET_MOVIE_PENDING = 'getMoviePending'
 export const GET_MOVIE_BY_QUERY_SUCCESS = "getMovieByQuerySuccess"
 export const GET_MOVIE_REVIEWS_SUCCESS = "getMovieReviewsSuccess"
 export const GET_GENRES = "getGenres"
@@ -49,6 +50,8 @@ export const GET_UPCOMING_MOVIES_ERROR = "getUpcomingMoviesError"
 //   },
 //   GET_MOVIE_ACTIONS: {
 //     GET_MOVIE_SUCCESS: "getMovieSuccess",
+//     GET_MOVIE_PENDING: "getMoviePending",
+//     GET_MOVIE_ERROR: "getMovieError",
 //     GET_MOVIE_BY_QUERY_SUCCESS: "getMovieByQuerySuccess",
 //     GET_MOVIE_REVIEWS_SUCCESS: "getMovieReviewsSuccess",
 //     GET_GENRES: "getGenres"
@@ -65,6 +68,12 @@ export const GET_UPCOMING_MOVIES_ERROR = "getUpcomingMoviesError"
 //     BY_ADULT: "adult"
 //   },
 //   SORING_MOVIES_ACTIONS: {
-//     SORT_MOVIES: "sortMovies"
+//     SORT_MOVIES: "sortMovies",
+//     SORT_BY_POPULARITY_DESCENDING: "popularityDescending",
+//     SORT_BY_POPULARITY_ASCENDING: "popularityAscending",
+//     SORT_BY_RATING_DESCENDING: "ratingDescending",
+//     SORT_BY_RATING_ASCENDING: "ratingAscending",
+//     SORT_BY_RELEASE_DATE_DESCENDING: "releaseDateDescending",
+//     SORT_BY_RELEASE_DATE_ASCENDING: "releaseDateAscending",
 //   }
 // }
