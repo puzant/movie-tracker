@@ -53,9 +53,11 @@ export function fetchMovies() {
  */
 
  const fetchMovieSuccess = createAction(actions.GET_MOVIE_SUCCESS, (movie) => ({movie}))
+ const fechMoviePending = createAction(actions.GET_MOVIE_PENDING)
 
  export function fetchMovieById(movieId) {
   return dispatch => {
+    dispatch(fechMoviePending())
     return api.getMovieById(movieId)
       .then((response) => {
         dispatch(fetchMovieSuccess(response.data))
