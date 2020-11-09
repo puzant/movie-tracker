@@ -1,20 +1,23 @@
-import axios from 'axios';
+import axios from './axiosInstance'
 
-const api = axios.create({
-  baseURL: "https://api.themoviedb.org/3/"
-});
+const getMovies = () => axios.get(`discover/movie`)
+const getMoreMovies = (pageNumber) => axios.get(`discover/movie`,  {params: {page: pageNumber} })
 
-const API_KEY = `63d59f2df02d27e6739533218ba6c9d9`
+const getMovieById = (movieId) => axios.get(`movie/${movieId}`, {
+  params: {
+    append_to_response: 'credits,keyword,recommendations',
+  }
+})
 
-const getMovies = () => api.get(`discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
-const getMoreMovies = (pageNumber) => api.get(`discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNumber}`)
-const getMovieById = (movieId) => api.get(`movie/${movieId}?append_to_response=credits,keyword,recommendations&api_key=${API_KEY}`)
-const getMovieByQuery = (queryParam) => api.get(`/search/movie?api_key=${API_KEY}&language=en-US&query=${queryParam}&page=1&include_adult=false`)
-const getMovieGenres = () => api.get(`genre/movie/list?api_key=${API_KEY}&language=en-US`)
-const getMovieReviews = (movieId) => api.get(`movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`)
-const getUpcomingMovies = () => api.get(`movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`)
-const getMovieImages = (movieId) => api.get(`/movie/${movieId}/images?api_key=${API_KEY}`)
-const getMovieRecommendations = (movieId) => api.get(`/movie/${movieId}/recommendations`)
+const getMovieByQuery = (queryParam) => axios.get(`/search/movie`, {
+  params: { query: queryParam }
+})
+
+const getMovieGenres = () => axios.get(`genre/movie/list`)
+const getMovieReviews = (movieId) => axios.get(`movie/${movieId}/reviews`)
+const getUpcomingMovies = () => axios.get(`movie/upcoming`)
+const getMovieImages = (movieId) => axios.get(`/movie/${movieId}/images`)
+const getMovieRecommendations = (movieId) => axios.get(`/movie/${movieId}/recommendations`)
 
 export default {
   getMovies,
