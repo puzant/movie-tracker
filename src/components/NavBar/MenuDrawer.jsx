@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Drawer from '@material-ui/core/Drawer';
@@ -33,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MenuDrawer() {
+export default function MenuDrawer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -43,14 +42,12 @@ export default function MenuDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
+  const DrawerList = (props) => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
+      className={classes.list}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(props.anchor, false)}
+      onKeyDown={toggleDrawer(props.anchor, false)}
       >
         <div className={classes.drawerHeader}>
           <IconButton>
@@ -59,7 +56,8 @@ export default function MenuDrawer() {
         </div>
       <Divider />
       <List>
-        {Constants.NAVBAR_ITEMS.map((item, index) => (
+        {props.navItems.map((item, index) => (
+          !item.requireAuth &&
           <NavLink key={index} exact activeStyle={{fontWeight: "bold", color: "#00c6ff"}} to={item.routePath}>
             <MenuItem button>
               <ListItemIcon>{item.icon}</ListItemIcon>
@@ -79,7 +77,7 @@ export default function MenuDrawer() {
             <img className={classes.menuIcon} src={menuIcon} />
           </Button>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-            {list(anchor)}
+            <DrawerList anchor={anchor} navItems={props.navItems} />
           </Drawer>
         </React.Fragment>
       ))}
