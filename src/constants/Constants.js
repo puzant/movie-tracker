@@ -7,6 +7,7 @@ import UserLogIn from '@material-ui/icons/ExitToApp'
 import Favorite from '@material-ui/icons/Favorite'
 import Bookmark from '@material-ui/icons/Bookmark'
 import Star from '@material-ui/icons/Star'
+import EmojiPeople from '@material-ui/icons/EmojiPeople'
 
 export default {
   ERROR_TEXT: {
@@ -39,8 +40,9 @@ export default {
     {navItemName: 'Discover', routePath: '/', icon: <DiscoverIcon />, requireAuth: false},
     {navItemName: 'Upcoming', routePath: '/upcoming-movies', icon: <UpcomingIcon />, requireAuth: false},
     {navItemName: 'TV Shows', routePath: '/tv', icon: <TvICon />, requireAuth: false},
-    {navItemName: 'Login', routePath: '/login', icon: <UserLogIn />, requireAuth: false},
+    {navItemName: 'People', routePath: '/people', icon: <EmojiPeople />, requireAuth: false},
     {navItemName: 'Profile', routePath: '/profile', icon: <ProfileIcon />, requireAuth: true},
+    {navItemName: 'Login', routePath: '/login', icon: <UserLogIn />, requireAuth: false}
   ],
   //  ISO 639-1 Code
   MOVIE_LANGUAGE_CODE: {
