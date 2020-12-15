@@ -90,10 +90,10 @@ class MovieOverview extends Component {
             </div>
 
             <div className="movie-genres">
-              <div className="movie-genres-text">Genres: </div>
-              <div className="list-of-movies-genres">
+              <span className="movie-genres-text">Genres: </span>
+              <span className="list-of-movies-genres">
                 { movie.genres?.length > 0 && <span>{movie.genres.map((genre) => genre.name).join(', ')}</span> }
-              </div>
+              </span>
             </div>
 
             <div className="movie-language">
