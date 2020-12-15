@@ -20,6 +20,9 @@ const initialState = {
   upcomingMovies: [],
   upcomingMoviesPending: false,
   upcomingMoviesError: false,
+  //  user date props
+  isAuth: false,
+  success: false
 }
 
 //  Key is the object property name to be accessed
