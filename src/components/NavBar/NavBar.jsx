@@ -12,6 +12,7 @@ class NavBar extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       name: "",
+      navItems: Constants.NAVBAR_ITEMS
     }
   }
 
@@ -21,14 +22,16 @@ class NavBar extends Component {
 
   render() { 
 
+    const { navItems } = this.state
+
     const NavItem = () => (
       <div className="navigation-items">
 
         <div className="drawer-menu-btn">
-          <MenuDrawer />
+          <MenuDrawer navItems={navItems} />
         </div>
         
-        {Constants.NAVBAR_ITEMS.map((item, index) => (
+        {navItems.map((item, index) => (
           !item.requireAuth && <li key={index} className="nav-item">
             <NavLink exact activeStyle={{fontWeight: "bold", color: "#82e0f5"}} to={item.routePath}>
               <span>{item.icon}</span>
