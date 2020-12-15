@@ -2,7 +2,13 @@
 
 ![preview](src/app-preview.png)
 
-Built using Reactjs for rendering the view, & with Redux to handle the State 
+- This App usese:
+  - ReactJs for rendering the view
+  - Redux for state mangement 
+  - React-Router-DOM for routing
+  - Styled-Components for styling with JS 
+  - React Material Design library
+
 
 - This App consists of 3 sections
   - Discover Movies 
