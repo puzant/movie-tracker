@@ -12,11 +12,10 @@ import './style.css'
 import PropTypes from 'prop-types';
 import Loader from '../Loader/Loader'
 import Error from '../Error/Error'
-
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import Constants from '../../constants/Constants'
+import styled from 'styled-components'
 
 class DiscoverMovies extends Component {  
 
@@ -157,7 +156,7 @@ class DiscoverMovies extends Component {
         
           <div className="movies-list-container">
 
-            {!this.props.pendingState && movies.map(movie => (
+            {movies.map(movie => (
               <Link to={`/movie-overview/${movie.id}`} key={movie.id}>
                 <Movie
                   movie={movie}
