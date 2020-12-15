@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     // alignItems: 'center',
     margin: 'auto',
-    width: '80%'
+    width: '83%'
   },
   reviewBox: {
     display: 'flex',
@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   moviesReviewText: {
-    fontWeight: 'bold',
     fontSize: '24px',
     marginTop: '20px',
     marginBottom: '14px',
