@@ -36,30 +36,34 @@ export const GET_UPCOMING_MOVIES_SUCCESS = "getUpcomingMoviesSuccess"
 export const GET_UPCOMING_MOVIES_PENDING = "getUpcomingMoviesPending"
 export const GET_UPCOMING_MOVIES_ERROR = "getUpcomingMoviesError"
 
+/** Actions for user authentication */
+export const LOGIN = "login"
+export const LOGIN_SUCCESS = "loginSucess"
+
 //  TODO: use this instead
 // export default {
 //   GET_MOVIES_ACTIONS: {
-//     GET_MOVIES_SUCCESS: "getMoviesSuccess",
-//     GET_MOVIES_PENDING: "getMoviesPending",
-//     GET_MOVIES_ERROR: "getMoviesError"
+//     SUCCESS: "getMoviesSuccess",
+//     PENDING: "getMoviesPending",
+//     ERROR: "getMoviesError"
 //   },
 //   GET_MORE_MOVIES_ACTIONS: {
-//     GET_MORE_MOVIES_SUCCESS: "getMoreMovies",
-//     GET_MORE_MOVIES_PENDING: "getMoreMoviesPending",
-//     GET_MORE_MOVIES_ERROR: "getMoreMoviesError"
+//     SUCCESS: "getMoreMovies",
+//     PENDING: "getMoreMoviesPending",
+//     ERROR: "getMoreMoviesError"
 //   },
 //   GET_MOVIE_ACTIONS: {
-//     GET_MOVIE_SUCCESS: "getMovieSuccess",
-//     GET_MOVIE_PENDING: "getMoviePending",
-//     GET_MOVIE_ERROR: "getMovieError",
-//     GET_MOVIE_BY_QUERY_SUCCESS: "getMovieByQuerySuccess",
-//     GET_MOVIE_REVIEWS_SUCCESS: "getMovieReviewsSuccess",
+//     SUCCESS: "getMovieSuccess",
+//     PENDING: "getMoviePending",
+//     ERROR: "getMovieError",
+//     BY_QUERY_SUCCESS: "getMovieByQuerySuccess",
+//     REVIEWS_SUCCESS: "getMovieReviewsSuccess",
 //     GET_GENRES: "getGenres"
 //   },
 //   GET_UPCOMING_MOVIES_ACTIONS: {
-//     GET_UPCOMING_MOVIES_SUCCESS: "getUpcomingMoviesSuccess",
-//     GET_UPCOMING_MOVIES_PENDING: "getUpcomingMoviesPending",
-//     GET_UPCOMING_MOVIES_ERROR: "getUpcomingMoviesError"
+//     SUCCESS: "getUpcomingMoviesSuccess",
+//     PENDING: "getUpcomingMoviesPending",
+//     ERROR: "getUpcomingMoviesError"
 //   },
 //   FILTER_MOVIES_ACTIONS: {
 //     FILTER_MOVIES: "filterMovies",
@@ -69,11 +73,11 @@ export const GET_UPCOMING_MOVIES_ERROR = "getUpcomingMoviesError"
 //   },
 //   SORING_MOVIES_ACTIONS: {
 //     SORT_MOVIES: "sortMovies",
-//     SORT_BY_POPULARITY_DESCENDING: "popularityDescending",
-//     SORT_BY_POPULARITY_ASCENDING: "popularityAscending",
-//     SORT_BY_RATING_DESCENDING: "ratingDescending",
-//     SORT_BY_RATING_ASCENDING: "ratingAscending",
-//     SORT_BY_RELEASE_DATE_DESCENDING: "releaseDateDescending",
-//     SORT_BY_RELEASE_DATE_ASCENDING: "releaseDateAscending",
+//     BY_POPULARITY_DESCENDING: "popularityDescending",
+//     BY_POPULARITY_ASCENDING: "popularityAscending",
+//     BY_RATING_DESCENDING: "ratingDescending",
+//     BY_RATING_ASCENDING: "ratingAscending",
+//     BY_RELEASE_DATE_DESCENDING: "releaseDateDescending",
+//     BY_RELEASE_DATE_ASCENDING: "releaseDateAscending",
 //   }
 // }
