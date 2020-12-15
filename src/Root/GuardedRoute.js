@@ -7,7 +7,7 @@ const GuardedRoute = (props) => {
 
   return (
     <Route {...otherProps}
-      render={(routeProps) => (isAuth ? <Component {...otherProps} /> : <Redirect to="/" /> )}
+      render={(routeProps) => (isAuth ? <Component {...routeProps} /> : <Redirect to="/" /> )}
     />
   )
 
