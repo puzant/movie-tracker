@@ -1,8 +1,8 @@
 import axios from './axiosInstance'
 
-export const getRequestToken = () => axios.get(`/authentication/token/new`)
+ const getRequestToken = () => axios.get(`/authentication/token/new`)
 
-export const login = (username, password, requestToken) => {
+ const login = (username, password, requestToken) => {
   axios.post('/authentication/token/validate_with_login', {
     username: username,
     password: password,
@@ -10,12 +10,18 @@ export const login = (username, password, requestToken) => {
   })
 }
 
-export const createSession = (requestToken) => {
+ const createSession = (requestToken) => {
   axios.post('/authentication/session/new', {
     request_token: requestToken
   })
 }
 
-export const deleteSession = (sessionId) => {
+const getAccount = (sessionId) => {
+  axios.post(`/account?session_id=${sessionId}`)
+}
+
+ const deleteSession = (sessionId) => {
   axios.delete('/authentication/session', {session_id: sessionId})
 }
+
+export default { getRequestToken, login, createSession, getAccount, deleteSession }
