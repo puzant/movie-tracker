@@ -1,6 +1,8 @@
 import { createAction } from 'redux-actions';
 import * as actions from './actionTypes'
 import api from '../../api/api'
+import auth from '../../api/authentication'
+
 /*
  |--------------------------------------------------------------------------
  | Get Movies
@@ -11,16 +13,17 @@ const fetchMoviesPending = createAction(actions.GET_MOVIES_PENDING)
 const fetchMoviesSuccess = createAction(actions.GET_MOVIES_SUCCESS, (movies) => ({movies}))
 const fetchMoviesError = createAction(actions.GET_MOVIES_ERROR, (error) => ({error}))
 
-export function fetchMovies() {
-  return dispatch => {
-    dispatch(fetchMoviesPending());
-      return api.getMovies()
-        .then((response) => {
-          return dispatch(fetchMoviesSuccess(response.data.results))
-        }).catch((error) => {
-          return dispatch(fetchMoviesError(error))
-        })
-    };
+export const fetchMovies = () => {
+  return async dispatch => {
+    try {
+      dispatch(fetchMoviesPending());
+      const getMoviesResponse = await api.getMovies()
+      const results = await dispatch(fetchMoviesSuccess(getMoviesResponse.data.results))
+      return results 
+    } catch(error) {
+        return dispatch(fetchMoviesError(error))
+    }
+  }
 }
 
 /*
@@ -33,18 +36,17 @@ export function fetchMovies() {
  const fetchMoreMoviesSuccess = createAction(actions.GET_MORE_MOVIES_SUCCESS, (movies) => ({movies}))
  const fetchMoreMoviesError = createAction(actions.GET_MORE_MOVIES_ERROR, (error) => ({error}))
 
- export function fetchMoreMovies(pageNumber) {
-  return dispatch => {
-    dispatch(fetcMorehMoviesPending())
-    return api.getMoreMovies(pageNumber)
-        .then((response) => {
-          dispatch(fetchMoreMoviesSuccess(response.data.results))
-        })
-        .then((error) => {
-          dispatch(fetchMoreMoviesError(error))
-        })
+ export const fetchMoreMovies = (pageNumber) => {
+  return async dispatch => {
+    try {
+      dispatch(fetcMorehMoviesPending())
+      const getMoreMoviesResposne = await api.getMoreMovies(pageNumber)
+      dispatch(fetchMoreMoviesSuccess(getMoreMoviesResposne.data.results))
+    } catch(error) {
+        dispatch(fetchMoreMoviesError(error))
     }
-}
+  }
+ }
 
 /*
  |--------------------------------------------------------------------------
@@ -55,19 +57,17 @@ export function fetchMovies() {
  const fetchMovieSuccess = createAction(actions.GET_MOVIE_SUCCESS, (movie) => ({movie}))
  const fechMoviePending = createAction(actions.GET_MOVIE_PENDING)
 
- export function fetchMovieById(movieId) {
-  return dispatch => {
-    dispatch(fechMoviePending())
-    return api.getMovieById(movieId)
-      .then((response) => {
-        dispatch(fetchMovieSuccess(response.data))
-      })
-      .then((error) => {
+ export const fetchMovieById = (movieId) => {
+  return async dispatch => {
+    try {
+      dispatch(fechMoviePending())
+      const movieByIdResponse = await api.getMovieById(movieId)
+      return dispatch(fetchMovieSuccess(movieByIdResponse.data))
+    } catch(error) {
         dispatch(fetchMoviesError(error))
-      })
+    }
   }
 }
-
 
 /*
  |--------------------------------------------------------------------------
@@ -77,15 +77,14 @@ export function fetchMovies() {
 
 const fetchMovieByQuerySucess = createAction(actions.GET_MOVIE_BY_QUERY_SUCCESS, (searchResults) => ({searchResults}))
 
-export function fetchMovieByQuery(query) {
-  return dispatch => {
-    api.getMovieByQuery(query)
-      .then((response) => {
-        dispatch(fetchMovieByQuerySucess(response.data))
-      })
-      .then((error) => {
-        dispatch(fetchMoviesError(error))
-      })
+export const fetchMovieByQuery = (query) => {
+  return async dispatch => {
+    try {
+      const movieByQueryResponse = await api.getMovieByQuery(query)
+      return dispatch(fetchMovieByQuerySucess(movieByQueryResponse.data))
+    } catch(error) {
+      dispatch(fetchMoviesError(error))
+    }
   }
 }
 
@@ -98,11 +97,13 @@ export function fetchMovieByQuery(query) {
 const fetchMoviesGenresSuccess = createAction(actions.GET_GENRES, (genres) => ({genres}))
 
 export function fetchMoviesGenres() {
-  return dispatch => {
-    return api.getMovieGenres()
-      .then((response) => {
-        dispatch(fetchMoviesGenresSuccess(response.data.genres))
-      })
+  return async dispatch => {
+    try {
+      const getGenresResponse = await api.getMovieGenres()
+      return dispatch(fetchMoviesGenresSuccess(getGenresResponse.data.genres))
+    } catch(error) {
+      console.log(error)
+    }
   }
 }
 
@@ -114,12 +115,10 @@ export function fetchMoviesGenres() {
 
 const fetchMovieReviewsSuccess = createAction(actions.GET_MOVIE_REVIEWS_SUCCESS, (reviews) => ({reviews}))
 
-export function fetchMovieReviews(movieId) {
-  return dispatch => {
-    return api.getMovieReviews(movieId)
-      .then((response) => {
-        dispatch(fetchMovieReviewsSuccess(response.data.results))
-      })
+export const fetchMovieReviews = (movieId) => {
+  return async dispatch => {
+    const movieReviewsResponse = await api.getMovieReviews(movieId)
+  dispatch(fetchMovieReviewsSuccess(movieReviewsResponse.data.results))
   }
 }
 
@@ -133,14 +132,14 @@ const fetchUpcomingMoviesSuccess = createAction(actions.GET_UPCOMING_MOVIES_SUCC
 const fetchUpcomingMoviesError   = createAction(actions.GET_UPCOMING_MOVIES_ERROR, (error) => ({error}))
 
 export function fetchUpcomingMovies() {
-  return dispatch => {
-    dispatch(fetchUpcomingMoviesPending())
-    return api.getUpcomingMovies()
-      .then((response) => {
-        dispatch(fetchUpcomingMoviesSuccess(response.data.results))
-      }).catch((error) => {
-        dispatch(fetchUpcomingMoviesError(error))
-      })
+  return async dispatch => {
+    try {
+      dispatch(fetchUpcomingMoviesPending())
+      const upcomingMoviesResponse = await api.getUpcomingMovies()
+      dispatch(fetchUpcomingMoviesSuccess(upcomingMoviesResponse.data.results))
+    } catch(error) {
+      dispatch(fetchUpcomingMoviesError(error))
+    }
   }
 }
 
@@ -149,7 +148,6 @@ export function fetchUpcomingMovies() {
  | Movies Fileters Functionallities
  |--------------------------------------------------------------------------
  */
-
 
 const filter = createAction(actions.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
 const sort = createAction(actions.SORT_MOVIES, (movies, sortingType) => ({movies, sortingType}))
@@ -167,9 +165,33 @@ export function sortMovies(movies, sortingType) {
   }
 }
 
-
 export function filterMoviesBasedByGenres(genersId) {
   return dispatch => {
     dispatch(filterByGenres(genersId))
   }
 }
+
+/*
+ |--------------------------------------------------------------------------
+ | Login User
+ |--------------------------------------------------------------------------
+ */
+
+ const login = createAction(actions.LOGIN)
+ const authSuccess = createAction(actions.LOGIN_SUCCESS)
+
+ export const loginUser = (username, password) => {
+   let requestToken, sessionId, accountId
+   return async dispatch => {
+     try {
+       dispatch(login)
+       const requestTokenResponse = await auth.getRequestToken()
+       requestToken = requestTokenResponse.data.request_token
+       const loginResponse = await auth.login(username, password, requestToken)
+       const getSessionResponse = await auth.createSession(requestToken)
+       dispatch(authSuccess)
+     } catch(error) {
+       console.log(error)
+     }  
+   }
+ }
