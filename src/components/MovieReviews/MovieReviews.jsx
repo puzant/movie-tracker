@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    // alignItems: 'center',
     margin: 'auto',
     width: '83%'
   },
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
     boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)',
     padding: '20px',
-    margin: '10px auto',
+    margin: '10px auto 10px 0',
     backgroundColor: '#fafafa'
   },
   userNameAvatarCont: {
@@ -43,8 +42,6 @@ const useStyles = makeStyles((theme) => ({
   },
   moviesReviewCont: {
     display: 'flex',
-    justifyContent: 'flexStart',
-    flexDirection: 'column',
     flexWrap: 'wrap',
   },
   moviesReviewText: {
