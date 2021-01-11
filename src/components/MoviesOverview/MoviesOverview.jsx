@@ -79,11 +79,6 @@ class MovieOverview extends Component {
               <span>{movie.vote_average} / 10</span>
             </div>
 
-            {/* {movie.homepage && <div className="movie-home-page">
-              <span className="movie-home-page-text">Home Page: </span>
-              <span className="movie-website-link"> <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a></span>
-            </div>} */}
-
             <div className="movie-release-status">
               <span className="status-text">Status: </span>
               <span>{movie.status}</span>
