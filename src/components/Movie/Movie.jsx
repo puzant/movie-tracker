@@ -11,9 +11,9 @@ const MoviePoster = (props = {}) => {
     return (
       <MoviePosterContainer>
         {
-          <img 
+          <MoviePosterImage 
+            imageLoaded={imageLoaded}
             onLoad={() => setState(!imageLoaded)}
-            style={!imageLoaded ? {display: 'none'} : {}}
             src={props.poster ? "http://image.tmdb.org/t/p/w185/" + props.poster
             : 
             "https://cinemaone.net/images/movie_placeholder.png"} alt=""/>   
@@ -26,14 +26,16 @@ const MoviePoster = (props = {}) => {
 
 const Movie = (props) => {
   return (
-    <div className="movie-container">
+    <MovieContainer>
     
       <MoviePoster poster={props.movie.poster_path} />
     
-      <div className="movie-title-rating">
-        <div className="movie-title">{props.movie.title}</div>
-        <div className="mv-release-date">{props.movie.release_date}</div>
-        <div className="movie-rating">
+      <MovieTitleRatingContainer>
+      
+        <MovieTitle title={props.movie.title}>{props.movie.title}</MovieTitle>
+        <MovieReleaseDate>{props.movie.release_date}</MovieReleaseDate>
+
+        <MovieRating>
           {props.movie.vote_count &&
             <Box display='flex' alignItems='center'>
               <Rating
@@ -51,11 +53,11 @@ const Movie = (props) => {
               </Box>
             </Box>
           }
-        </div>
-      </div>
+        </MovieRating>
+      </MovieTitleRatingContainer>
     
     
-    </div>
+    </MovieContainer>
   )
 }
 
@@ -64,4 +66,48 @@ export default Movie;
 const MoviePosterContainer = styled.div`
 `
 
-const MoviePosterImage = styled.img``
+const MoviePosterImage = styled.img`
+  display: ${props => !props.imageLoaded ? 'none' : 'inline'};
+`
+
+const MovieContainer = styled.div`
+  background: #fff;
+  box-shadow: -2px 4px 30px -1px rgba(0,0,0,0.75);
+  transform-origin: top left;
+  border-radius: 5px;
+  margin: 15px;
+  width: auto;
+  padding: 13px;
+  height: 375px;
+  transition: .5s;
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(235, 231, 231);
+  }
+`
+
+const MovieTitle = styled.div`
+  margin-top: 4px;
+  font-weight: bold;
+  width: 160px; 
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const MovieReleaseDate = styled.div`
+  font-weight: bold;
+  margin-top: 10px;
+`
+
+const MovieTitleRatingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+`
+
+const MovieRating = styled.div`
+  margin-top: 4px;
+  font-weight: bold;
+`
