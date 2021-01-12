@@ -125,45 +125,11 @@
 
 
 /** DiscoverMovies CSS ends here **/
-
-.movie-container {
-  background: #fff;
-  box-shadow: -2px 4px 30px -1px rgba(0,0,0,0.75);
-  transform-origin: top left;
-  border-radius: 5px;
-  margin: 15px;
-  width: auto;
-  padding: 13px;
-  height: 375px;
-  transition: .5s;
-}
-
-.movie-container:hover {
-  cursor: pointer;
-  background-color: rgb(235, 231, 231);
-}
-
-.movie-title-rating {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 5px;
-}
-
 .rating-value {
   background: rgb(101, 170, 230);
   color: #fff;
   border-radius: 5px;
   padding: 2px;
-}
-
-.movie-title {
-  margin-top: 4px;
-  font-weight: bold;
-  width: 160px; 
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .movie-genres-text,
@@ -186,11 +152,6 @@
 
 .movie-overview {
   line-height: 1.8rem;
-}
-
-.movie-rating {
-  margin-top: 4px;
-  font-weight: bold;
 }
 
 .top-cast-text {
@@ -219,11 +180,6 @@
 
 .movie-overview-rating,
 .movie-runtime-cont {
-  margin-top: 10px;
-}
-
-.mv-release-date {
-  font-weight: bold;
   margin-top: 10px;
 }
 
