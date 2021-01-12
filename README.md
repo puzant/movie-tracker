@@ -9,15 +9,13 @@
   - Styled-Components for styling with JS 
   - React Material Design library
 
-
-- This App consists of 3 sections
+- This App consists of 6 sections
   - Discover Movies 
   - Movie OverView
   - Movie Search Results
   - Upcoming Movies
   - Profile
   - Login
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
