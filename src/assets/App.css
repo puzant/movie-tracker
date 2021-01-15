@@ -20,8 +20,7 @@
 }
 
 .navigation-items {
-  display: flex;
-  justify-content: flex-start;
+  
 }
 
 .drawer-menu-btn {
@@ -307,12 +306,6 @@ a {
     display: flex;
     flex-direction: row;
     width: 100%;
-  }
-
-  .navigation-items {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
   }
 
   .nav-item {
