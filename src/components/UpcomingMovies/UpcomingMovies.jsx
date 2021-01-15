@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types';
 import Movie from '../Movie/Movie'
 import { Link } from "react-router-dom";
-import './style.css'
 import Loader from '../Loader/Loader'
 import Error from '../Error/Error'
 import Constants from '../../constants/Constants'
