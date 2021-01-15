@@ -9,7 +9,20 @@ import './style.css'
 import Loader from '../Loader/Loader'
 import Error from '../Error/Error'
 import Constants from '../../constants/Constants'
+import styled from 'styled-components'
 
+const UpcomingMoviesContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+`
+
+const SubContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
 class UpComingMovies extends Component {
   
   componentDidMount() {
@@ -20,22 +33,22 @@ class UpComingMovies extends Component {
     const { upcomingMovies } = this.props 
     return (
       
-      <div className="upcoming-movies-main-container">
+      <UpcomingMoviesContainer>
         
-        <div className="upcoming-movies-sub-container">
+        <SubContainer>
           {upcomingMovies && upcomingMovies.map((ucm) => (
             <Link to={`/movie-overview/${ucm.id}`} key={ucm.id}>
               <Movie movie={ucm} key={ucm.id}>
               </Movie>
             </Link>
           ))}
-        </div>
+        </SubContainer>
 
         <Loader pendingState={this.props.upcomingMoviesPending} />
 
         <Error errorText={Constants.ERROR_TEXT.FETCH_UPCOMING_MOVIES_ERROR_TEXT} error={this.props.upcomingMoviesError} />
       
-      </div>
+      </UpcomingMoviesContainer>
 
      );
   }
