@@ -182,16 +182,34 @@ export function filterMoviesBasedByGenres(genersId) {
 
  export const loginUser = (username, password) => {
    let requestToken, sessionId, accountId
-   return async dispatch => {
+    return async (dispatch) => {
+
      try {
        dispatch(login)
        const requestTokenResponse = await auth.getRequestToken()
-       requestToken = requestTokenResponse.data.request_token
-       const loginResponse = await auth.login(username, password, requestToken)
-       const getSessionResponse = await auth.createSession(requestToken)
+       requestToken = requestTokenResponse.data.request_token  
        dispatch(authSuccess)
      } catch(error) {
        console.log(error)
-     }  
+     }
+
+     try {
+      const loginResponse = await auth.login(username, password, requestToken)
+     } catch(error) {
+       console.log(error)
+     }
+     
+     try {
+      const sessionResponse = await auth.createSession(requestToken)  
+      sessionId = sessionResponse.data.session_id
+     } catch(error) {
+       console.log(error)
+     }
+
+     try {
+       const userAccountResponse = await auth.getAccount(sessionId)
+     } catch(error) {
+       console.log(error)
+     }
    }
  }
