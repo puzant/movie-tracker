@@ -135,11 +135,11 @@ class Login extends Component {
   login = () => {
     if((this.state.username == null || this.state.password == null)) {
       this.setState({validationErrorExsist: true}, () => {
-        return this.GetErrorText()
+         this.GetErrorText()
       })
     }
     else {
-      return this.props.loginUser(this.state.username, this.state.password)
+       this.props.loginUser(this.state.username, this.state.password)
     }
   }
 
