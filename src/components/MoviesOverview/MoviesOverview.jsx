@@ -10,7 +10,16 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
 import Cast from '../Cast/Cast'
 import Movie from '../Movie/Movie'
+import styled from 'styled-components'
 
+const MovieInfoContainer = styled.div`
+  margin-top: 10px;
+`
+
+const MovieInfoText = styled.span`
+  color: #a0d2eb;
+  font-weight: bold;
+`
 class MovieOverview extends Component {
 
   componentDidMount() {
@@ -20,7 +29,7 @@ class MovieOverview extends Component {
   }
 
   movieLanguage() {
-    switch(this.props.movie.original_language) {
+    switch(this.props.movie?.original_language) {
       case Constants.MOVIE_LANGUAGE_CODE.ENGLISH:
         return "English"
       case Constants.MOVIE_LANGUAGE_CODE.FRENCH:
@@ -42,6 +51,12 @@ class MovieOverview extends Component {
 
     const actors = movie.credits?.cast?.slice(0, MAX_NUMBER_OF_ACTORS) ?? [];
 
+    const MovieInfo = (props) => (
+      <MovieInfoContainer>
+        <MovieInfoText>{props.text}: </MovieInfoText>
+        <span>{props.value}</span>
+      </MovieInfoContainer>
+    )
 
     const RenderMovieRunTime = () => 
       movie.runtime ? (
@@ -74,15 +89,9 @@ class MovieOverview extends Component {
             <span className="movie-release-date">({movie.release_date})</span>
             <div className="movie-tag-line">{movie.tagline}</div>
 
-            <div className="movie-overview-rating">
-              <span className="rating-text">Rating: </span>
-              <span>{movie.vote_average} / 10</span>
-            </div>
+            <MovieInfo text="Rating" value={movie.vote_average} />
 
-            <div className="movie-release-status">
-              <span className="status-text">Status: </span>
-              <span>{movie.status}</span>
-            </div>
+            <MovieInfo text="Status" value={movie.status} />
 
             <div className="movie-genres">
               <span className="movie-genres-text">Genres: </span>
@@ -91,17 +100,11 @@ class MovieOverview extends Component {
               </span>
             </div>
 
-            <div className="movie-language">
-              <span className="language-text">Language: </span>
-              <span>{movie.original_language && this.movieLanguage()}</span>
-            </div>
+            <MovieInfo text="Language" value={this.movieLanguage()} />
 
             <RenderMovieRunTime />
 
-            <div className="movie-overview">
-              <div className="overview-text">About The Movie</div> 
-              <span>{movie.overview}</span>
-            </div>
+            <MovieInfo text="About The Movie" value={movie.overview} />
 
             <div className="movie-overview-user-actions-cont">
               <Tooltip title="login to add to your favorite list" aria-label="add">
