@@ -4,6 +4,12 @@ import '../../assets/App.css'
 import { NavLink, BrowserRouter as Router } from "react-router-dom";
 import Constants from '../../constants/Constants'
 import MenuDrawer from './MenuDrawer'
+import styled from 'styled-components'
+
+const NavigationItemsContinaer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`
 
 class NavBar extends Component {
 
@@ -25,7 +31,7 @@ class NavBar extends Component {
     const { navItems } = this.state
 
     const NavItem = () => (
-      <div className="navigation-items">
+      <NavigationItemsContinaer>
 
         <div className="drawer-menu-btn">
           <MenuDrawer navItems={navItems} />
@@ -40,7 +46,7 @@ class NavBar extends Component {
           </li>
         ))}
 
-      </div>
+      </NavigationItemsContinaer>
     )
 
     return ( 
