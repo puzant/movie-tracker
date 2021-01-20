@@ -1,112 +1,118 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar';
+import styled from 'styled-components'
 
-const randomColor = Math.floor(Math.random()*16777215).toString(16);
+const MovieReviews = () => {
 
-const useStyles = makeStyles((theme) => ({
-  rootContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    margin: 'auto',
-    width: '83%'
-  },
-  reviewBox: {
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: '5px',
-    width: 'auto',
-    boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)',
-    padding: '20px',
-    margin: '10px auto 10px 0',
-    backgroundColor: '#fafafa'
-  },
-  userNameAvatarCont: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  userAvatar: {
-    backgroundColor: '#'+randomColor,
-  },
-  userName: {
-    fontWeight: 'bold',
-    fontSize: '20px',
-    marginLeft: '10px'
-  },
-  userReviewCont: {
-    marginTop: '10px',
-    lineHeight: '25px'
-  },
-  moviesReviewCont: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  moviesReviewText: {
-    fontSize: '24px',
-    marginTop: '20px',
-    marginBottom: '14px',
-    alignSelf: 'flex-start'
-  },
-  noReviewsText: {
-    textAlign: 'left',
-    fontSize: '20px'
-  },
-  showMoreBtn: {
-    color: '#4ebdb6',
-    textDecoration: 'underLine',
-    cursor: 'pointer'
-  }
-}))
-
-const MovieReviews = (props = {}) => {
-
-  const classes = useStyles()
+  const randomColor = Math.floor(Math.random()*16777215).toString(16);
   const [hidden, setVisibility] = useState(true)
 
   return (
-    <div className={classes.rootContainer}>
+    <RootContainer>
 
-      <div className={classes.moviesReviewText}>Movie Reviews</div>
+      <MovieReviewsTitle>Movie Reviews</MovieReviewsTitle>
 
       {props.reviews.length == 0 &&
-          <span className={classes.noReviewsText}>
+          <NoMovieReviewText>
             There are no reviews for this movie
-          </span>
+          </NoMovieReviewText>
       }
 
-      <div className={classes.moviesReviewCont}>
+      <MovieReviewContainer>
       {
         props.reviews.map((r) => (
-          <div key={r.id} className={classes.reviewBox}>
-            <div className={classes.userNameAvatarCont}>
-              <Avatar className={classes.userAvatar}>{r.author[0]}</Avatar>
-              <div className={classes.userName}>{r.author}</div>
-            </div>
-            <div className={classes.userReviewCont}>
+          <ReviewBox key={r.id}>
+            <UserContainer>
+              <UserAvatar randomColor={randomColor}>{r.author[0]}</UserAvatar>
+              <UserName>{r.author}</UserName>
+            </UserContainer>
+            <ReviewContent>
               <>
                 {hidden ? `${r.content.substr(0, 250).trim()} ...` : r.content}
                 {
                 hidden ? 
-                  <a className={classes.showMoreBtn} onClick={() => setVisibility(false)}>read more</a>
+                  <ShowMoreBtn onClick={() => setVisibility(false)}>read more</ShowMoreBtn>
                   :
-                  <a className={classes.showMoreBtn} onClick={() => setVisibility(true)}>read less</a>
+                  <ShowMoreBtn onClick={() => setVisibility(true)}>read less</ShowMoreBtn>
                 }
               </>
-            </div>
-          </div>
+            </ReviewContent>
+          </ReviewBox>
         ))
       }
-      </div>
+      </MovieReviewContainer>
 
-    </div>
+    </RootContainer>
   )
 }
 
 MovieReviews.propTypes = {
   moviesReviews: PropTypes.array
 }
+
+const RootContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 83%;
+`
+
+const MovieReviewContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+
+const ReviewBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  width: auto;
+  box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+  padding: 20px;
+  margin: 10px auto 10px 0;
+  background-color: #fafafa;
+`
+
+const UserContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+const UserName = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+`
+
+const UserAvatar = styled(Avatar)`
+  background-color: ${props =>  '#' + props.randomColor + '!important'};
+`
+
+const ShowMoreBtn = styled.a`
+  color: #4ebdb6;
+  text-decoration: underLine;
+  cursor: pointer;
+`
+
+const ReviewContent = styled.div`
+  margin-top: 10px;
+  line-height: 25px;
+`
+
+const MovieReviewsTitle = styled.div`
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 14px;
+  align-self: center;
+  text-align: center;
+`
+
+const NoMovieReviewText = styled.span`
+  text-align: center;
+  font-size: 20px;
+`
 
 export default MovieReviews
