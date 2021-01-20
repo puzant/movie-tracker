@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar';
 import styled from 'styled-components'
 
-const MovieReviews = () => {
+const MovieReviews = (props = {}) => {
 
   const randomColor = Math.floor(Math.random()*16777215).toString(16);
   const [hidden, setVisibility] = useState(true)
