@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
-import Routes from '../../Root/Routes'
+import Routes from '../../root/routes'
 import '../../assets/App.css'
 import { NavLink, BrowserRouter as Router } from "react-router-dom";
 import Constants from '../../constants/Constants'
-import MenuDrawer from './MenuDrawer'
+import MenuDrawer from './menuDrawer'
 import styled from 'styled-components'
 
 const NavigationItemsContinaer = styled.div`
   display: flex;
   justify-content: flex-start;
+`
+const MainAppContainer = styled.div`
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  background: #00c6ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  font-weight: bold;
+`
+
+const MainAppNavbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `
 
 class NavBar extends Component {
@@ -39,7 +58,7 @@ class NavBar extends Component {
         
         {navItems.map((item, index) => (
           !item.requireAuth && <li key={index} className="nav-item">
-            <NavLink exact activeStyle={{fontWeight: "bold", color: "#82e0f5"}} to={item.routePath}>
+            <NavLink exact activeStyle={{fontWeight: "bold", color: "#133254"}} to={item.routePath}>
               <span>{item.icon}</span>
               <span>{item.navItemName}</span>
             </NavLink>
@@ -51,8 +70,8 @@ class NavBar extends Component {
 
     return ( 
       <Router>
-         <div className="main-app-container">
-           <div className="main-app-navbar">
+         <MainAppContainer>
+           <MainAppNavbar>
              
              <NavItem />
              
@@ -63,8 +82,8 @@ class NavBar extends Component {
                 </NavLink>
               </div>       
              
-           </div>
-         </div>
+           </MainAppNavbar>
+         </MainAppContainer>
 
         <Routes />
 
