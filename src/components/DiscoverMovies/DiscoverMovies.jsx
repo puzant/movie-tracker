@@ -17,6 +17,48 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Constants from '../../constants/Constants'
 import styled from 'styled-components'
 
+const DiscoverMoviesContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+`
+
+const MoviesListControllers = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  width: 85%;
+`
+
+const MovieFiltersContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const DiscoverMoviesText = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+`
+
+const GenersText = styled.div`
+  font-weight: bold;
+`
+
+const GenresFiltersContainer = styled.div`
+  width: 100%;
+  overflow: scroll;
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: scroll;
+  }
+`
 class DiscoverMovies extends Component {  
 
   constructor(props) {
@@ -73,34 +115,27 @@ class DiscoverMovies extends Component {
 
   render() {
 
-    const DiscoverMoviesText = () => (
-      <div className="discover-movies-text">
-        <div className="movies-number">Discover New Movies</div>
-      </div>
-    )
-
     const MoreMoviesLoader = (props) => (
       <div className="load-more-movies">
         {props.loadMorePendingState && props.movies && <img className="movies-loader" src={loader} alt=""/>}
       </div>
     )
 
-    let {genres, movies} = this.props
+    const { genres, movies } = this.props
     const { filterMenuAnchorEl, sortMenuAnchorEl } = this.state
 
     return ( 
+      <DiscoverMoviesContainer>
 
-      <div className="discover-movies-container">
+        <MoviesListControllers>
 
-        <div className="movies-list-controllers">
+          <DiscoverMoviesText>Discover new Movies</DiscoverMoviesText>
 
-          <DiscoverMoviesText />
-
-          <div className="sort-filter-movies-container">
+          <MovieFiltersContainer>
 
             <div className="sort-movies-container">
-              <img onClick={this.handleSortingrMenuClick} className="sort-logo" src={sortLogo} alt=""/>
-              <span className="sort-text">{Constants.SORTING_MENU_TEXT}</span>
+              <img onClick={this.handleSortingrMenuClick} className="sort-logo" src={sortLogo} alt="sort_logo" />
+              <span className="sort-text">Sort</span>
               <Menu 
                 id="sort-menu"
                 anchorEl={sortMenuAnchorEl}
@@ -118,8 +153,8 @@ class DiscoverMovies extends Component {
           </div>
 
           <div className="filter-movies-container">
-            <img onClick={this.handleFilterMenuClick} className="filter-logo" src={filterLogo} alt=""/>
-            <span className="filter-text dropbtn">{Constants.FILTERING_MENU_TEXT}</span>
+            <img onClick={this.handleFilterMenuClick} className="filter-logo" src={filterLogo} alt="filter_logo" />
+            <span className="filter-text dropbtn">Filter</span>
               <Menu 
                 id="filter-menu"
                 anchorEl={filterMenuAnchorEl}
@@ -136,13 +171,11 @@ class DiscoverMovies extends Component {
 
               </Menu>
           </div>
-        </div>
+        </MovieFiltersContainer>
 
-        </div>
+        </MoviesListControllers>
 
         <div className="movies-genres-selector-container">
-          <div className="genres-text">Genres:</div>
-          <div className="genres-filter-container">
           <GenersText>Genres:</GenersText>
           <GenresFiltersContainer>
           {genres?.map(genre => (
@@ -152,13 +185,11 @@ class DiscoverMovies extends Component {
               {genre.name}
             </span>
           )) }
-          </div>
-        </div>
-      
+          </GenresFiltersContainer>
+        </div> 
         
           <div className="movies-list-container">
-
-            {movies.map(movie => (
+            {movies?.map(movie => (
               <Link to={`/movie-overview/${movie.id}`} key={movie.id}>
                 <Movie
                   movie={movie}
@@ -167,17 +198,13 @@ class DiscoverMovies extends Component {
               </Movie>
             </Link>
             )) }
-
           </div>
         
-            
         <Loader pendingState={this.props.pendingState} />
-        
         <MoreMoviesLoader loadMorePendingState={this.props.loadMorePendingState} movies={this.props.movies} />
-
         <Error errorText={Constants.ERROR_TEXT.FETCH_MOVIES_ERROR_TEXT} error={this.props.errorState} />
 
-      </div>
+      </DiscoverMoviesContainer>
      );
   }
 }
