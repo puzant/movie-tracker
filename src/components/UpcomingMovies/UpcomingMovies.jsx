@@ -55,9 +55,9 @@ class UpComingMovies extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    upcomingMovies: state.upcomingMovies,
-    upcomingMoviesPending: state.upcomingMoviesPending,
-    upcomingMoviesError: state.upcomingMoviesError
+    upcomingMovies: state.upcoming.upcomingMovies,
+    upcomingMoviesPending: state.upcoming.upcomingMoviesPending,
+    upcomingMoviesError: state.upcoming.upcomingMoviesError
   }
 }
  
