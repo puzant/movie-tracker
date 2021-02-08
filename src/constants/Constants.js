@@ -16,8 +16,6 @@ export default {
     FETCH_MOVIE_ERROR_TEXT: 'There was an error while fetching the movie information',
     FETCH_MOVIE_REVIEWS_ERROR_TEXT: 'There was an error while fetching the movie reviews'
   },
-  SORTING_MENU_TEXT: 'Sort',
-  FILTERING_MENU_TEXT: 'Filter',
   FILTER_TYPES: [
     {TEXT_TITLE: 'Highest Rating', FILTER_NAME: 'highestRating'},
     {TEXT_TITLE: 'Adult' , FILTER_NAME: 'adult'} 
