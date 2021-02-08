@@ -1,20 +1,13 @@
 .discover-movies-container {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
+  
 }
 
 .movies-list-controllers {
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
-  align-items: center;
-  width: 85%;
+  
 }
 
 .movies-number {
-  font-weight: bold;
-  font-size: 20px;
+
 }
 
 .sort-filter-movies-container {
@@ -85,10 +78,6 @@
   flex-wrap: wrap;
 }
 
-.genres-text {
-  font-weight: bold;
-}
-
 .genres-filter-container {
   width: 100%;
   overflow: scroll;
@@ -120,10 +109,7 @@
 
 @media only screen and (max-width: 600px) {
   .genres-filter-container {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    overflow: scroll;
+    
   }
 
   .movies-list-controllers {
