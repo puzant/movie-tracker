@@ -75,15 +75,18 @@ export const fetchMovies = () => {
  |--------------------------------------------------------------------------
  */
 
-const fetchMovieByQuerySucess = createAction(actions.GET_MOVIE_BY_QUERY_SUCCESS, (searchResults) => ({searchResults}))
+const fetchMovieByQuerySuccess = createAction(actions.GET_MOVIE_BY_QUERY_SUCCESS, (searchResults) => ({searchResults}))
+const fetchMovieByQueryPending = createAction(actions.GET_MOVIE_BY_QUERY_PENDING)
+const fetchMovieByQueryError = createAction(actions.GET_MOVIE_BY_QUERY_ERROR, (error) => ({error}))
 
 export const fetchMovieByQuery = (query) => {
   return async dispatch => {
     try {
+      dispatch(fetchMovieByQueryPending())
       const movieByQueryResponse = await api.getMovieByQuery(query)
-      return dispatch(fetchMovieByQuerySucess(movieByQueryResponse.data))
+      return dispatch(fetchMovieByQuerySuccess(movieByQueryResponse.data))
     } catch(error) {
-      dispatch(fetchMoviesError(error))
+      dispatch(fetchMovieByQueryError(error))
     }
   }
 }
