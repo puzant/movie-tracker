@@ -11,9 +11,13 @@ export const GET_MORE_MOVIES_ERROR = "getMoreMoviesError"
 /** Actions for Movie */
 export const GET_MOVIE_SUCCESS = "getMovieSuccess"
 export const GET_MOVIE_PENDING = 'getMoviePending'
-export const GET_MOVIE_BY_QUERY_SUCCESS = "getMovieByQuerySuccess"
 export const GET_MOVIE_REVIEWS_SUCCESS = "getMovieReviewsSuccess"
 export const GET_GENRES = "getGenres"
+
+ /** Actions for Movie search */
+ export const GET_MOVIE_BY_QUERY_SUCCESS = "getMovieByQuerySuccess"
+ export const GET_MOVIE_BY_QUERY_PENDING = "getMovieByQueryPending"
+ export const GET_MOVIE_BY_QUERY_ERROR = "getMovieByQueryError"
 
 /** Actions for Movies Filters */
 export const FILTER_MOVIES = "filterMovies"
