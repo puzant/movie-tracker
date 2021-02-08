@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar';
 import styled from 'styled-components'
+import utils from '../../utils/utils' 
 
-const MovieReviews = (props = {}) => {
+const MovieReviews = ({reviews}) => {
 
-  const randomColor = Math.floor(Math.random()*16777215).toString(16);
+  const randomColor = utils.generateRandomColorValue()
   const [hidden, setVisibility] = useState(true)
 
   return (
@@ -13,7 +14,7 @@ const MovieReviews = (props = {}) => {
 
       <MovieReviewsTitle>Movie Reviews</MovieReviewsTitle>
 
-      {props.reviews.length == 0 &&
+      {reviews.length == 0 &&
           <NoMovieReviewText>
             There are no reviews for this movie
           </NoMovieReviewText>
@@ -21,7 +22,7 @@ const MovieReviews = (props = {}) => {
 
       <MovieReviewContainer>
       {
-        props.reviews.map((r) => (
+        reviews.map((r) => (
           <ReviewBox key={r.id}>
             <UserContainer>
               <UserAvatar randomColor={randomColor}>{r.author[0]}</UserAvatar>
@@ -48,7 +49,7 @@ const MovieReviews = (props = {}) => {
 }
 
 MovieReviews.propTypes = {
-  moviesReviews: PropTypes.array
+  movieReviews: PropTypes.array
 }
 
 const RootContainer = styled.div`
@@ -60,8 +61,8 @@ const RootContainer = styled.div`
 `
 
 const MovieReviewContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 const ReviewBox = styled.div`
