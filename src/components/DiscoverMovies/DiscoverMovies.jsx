@@ -3,8 +3,8 @@ import Movie from '../Movie/Movie'
 import loader from '../../assets/loader-dotted.gif'
 import sortLogo from '../../assets/sort.svg'
 import filterLogo from '../../assets/filter.svg'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import * as actions from '../../redux/actions/actionCreators'
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
@@ -143,7 +143,9 @@ class DiscoverMovies extends Component {
         <div className="movies-genres-selector-container">
           <div className="genres-text">Genres:</div>
           <div className="genres-filter-container">
-          {!this.genres?.length > 0 && genres.map(genre => (
+          <GenersText>Genres:</GenersText>
+          <GenresFiltersContainer>
+          {genres?.map(genre => (
             <span onClick={() => this.handleFilteringByGenres(genre.id)} 
               className={`movie-genre + ${this.state.selectedGenres.includes(genre.id) ? "selected-genre" : ""}`} 
               key={genre.id}>
@@ -182,12 +184,12 @@ class DiscoverMovies extends Component {
 
 const mapStateToProps = (state) => { 
   return {
-    movies: state.movies,
-    pendingState: state.pending,
-    loadMorePendingState: state.loadMorePending,
-    loadMoreMoviesError: state.loadMoreMoviesError,
-    errorState: state.error,
-    genres: state.genres
+    movies: state.discover.movies,
+    pendingState: state.discover.pending,
+    loadMorePendingState: state.discover.loadMorePending,
+    loadMoreMoviesError: state.discover.loadMoreError,
+    errorState: state.discover.error,
+    genres: state.discover.genres
   }
 }
 
