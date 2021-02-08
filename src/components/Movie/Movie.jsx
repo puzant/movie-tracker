@@ -6,20 +6,20 @@ import styled from 'styled-components'
 
 const MoviePoster = (props = {}) => {
 
-  const [imageLoaded, setState] = React.useState(false)
+  const [imageLoaded, setImageLoadedState] = React.useState(false)
 
     return (
       <MoviePosterContainer>
         {
-          <MoviePosterImage 
+          <MoviePosterImage
             imageLoaded={imageLoaded}
-            onLoad={() => setState(!imageLoaded)}
+            onLoad={() => setImageLoadedState(!imageLoaded)}
             src={props.poster ? "http://image.tmdb.org/t/p/w185/" + props.poster
             : 
-            "https://cinemaone.net/images/movie_placeholder.png"} alt=""/>   
+            "https://cinemaone.net/images/movie_placeholder.png"} alt=""/>
         }
         
-        {!imageLoaded && <Skeleton variant="rect" animation="wave" width={185} height={278} />}  
+        {!imageLoaded && <Skeleton variant="rect" animation="wave" width={185} height={278} />}
       </MoviePosterContainer>
     )
   }
