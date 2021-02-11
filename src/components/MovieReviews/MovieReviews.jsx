@@ -14,7 +14,7 @@ const MovieReviews = ({reviews}) => {
 
       <MovieReviewsTitle>Movie Reviews</MovieReviewsTitle>
 
-      {reviews.length == 0 &&
+      {reviews.length === 0 &&
           <NoMovieReviewText>
             There are no reviews for this movie
           </NoMovieReviewText>
