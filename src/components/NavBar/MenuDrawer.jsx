@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Constants from '../../constants/Constants'
 import { NavLink } from "react-router-dom";
 import menuIcon from '../../assets/menu-icon.jpg'
 import Divider from '@material-ui/core/Divider';
@@ -74,7 +73,7 @@ export default function MenuDrawer(props) {
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
-            <img className={classes.menuIcon} src={menuIcon} />
+            <img className={classes.menuIcon} src={menuIcon} alt="icon" />
           </Button>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             <DrawerList anchor={anchor} navItems={props.navItems} />
