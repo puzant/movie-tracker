@@ -211,6 +211,7 @@ export function filterMoviesBasedByGenres(genersId) {
 
      try {
        const userAccountResponse = await auth.getAccount(sessionId)
+       accountId = userAccountResponse.data.id
      } catch(error) {
        console.log(error)
      }
