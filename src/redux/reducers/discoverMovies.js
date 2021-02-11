@@ -76,6 +76,8 @@ const sortMovies = (state, {payload}) => {
         ...state,
         movies: sortedMovies
       }
+    default:
+      return
   }
 }
 
@@ -98,7 +100,8 @@ const filterBasedOnGenres = (state, {payload}) => {
 
   state.movies.map((movie) => {
     for(let i=0; i<movie.genre_ids.length; i++) {
-      if(payload.genersId.includes(movie.genre_ids[i])) filteredMoviesByGenres.push(movie)
+      if(payload.genersId.includes(movie.genre_ids[i])) 
+        filteredMoviesByGenres.push(movie)
     }
   })
 
