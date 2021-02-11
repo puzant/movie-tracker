@@ -78,7 +78,7 @@ class NavBar extends Component {
               <div className="movies-search-bar">
                 <input value={this.state.name} onChange={this.handleChange} className="input-search-bar" type="text" placeholder="Enter Movie Name" />
                 <NavLink to={{pathname: 'search-results', search:`?search=${this.state.name}`}}>
-                  <button disabled={this.state.name.length == 0} className="btn-search">Search</button>
+                  <button disabled={this.state.name.length === 0} className="btn-search">Search</button>
                 </NavLink>
               </div>       
              
