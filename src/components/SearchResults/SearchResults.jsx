@@ -20,7 +20,7 @@ class SearchResults extends Component {
     let { searchResults, searchResultsPending } = this.props
 
     const EmptySearchResults = (props) => {
-      return props?.searchResults?.length == 0 && <div className="no-results"><img src={emptyResultsLogo} alt=""/></div>
+      return props?.searchResults?.length === 0 && <div className="no-results"><img src={emptyResultsLogo} alt=""/></div>
     }
 
     return ( 
