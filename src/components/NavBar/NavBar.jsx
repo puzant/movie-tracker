@@ -30,7 +30,7 @@ const MainAppNavbar = styled.div`
   width: 100%;
 `
 
-class NavBar extends Component {
+class Navbar extends Component {
 
   constructor(props) {
     super(props)
@@ -92,4 +92,4 @@ class NavBar extends Component {
   }
 }
  
-export default NavBar;
+export default Navbar;
