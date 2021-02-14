@@ -1,9 +1,9 @@
 import React from 'react';
 import loader from '../../assets/loader-dotted.gif'
 
-const Loader = (props) => (
+const Loader = ({pendingState}) => (
   <div className="movie-loader-container">
-      {props.pendingState && <img className="movies-loader" alt="loading icon" src={loader} />}
+      {pendingState && <img className="movies-loader" alt="loading icon" src={loader} />}
   </div>
 )
 
