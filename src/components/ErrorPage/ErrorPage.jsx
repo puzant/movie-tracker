@@ -1,43 +1,34 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-
 import brokenImage from '../../assets/ambient-1.png'
+import styled from 'styled-components'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '80vh',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: '40vh',
-    height: '40vh',
-    marginBottom: theme.spacing(3),
-  },
-  errorText: {
-    fontWeight: theme.typography.fontWeightMedium,
-    textAlign: 'center',
-    color: '#4ebdb6'
-  },
-}))
-
-
-const ErrorPage = (props) => {
-
-  const classes = useStyles();
-
+export const ErrorPage = ({errorText}) => {
   return (
-    <div className={classes.root}>
-      <img className={classes.image} src={brokenImage} alt=""/>
-      <Typography className={classes.errorText} color="primary" variant="h4">
-        {props.errorText}
-      </Typography>
-  </div>
+    <Root>
+      <ErrorImage src={brokenImage} alt="" />
+      <ErrorText>{errorText}</ErrorText>
+  </Root>
   )
 }
 
-export default ErrorPage
+const Root = styled.div`
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const ErrorImage = styled.img`
+  width: 40vh;
+  height: 40vh;
+  margin-bottom: 24px;
+`
+
+const ErrorText = styled.div`
+  font-weight: 500;
+  font-size: 30px;
+  text-align: center;
+  color: #4ebdb6;
+`
