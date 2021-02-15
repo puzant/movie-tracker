@@ -5,7 +5,8 @@ import sortLogo from '../../assets/sort.svg'
 import filterLogo from '../../assets/filter.svg'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from '../../redux/actions/actionCreators'
+// import * as actions from '../../redux/actions/actionCreators'
+import moviesActions from '../../redux/actions/discoverMoviesActions'
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import './style.css'
@@ -221,7 +222,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch)
+  return bindActionCreators(moviesActions, dispatch)
 }
 
 DiscoverMovies.propTypes = {
