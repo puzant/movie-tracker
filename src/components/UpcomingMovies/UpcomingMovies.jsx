@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-// import * as actions from '../../redux/actions/actionCreators'
 import upcomingMoviesActions from '../../redux/actions/upcomingMoviesActions'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
