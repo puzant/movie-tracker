@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {bindActionCreators} from 'redux'
-import * as actions from '../../redux/actions/actionCreators.js';
+import movieOverviewActions from '../../redux/actions/movieOverviewActions'
 import {connect} from 'react-redux'
 import MovieReviews from '../movieReviews/movieReviews'
 import Loader from '../Loader/Loader'
@@ -173,7 +173,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch)
+  return bindActionCreators(movieOverviewActions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieOverview)
