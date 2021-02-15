@@ -14,10 +14,10 @@ export const GET_MOVIE_PENDING = 'getMoviePending'
 export const GET_MOVIE_REVIEWS_SUCCESS = "getMovieReviewsSuccess"
 export const GET_GENRES = "getGenres"
 
- /** Actions for Movie search */
- export const GET_MOVIE_BY_QUERY_SUCCESS = "getMovieByQuerySuccess"
- export const GET_MOVIE_BY_QUERY_PENDING = "getMovieByQueryPending"
- export const GET_MOVIE_BY_QUERY_ERROR = "getMovieByQueryError"
+/** Actions for Movie search */
+export const GET_MOVIE_BY_QUERY_SUCCESS = "getMovieByQuerySuccess"
+export const GET_MOVIE_BY_QUERY_PENDING = "getMovieByQueryPending"
+export const GET_MOVIE_BY_QUERY_ERROR = "getMovieByQueryError"
 
 /** Actions for Movies Filters */
 export const FILTER_MOVIES = "filterMovies"
@@ -33,7 +33,6 @@ export const SORT_BY_RATING_DESCENDING = "ratingDescending"
 export const SORT_BY_RATING_ASCENDING = "ratingAscending"
 export const SORT_BY_RELEASE_DATE_DESCENDING = "releaseDateDescending"
 export const SORT_BY_RELEASE_DATE_ASCENDING = "releaseDateAscending"
-
 
 /** Actions for Upcomning Movies */
 export const GET_UPCOMING_MOVIES_SUCCESS = "getUpcomingMoviesSuccess"
