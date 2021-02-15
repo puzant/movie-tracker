@@ -76,7 +76,7 @@ class MovieOverview extends Component {
             background: `url(https://image.tmdb.org/t/p/w1280/${movie.backdrop_path})`,
             backgroundSize: 'cover', 
             backgroundPosition: 'center, center',
-            boxShadow: 'inset 0 0 0 100vw #000000',
+            boxShadow: 'inset 0 0 0 100vw rgb(0 0 0 / 70%)',
             color: '#fff'
           }}>
         
