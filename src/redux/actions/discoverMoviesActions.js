@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as actions from './actionTypes'
+import discoverMoviesActionTypes from '../actionTypes/discoverMoviesActionTypes'
 import api from '../../api/api'
 
 /*
@@ -8,9 +8,9 @@ import api from '../../api/api'
  |--------------------------------------------------------------------------
  */
 
-const fetchMoviesPending = createAction(actions.GET_MOVIES_PENDING)
-const fetchMoviesSuccess = createAction(actions.GET_MOVIES_SUCCESS, (movies) => ({movies}))
-const fetchMoviesError = createAction(actions.GET_MOVIES_ERROR, (error) => ({error}))
+const fetchMoviesPending = createAction(discoverMoviesActionTypes.GET_MOVIES_ACTIONS.PENDING)
+const fetchMoviesSuccess = createAction(discoverMoviesActionTypes.GET_MOVIES_ACTIONS.SUCCESS, (movies) => ({movies}))
+const fetchMoviesError = createAction(discoverMoviesActionTypes.GET_MOVIES_ACTIONS.ERROR, (error) => ({error}))
 
 const fetchMovies = () => {
   return async dispatch => {
@@ -31,9 +31,9 @@ const fetchMovies = () => {
  |--------------------------------------------------------------------------
  */
 
-const fetchMoviesGenresSuccess = createAction(actions.GET_GENRES, (genres) => ({genres}))
+const fetchMoviesGenresSuccess = createAction(discoverMoviesActionTypes.GET_MOVIES_GENRES, (genres) => ({genres}))
 
-export function fetchMoviesGenres() {
+const fetchMoviesGenres = () => {
   return async dispatch => {
     try {
       const getGenresResponse = await api.getMovieGenres()
@@ -50,11 +50,11 @@ export function fetchMoviesGenres() {
  |--------------------------------------------------------------------------
  */
 
-const fetcMorehMoviesPending = createAction(actions.GET_MORE_MOVIES_PENDING)
-const fetchMoreMoviesSuccess = createAction(actions.GET_MORE_MOVIES_SUCCESS, (movies) => ({movies}))
-const fetchMoreMoviesError = createAction(actions.GET_MORE_MOVIES_ERROR, (error) => ({error}))
+const fetcMorehMoviesPending = createAction(discoverMoviesActionTypes.GET_MORE_MOVIES_ACTIONS.PENDING)
+const fetchMoreMoviesSuccess = createAction(discoverMoviesActionTypes.GET_MORE_MOVIES_ACTIONS.SUCCESS, (movies) => ({movies}))
+const fetchMoreMoviesError = createAction(discoverMoviesActionTypes.GET_MORE_MOVIES_ACTIONS.ERROR, (error) => ({error}))
 
-export const fetchMoreMovies = (pageNumber) => {
+const fetchMoreMovies = (pageNumber) => {
  return async dispatch => {
    try {
      dispatch(fetcMorehMoviesPending())
@@ -72,23 +72,23 @@ export const fetchMoreMovies = (pageNumber) => {
  |--------------------------------------------------------------------------
  */
 
-const filter = createAction(actions.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
-const sort = createAction(actions.SORT_MOVIES, (movies, sortingType) => ({movies, sortingType}))
-const filterByGenres = createAction(actions.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
+const filter = createAction(discoverMoviesActionTypes.FILTER_MOVIES_ACTIONS.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
+const sort = createAction(discoverMoviesActionTypes.SORTING_MOVIES_ACTIONS.SORT_MOVIES, (movies, sortingType) => ({movies, sortingType}))
+const filterByGenres = createAction(discoverMoviesActionTypes.FILTER_MOVIES_ACTIONS.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
 
-export function filterMovies(movies, filterType) {
+const filterMovies = (movies, filterType) => {
   return dispatch => {
     dispatch(filter(movies, filterType))
   }
 }
 
-export function sortMovies(movies, sortingType) {
+const sortMovies = (movies, sortingType) => {
   return dispatch => {
     dispatch(sort(movies, sortingType))
   }
 }
 
-export function filterMoviesBasedByGenres(genersId) {
+const filterMoviesBasedByGenres = (genersId) => {
   return dispatch => {
     dispatch(filterByGenres(genersId))
   }
