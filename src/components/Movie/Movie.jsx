@@ -63,8 +63,7 @@ const Movie = (props) => {
 
 export default Movie;
 
-const MoviePosterContainer = styled.div`
-`
+const MoviePosterContainer = styled.div``
 
 const MoviePosterImage = styled.img`
   display: ${props => !props.imageLoaded ? 'none' : 'inline'};
@@ -72,7 +71,7 @@ const MoviePosterImage = styled.img`
 
 const MovieContainer = styled.div`
   background: #fff;
-  box-shadow: -2px 4px 30px -1px rgba(0,0,0,0.75);
+  box-shadow: -2px 4px 30px -1px #000000;
   transform-origin: top left;
   border-radius: 5px;
   margin: 15px;
@@ -82,7 +81,7 @@ const MovieContainer = styled.div`
   transition: .5s;
   &:hover {
     cursor: pointer;
-    background-color: rgb(235, 231, 231);
+    background-color: #ebe7e7;
   }
 `
 
