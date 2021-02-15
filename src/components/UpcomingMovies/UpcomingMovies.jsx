@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import * as actions from '../../redux/actions/actionCreators'
-import {bindActionCreators} from 'redux'
+// import * as actions from '../../redux/actions/actionCreators'
+import upcomingMoviesActions from '../../redux/actions/upcomingMoviesActions'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
 import Movie from '../Movie/Movie'
 import { Link } from "react-router-dom";
@@ -62,7 +63,7 @@ const mapStateToProps = (state) => {
 }
  
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch)
+  return bindActionCreators(upcomingMoviesActions, dispatch)
 }
 
 UpComingMovies.propTypes = {
