@@ -12,7 +12,7 @@ const fetchMovieByQuerySuccess = createAction(actions.GET_MOVIE_BY_QUERY_SUCCESS
 const fetchMovieByQueryPending = createAction(actions.GET_MOVIE_BY_QUERY_PENDING)
 const fetchMovieByQueryError = createAction(actions.GET_MOVIE_BY_QUERY_ERROR, (error) => ({error}))
 
-export const fetchMovieByQuery = (query) => {
+const fetchMovieByQuery = (query) => {
   return async dispatch => {
     try {
       dispatch(fetchMovieByQueryPending())
