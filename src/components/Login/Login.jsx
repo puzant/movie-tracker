@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Info from '@material-ui/icons/Info'
 import Constants from '../../constants/Constants'
 import { bindActionCreators } from 'redux'
-import * as actions from '../../redux/actions/actionCreators.js';
+import loginActions from '../../redux/actions/loginActions'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import styled from 'styled-components'
@@ -138,7 +138,7 @@ class Login extends Component {
       })
     }
     else {
-       this.props.loginUser(this.state.username, this.state.password)
+       this.props.loginActions(this.state.username, this.state.password)
     }
   }
 
@@ -202,7 +202,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch)
+  return bindActionCreators(loginActions, dispatch)
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
