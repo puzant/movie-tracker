@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import * as actions from './actionTypes'
+import movieOverviewActionTypes from '../actionTypes/movieOverviewActionTypes'
 import api from '../../api/api'
 
 /*
@@ -8,8 +8,8 @@ import api from '../../api/api'
  |--------------------------------------------------------------------------
  */
 
-const fetchMovieSuccess = createAction(actions.GET_MOVIE_SUCCESS, (movie) => ({movie}))
-const fechMoviePending = createAction(actions.GET_MOVIE_PENDING)
+const fetchMovieSuccess = createAction(movieOverviewActionTypes.GET_MOVIE_ACTIONS.SUCCESS, (movie) => ({movie}))
+const fechMoviePending = createAction(movieOverviewActionTypes.GET_MOVIE_ACTIONS.PENDING)
 
 const fetchMovieById = (movieId) => {
  return async dispatch => {
@@ -30,7 +30,7 @@ const fetchMovieById = (movieId) => {
  |--------------------------------------------------------------------------
  */
 
-const fetchMovieReviewsSuccess = createAction(actions.GET_MOVIE_REVIEWS_SUCCESS, (reviews) => ({reviews}))
+const fetchMovieReviewsSuccess = createAction(movieOverviewActionTypes.REVIEWS_SUCCESS, (reviews) => ({reviews}))
 
 const fetchMovieReviews = (movieId) => {
   return async dispatch => {
