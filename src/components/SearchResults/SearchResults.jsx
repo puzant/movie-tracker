@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux'
-import * as actions from '../../redux/actions/actionCreators.js';
+import searchMoviesActions from '../../redux/actions/searchMoviesActions'
 import {connect} from 'react-redux'
 import queryString from 'query-string'
 import Loader from '../Loader/Loader'
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch)
+  return bindActionCreators(searchMoviesActions, dispatch)
 }
 
 SearchResults.propTypes = {
