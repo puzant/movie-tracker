@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import * as actions from './actionTypes'
-import api from '../../api/api'
+import auth from '../../api/authentication'
 
 /*
  |--------------------------------------------------------------------------
