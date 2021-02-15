@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Info from '@material-ui/icons/Info'
 import Constants from '../../constants/Constants'
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 import * as actions from '../../redux/actions/actionCreators.js';
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
@@ -60,7 +60,7 @@ flex-direction: column;
 
 const StyledInput = styled.input`
 margin-top: 10px;
-border-color: rgba(33,37,41,0.15);
+border: 1px solid #abb3ba;
 color: #292b2c;
 padding: 12px;
 border-radius: 1.25rem;
@@ -73,7 +73,6 @@ vertical-align: middle;
 
 const ErrorCardContainer = styled.div`
 margin: 20px 0 10px 0;
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 background-color: #fff;
 border-radius: 8px;
 border: 1px solid #ccc;
