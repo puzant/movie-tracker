@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import searchMoviesActions from '../actionTypes/searchMoviesActionTypes'
+import { SEARCH_MOVIES_ACTIONS } from '../actionTypes/searchMoviesActionTypes'
 import api from '../../api/api'
 
 /*
@@ -8,9 +8,9 @@ import api from '../../api/api'
  |--------------------------------------------------------------------------
  */
 
-const fetchMovieByQuerySuccess = createAction(searchMoviesActions.SEARCH_MOVIES_ACTIONS.GET_MOVIE_BY_QUERY_SUCCESS, (searchResults) => ({searchResults}))
-const fetchMovieByQueryPending = createAction(searchMoviesActions.SEARCH_MOVIES_ACTIONS.GET_MOVIE_BY_QUERY_PENDING)
-const fetchMovieByQueryError = createAction(searchMoviesActions.SEARCH_MOVIES_ACTIONS.GET_MOVIE_BY_QUERY_ERROR, (error) => ({error}))
+const fetchMovieByQuerySuccess = createAction(SEARCH_MOVIES_ACTIONS.SUCCESS, (searchResults) => ({searchResults}))
+const fetchMovieByQueryPending = createAction(SEARCH_MOVIES_ACTIONS.PENDING)
+const fetchMovieByQueryError = createAction(SEARCH_MOVIES_ACTIONS.ERROR, (error) => ({error}))
 
 const fetchMovieByQuery = (query) => {
   return async dispatch => {
