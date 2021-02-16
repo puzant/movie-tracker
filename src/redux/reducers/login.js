@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as actions from '../actions/actionTypes'
+
 
 export const initialState = {
   isAuth: false,
