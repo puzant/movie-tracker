@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as actions from '../actions/actionTypes'
+import { UPCOMING_MOVIES_ACTIONS } from '../actionTypes/upcomingMoviesActionTypes'
 
 export const initialState = {
   upcomingMovies: [],
@@ -19,9 +19,9 @@ const fetchUpcomingMoviesSuccess = (state, {payload}) => {
 const fetchUpcomingMoviesError = (state) => ({...state, upcomingMoviesError: true, upcomingMoviesPending: false})
 
 const upcomingMoviesActionHandler = {
-  [actions.GET_UPCOMING_MOVIES_PENDING]: fetchUpcomingMoviesPending,
-  [actions.GET_UPCOMING_MOVIES_SUCCESS]: fetchUpcomingMoviesSuccess,
-  [actions.GET_UPCOMING_MOVIES_ERROR]: fetchUpcomingMoviesError
+  [UPCOMING_MOVIES_ACTIONS.PENDING]: fetchUpcomingMoviesPending,
+  [UPCOMING_MOVIES_ACTIONS.SUCCESS]: fetchUpcomingMoviesSuccess,
+  [UPCOMING_MOVIES_ACTIONS.ERROR]: fetchUpcomingMoviesError
 }
 
 export default handleActions(upcomingMoviesActionHandler, initialState)
