@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import * as actions from '../actions/actionTypes'
+import { SEARCH_MOVIES_ACTIONS } from '../actionTypes/searchMoviesActionTypes'
 
 export const initialState = {
   searchResults: [],
@@ -18,9 +18,9 @@ const fetchMovieByQueryPending = (state) => ({...state, pending: true, error: fa
 const fetchMOvieByQueryError = (state) => ({ ...state, error: true, pending: false })
 
 const searchMovieActionsHandler = {
-  [actions.GET_MOVIE_BY_QUERY_SUCCESS]: fetchMovieByQuerySuccess,
-  [actions.GET_MOVIE_BY_QUERY_PENDING]: fetchMovieByQueryPending,
-  [actions.GET_MOVIE_BY_QUERY_ERROR]: fetchMOvieByQueryError,
+  [SEARCH_MOVIES_ACTIONS.SUCCESS]: fetchMovieByQuerySuccess,
+  [SEARCH_MOVIES_ACTIONS.PENDING]: fetchMovieByQueryPending,
+  [SEARCH_MOVIES_ACTIONS.ERROR]: fetchMOvieByQueryError,
 }
 
 export default handleActions(searchMovieActionsHandler, initialState)
