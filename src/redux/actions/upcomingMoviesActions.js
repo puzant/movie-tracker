@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import upcomingMoviesActions from '../actionTypes/upcomingMoviesActionTypes'
+import { UPCOMING_MOVIES_ACTIONS } from '../actionTypes/upcomingMoviesActionTypes'
 import api from '../../api/api'
 
 /*
@@ -7,9 +7,9 @@ import api from '../../api/api'
  | Get Upcoming Movies
  |--------------------------------------------------------------------------
  */
-const fetchUpcomingMoviesPending = createAction(upcomingMoviesActions.GET_UPCOMING_MOVIES_ACTIONS.PENDING)
-const fetchUpcomingMoviesSuccess = createAction(upcomingMoviesActions.GET_UPCOMING_MOVIES_ACTIONS.SUCCESS, (upcomingMoveis) => ({upcomingMoveis}))
-const fetchUpcomingMoviesError   = createAction(upcomingMoviesActions.GET_UPCOMING_MOVIES_ACTIONS.SUCCESS, (error) => ({error}))
+const fetchUpcomingMoviesPending = createAction(UPCOMING_MOVIES_ACTIONS.PENDING)
+const fetchUpcomingMoviesSuccess = createAction(UPCOMING_MOVIES_ACTIONS.SUCCESS, (upcomingMoveis) => ({upcomingMoveis}))
+const fetchUpcomingMoviesError   = createAction(UPCOMING_MOVIES_ACTIONS.ERROR, (error) => ({error}))
 
 const fetchUpcomingMovies = () => {
   return async dispatch => {
