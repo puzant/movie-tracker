@@ -1,5 +1,11 @@
 import { handleActions } from 'redux-actions';
-import * as actions from '../actions/actionTypes'
+import { 
+  GET_MOVIES_ACTIONS,
+  GET_MORE_MOVIES_ACTIONS,
+  GET_MOVIES_GENRES,
+  FILTER_MOVIES_ACTIONS,
+  SORTING_MOVIES_ACTIONS 
+} from '../actionTypes/discoverMoviesActionTypes'
 import utils from '../../utils/utils'
 import Constants from '../../constants/Constants'
 
@@ -40,37 +46,37 @@ const fetchGenres = (state, {payload}) => ({...state, genres: payload.genres})
 const sortMovies = (state, {payload}) => {
   let sortedMovies
   switch(payload.sortingType) {
-    case actions.SORT_BY_RELEASE_DATE_DESCENDING:
+    case SORTING_MOVIES_ACTIONS.BY_RELEASE_DATE_DESCENDING:
       sortedMovies = utils.sortInDescendingOrder(payload.movies, Constants.TMDB_API_DATA.RELEASE_DATE)
       return {
         ...state,
         movies: sortedMovies
       }
-    case actions.SORT_BY_RELEASE_DATE_ASCENDING:
+    case SORTING_MOVIES_ACTIONS.BY_RELEASE_DATE_ASCENDING:
       sortedMovies = utils.sortInAscendingOrder(payload.movies, Constants.TMDB_API_DATA.RELEASE_DATE)
       return {
         ...state,
         movies: sortedMovies
       }
-    case actions.SORT_BY_POPULARITY_DESCENDING:
+    case SORTING_MOVIES_ACTIONS.BY_POPULARITY_DESCENDING:
       sortedMovies = utils.sortInDescendingOrder(payload.movies, Constants.TMDB_API_DATA.MOVIE_POPULARITY)
       return {
         ...state,
         movies: sortedMovies
       }
-    case actions.SORT_BY_POPULARITY_ASCENDING:
+    case SORTING_MOVIES_ACTIONS.BY_POPULARITY_ASCENDING:
       sortedMovies = utils.sortInAscendingOrder(payload.movies, Constants.TMDB_API_DATA.MOVIE_POPULARITY)
       return {
         ...state,
         movies: sortedMovies
       }
-    case actions.SORT_BY_RATING_ASCENDING:
+    case SORTING_MOVIES_ACTIONS.BY_RATING_ASCENDING:
       sortedMovies = utils.sortInAscendingOrder(payload.movies, Constants.TMDB_API_DATA.VOTE_AVERAGE)
       return {
         ...state,
         movies: sortedMovies
       }
-    case actions.SORT_BY_RATING_DESCENDING:
+    case SORTING_MOVIES_ACTIONS.BY_RATING_DESCENDING:
       sortedMovies = utils.sortInDescendingOrder(payload.movies, Constants.TMDB_API_DATA.VOTE_AVERAGE)
       return {
         ...state,
@@ -83,10 +89,10 @@ const sortMovies = (state, {payload}) => {
 
 const filterMovies = (state, {payload}) => {
   let filterMovies;
-  if(payload.filterType === actions.BY_HIGHEST_ORDER) {
+  if(payload.filterType === FILTER_MOVIES_ACTIONS.BY_HIGHEST_ORDER) {
     filterMovies =  payload.movies.filter((movie) => { return movie.vote_average > 6.9 })
 
-  } else if(payload.filterType === actions.BY_ADULT) {
+  } else if(payload.filterType === FILTER_MOVIES_ACTIONS.BY_ADULT) {
       filterMovies = payload.movies.filter((movie) => { return movie.adult })
   }
     return {
@@ -115,16 +121,16 @@ const filterBasedOnGenres = (state, {payload}) => {
 }
 
 const moviesActionHandler = {
-  [actions.GET_MOVIES_PENDING]: fetchMoviesPending,
-  [actions.GET_MOVIES_SUCCESS]: fetchMoviesSuccess,
-  [actions.GET_MOVIES_ERROR]: fetchMoviesError,
-  [actions.GET_MORE_MOVIES_PENDING]: fetchMoreMoviesPending,
-  [actions.GET_MORE_MOVIES_SUCCESS]: fetchMoreMoviesSuccess,
-  [actions.GET_MORE_MOVIES_ERROR]: fetchMoreMoviesError,
-  [actions.SORT_MOVIES]: sortMovies,
-  [actions.FILTER_MOVIES]: filterMovies,
-  [actions.FILTER_BASED_ON_GENRES]: filterBasedOnGenres,
-  [actions.GET_GENRES]: fetchGenres
+  [GET_MOVIES_ACTIONS.PENDING]: fetchMoviesPending,
+  [GET_MOVIES_ACTIONS.SUCCESS]: fetchMoviesSuccess,
+  [GET_MOVIES_ACTIONS.ERROR]: fetchMoviesError,
+  [GET_MORE_MOVIES_ACTIONS.PENDING]: fetchMoreMoviesPending,
+  [GET_MORE_MOVIES_ACTIONS.SUCCESS]: fetchMoreMoviesSuccess,
+  [GET_MORE_MOVIES_ACTIONS.ERROR]: fetchMoreMoviesError,
+  [SORTING_MOVIES_ACTIONS.SORT_MOVIES]: sortMovies,
+  [FILTER_MOVIES_ACTIONS.FILTER_MOVIES]: filterMovies,
+  [FILTER_MOVIES_ACTIONS.FILTER_BASED_ON_GENRES]: filterBasedOnGenres,
+  [GET_MOVIES_GENRES.GET_GENRES]: fetchGenres
 }
 
 export default handleActions(moviesActionHandler, initialState)
