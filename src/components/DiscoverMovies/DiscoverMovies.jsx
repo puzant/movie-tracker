@@ -1,3 +1,4 @@
+/** TODO: Refator to functional component */
 import React, { Component } from 'react';
 import Movie from '../Movie/Movie'
 import loader from '../../assets/loader-dotted.gif'
@@ -10,8 +11,8 @@ import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import './style.css'
 import PropTypes from 'prop-types';
-import Loader from '../Loader/Loader'
-import Error from '../Error/Error'
+import Loader from '../loader/loader'
+import Error from '../error/error'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Constants from '../../constants/Constants'
