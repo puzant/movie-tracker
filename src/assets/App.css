@@ -1,80 +1,4 @@
-.drawer-menu-btn {
-  display: none;
-}
-
-.nav-item a {
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  text-align: center;
-  padding: 2px 16px;
-  text-decoration: none;
-  transition: 0.5s;
-}
-
-.nav-item a:hover:not(.active) {
-  background-color: #e5eaf5;
-  border-radius: 10px;
-  color: #111;
-}
-
-.movies-search-bar {
-  display: flex;
-  justify-content: flex-end;
-  width: 30%;
-  align-items: center;
-}
-
-.input-search-bar {
-  background: #f8fcfe;
-  border-radius: 1px;
-  box-shadow: 0 0 3px #fff inset;
-  color: #111;
-  padding: 12px 10px;
-  width: 225px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  margin-right: 6px;
-  transition: .5s;
-  opacity: .5;
-}
-
-.input-search-bar::placeholder {
-  color: #111;
-}
-
-.input-search-bar:focus {
-  outline: none;
-  opacity: 1;
-}
-
-.btn-search {
-  font-weight: bold;
-  background: #f8fcfe;
-  color: #111;
-  padding: 12px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  transition: .5s;
-}
-
-.btn-search:disabled {
-  opacity: 0.5;
-  cursor: default !important;
-}
-
-.btn-search:hover {
-  cursor: pointer;
-}
-
 /** App CSS ends here */
-
-
-
-
-
-
-
 
 .movie-genre {
   border: 1px solid #0000003b;
@@ -89,12 +13,6 @@
   cursor: pointer;
   background: #f5f0f0;
 }
-
-
-
-
-
-
 
 
 
