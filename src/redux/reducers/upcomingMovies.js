@@ -3,20 +3,20 @@ import { UPCOMING_MOVIES_ACTIONS } from '../actionTypes/upcomingMoviesActionType
 
 export const initialState = {
   upcomingMovies: [],
-  upcomingMoviesPending: false,
-  upcomingMoviesError: false,
+  pending: false,
+  error: false,
 }
 
-const fetchUpcomingMoviesPending = (state) => ({...state, upcomingMoviesPending: true, upcomingMoviesError: false})
+const fetchUpcomingMoviesPending = (state) => ({...state, pending: true, error: false})
 const fetchUpcomingMoviesSuccess = (state, {payload}) => {
   return ({
     ...state,
     upcomingMovies: payload.upcomingMoveis,
-    upcomingMoviesPending: false,
-    upcomingMoviesError: false
+    pending: false,
+    error: false
   })
 }
-const fetchUpcomingMoviesError = (state) => ({...state, upcomingMoviesError: true, upcomingMoviesPending: false})
+const fetchUpcomingMoviesError = (state) => ({...state, error: true, pending: false})
 
 const upcomingMoviesActionHandler = {
   [UPCOMING_MOVIES_ACTIONS.PENDING]: fetchUpcomingMoviesPending,
