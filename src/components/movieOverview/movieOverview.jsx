@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import movieOverviewActions from '../../redux/actions/movieOverviewActions'
 import {connect} from 'react-redux'
 import MovieReviews from '../movieReviews/movieReviews'
-import Loader from '../Loader/Loader'
+import Loader from '../loader/loader'
 import Constants from '../../constants/Constants'
 import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
