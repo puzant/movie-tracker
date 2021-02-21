@@ -130,7 +130,7 @@ const moviesActionHandler = {
   [SORTING_MOVIES_ACTIONS.SORT_MOVIES]: sortMovies,
   [FILTER_MOVIES_ACTIONS.FILTER_MOVIES]: filterMovies,
   [FILTER_MOVIES_ACTIONS.FILTER_BASED_ON_GENRES]: filterBasedOnGenres,
-  [GET_MOVIES_GENRES.GET_GENRES]: fetchGenres
+  [GET_MOVIES_GENRES]: fetchGenres
 }
 
 export default handleActions(moviesActionHandler, initialState)
