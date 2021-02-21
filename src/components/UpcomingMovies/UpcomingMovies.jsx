@@ -1,63 +1,47 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import {connect} from 'react-redux'
 import upcomingMoviesActions from '../../redux/actions/upcomingMoviesActions'
 import { bindActionCreators } from 'redux'
-import PropTypes from 'prop-types';
-import Movie from '../Movie/Movie'
 import { Link } from "react-router-dom";
-import Loader from '../Loader/Loader'
-import Error from '../Error/Error'
+import PropTypes from 'prop-types';
 import Constants from '../../constants/Constants'
-import styled from 'styled-components'
+import Movie from '../Movie/Movie'
+import Loader from '../loader/loader'
+import Error from '../error/error'
 
-const UpcomingMoviesContainer = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-`
+export const UpComingMovies = (props) => {
 
-const SubContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-`
-class UpComingMovies extends Component {
+  const { upcomingMovies, error, pending, fetchUpcomingMovies } = props
   
-  componentDidMount() {
-    this.props.fetchUpcomingMovies()
-  }
+  useEffect(() => {
+    fetchUpcomingMovies()
+  }, [])
 
-  render() { 
-    const { upcomingMovies } = this.props 
-    return (
-      
-      <UpcomingMoviesContainer>
+  return (
+    <UpcomingMoviesContainer>
         
-        <SubContainer>
-          {upcomingMovies && upcomingMovies.map((ucm) => (
-            <Link to={`/movie-overview/${ucm.id}`} key={ucm.id}>
-              <Movie movie={ucm} key={ucm.id}>
-              </Movie>
-            </Link>
-          ))}
-        </SubContainer>
+      <SubContainer>
+        {upcomingMovies && upcomingMovies.map((ucm) => (
+          <Link to={`/movie-overview/${ucm.id}`} key={ucm.id}>
+            <Movie movie={ucm} key={ucm.id} />
+          </Link>
+        ))}
+      </SubContainer>
 
-        <Loader pendingState={this.props.upcomingMoviesPending} />
-
-        <Error errorText={Constants.ERROR_TEXT.FETCH_UPCOMING_MOVIES_ERROR_TEXT} error={this.props.upcomingMoviesError} />
+      <Loader pendingState={pending} />
+      <Error errorText={Constants.ERROR_TEXT.FETCH_UPCOMING_MOVIES_ERROR_TEXT} error={error} />
       
-      </UpcomingMoviesContainer>
+    </UpcomingMoviesContainer>
+  )
 
-     );
-  }
 }
 
 const mapStateToProps = (state) => {
   return {
     upcomingMovies: state.upcoming.upcomingMovies,
-    upcomingMoviesPending: state.upcoming.upcomingMoviesPending,
-    upcomingMoviesError: state.upcoming.upcomingMoviesError
+    pending: state.upcoming.pending,
+    error: state.upcoming.error
   }
 }
  
@@ -73,3 +57,16 @@ UpComingMovies.propTypes = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpComingMovies);
+
+const UpcomingMoviesContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+`
+
+const SubContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
