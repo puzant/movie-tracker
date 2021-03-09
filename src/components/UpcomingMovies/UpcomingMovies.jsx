@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import {connect} from 'react-redux'
 import upcomingMoviesActions from '../../redux/actions/upcomingMoviesActions'
 import { bindActionCreators } from 'redux'
@@ -9,6 +8,7 @@ import Constants from '../../constants/Constants'
 import Movie from '../Movie/Movie'
 import Loader from '../loader/loader'
 import Error from '../error/error'
+import { Block, BlockGroup } from '../layout/block/block'
 
 export const UpComingMovies = (props) => {
 
@@ -19,20 +19,20 @@ export const UpComingMovies = (props) => {
   }, [])
 
   return (
-    <UpcomingMoviesContainer>
+    <BlockGroup marginTop='20'>
         
-      <SubContainer>
+      <Block justify='center' layout='horizontal' wrap>
         {upcomingMovies && upcomingMovies.map((ucm) => (
           <Link to={`/movie-overview/${ucm.id}`} key={ucm.id}>
             <Movie movie={ucm} key={ucm.id} />
           </Link>
         ))}
-      </SubContainer>
+      </Block>
 
       <Loader pendingState={pending} />
       <Error errorText={Constants.ERROR_TEXT.FETCH_UPCOMING_MOVIES_ERROR_TEXT} error={error} />
       
-    </UpcomingMoviesContainer>
+    </BlockGroup>
   )
 
 }
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
     error: state.upcoming.error
   }
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(upcomingMoviesActions, dispatch)
 }
@@ -57,16 +57,3 @@ UpComingMovies.propTypes = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpComingMovies);
-
-const UpcomingMoviesContainer = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-`
-
-const SubContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-`
