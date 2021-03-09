@@ -11,7 +11,7 @@ import GuardedRoute from './guardedRoute'
 const notFoundPage = () => <ErrorPage errorText="Page Not Found"/>
 
 const Routes = () => {
- 
+
   return (
     <Switch>
       <Route path="/" exact component={DiscoverMovies} />
