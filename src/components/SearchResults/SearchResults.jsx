@@ -8,6 +8,7 @@ import Movie from '../Movie/Movie'
 import emptyResultsLogo from '../../assets/empty-results.png'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { Block } from '../layout/block/block'
 
 class SearchResults extends Component {
 
@@ -17,16 +18,12 @@ class SearchResults extends Component {
   }
 
   render() { 
-    let { searchResults, searchResultsPending } = this.props
-
-    const EmptySearchResults = (props) => {
-      return props?.searchResults?.length === 0 && <div className="no-results"><img src={emptyResultsLogo} alt=""/></div>
-    }
+    let { searchResults, searchResultsPending, emptySearchResults } = this.props
 
     return ( 
-      <div className="search-results-container">
+      <Block layout='horizontal' justify='center' marginTop='20' wrap>
 
-        {/* <EmptySearchResults searchResults={searchResults} /> */}
+        {emptySearchResults && <><img src={emptyResultsLogo} alt=""/></>}
 
         {searchResults?.map(movie => (
           <Link to={`/movie-overview/${movie.id}`} key={movie.id}>
@@ -36,20 +33,21 @@ class SearchResults extends Component {
             >
           </Movie>
         </Link>
-        )) }
+        ))}
 
         {searchResultsPending && <Loader pendingState={searchResultsPending} />}
         
-      </div>
-     );
+      </Block>
+    );
   }
 }
- 
+
 const mapStateToProps = (state) => { 
   return {
     searchResults: state.search.searchResults,
     searchResultsPending: state.search.pending,
-    searchResultsError: state.search.error
+    searchResultsError: state.search.error,
+    emptySearchResults: state.search.empty
   }
 }
 
