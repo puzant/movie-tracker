@@ -1,7 +1,6 @@
 /** TODO: Refator to functional component */
 import React, { Component } from 'react';
 import Movie from '../Movie/Movie'
-import loader from '../../assets/loader-dotted.gif'
 import sortLogo from '../../assets/sort.svg'
 import filterLogo from '../../assets/filter.svg'
 import { bindActionCreators } from 'redux'
@@ -17,26 +16,17 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Constants from '../../constants/Constants'
 import styled from 'styled-components'
-
-const DiscoverMoviesContainer = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-`
+import { Block, BlockGroup } from '../layout/block/block'
 
 const MoviesListControllers = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
   align-items: center;
-  width: 85%;
+  width: 82%;
 `
 
-const MovieFiltersContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+const MovieFiltersContainer = styled(Block)``
 
 const DiscoverMoviesText = styled.div`
   font-weight: bold;
@@ -48,20 +38,42 @@ const GenersText = styled.div`
 `
 
 const GenresFiltersContainer = styled.div`
-  width: 100%;
+  width: 85%;
   overflow: scroll;
   display: flex; 
   flex-wrap: wrap;
   justify-content: flex-start;
   @media (max-width: 600px) {
+    width: 300px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     overflow: scroll;
   }
 `
-class DiscoverMovies extends Component {  
 
+const MovieGenre = styled.span`
+  border: 1px solid #0000003b;
+  color: #000000de;
+  background: ${props => props.selectedGenre && '#f5f0f0'};
+  margin: 4px;
+  padding: 8px;
+  border-radius: 15px;
+  transition: .5s;
+  &:hover {
+    cursor: pointer;
+    background: #f5f0f0;
+  }
+`
+
+const GenresContainer = styled.div`
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  width: 82%;
+`
+
+class DiscoverMovies extends Component {  
   constructor(props) {
     super(props);
     let pagesCounter = 2
@@ -86,10 +98,12 @@ class DiscoverMovies extends Component {
 
   handleSort(movies, sortingType) {
     this.props.sortMovies(movies, sortingType)
+    this.setState({ sortMenuAnchorEl:  null})
   }
 
   handleFilter(movies, filterType) {
     this.props.filterMovies(movies, filterType)
+    this.setState({ filterMenuAnchorEl: null })
   }
 
   handleFilteringByGenres = id => {
@@ -98,98 +112,88 @@ class DiscoverMovies extends Component {
     }, () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres))
   }
 
-  handleClosingFiltertMenu = () => {
-    this.setState({ filterMenuAnchorEl: null })
-  }
-
-  handleFilterMenuClick = (event) => {
-    this.setState({ filterMenuAnchorEl:  event.currentTarget})
-  }
-
-  handleClosingSortingtMenu = () => {
-    this.setState({ sortMenuAnchorEl: null })
-  }
-
-  handleSortingrMenuClick = (event) => {
-    this.setState({ sortMenuAnchorEl:  event.currentTarget})
-  }
-
   render() {
 
     const MoreMoviesLoader = (props) => (
-      <div className="load-more-movies">
-        {props.loadMorePendingState && props.movies && <img className="movies-loader" src={loader} alt=""/>}
-      </div>
+      <Block align='center'>
+        {props.loadMorePendingState && <Loader pendingState={props.loadMorePendingState} />}
+      </Block>
     )
 
     const { genres, movies } = this.props
     const { filterMenuAnchorEl, sortMenuAnchorEl } = this.state
 
-    return ( 
-      <DiscoverMoviesContainer>
+    return (
+      <BlockGroup marginTop='20' gap={15}>
 
         <MoviesListControllers>
 
           <DiscoverMoviesText>Discover new Movies</DiscoverMoviesText>
 
-          <MovieFiltersContainer>
+          <MovieFiltersContainer layout='horizontal' align='center' gap={15}>
 
-            <div className="sort-movies-container">
-              <img onClick={this.handleSortingrMenuClick} className="sort-logo" src={sortLogo} alt="sort_logo" />
-              <span className="sort-text">Sort</span>
+            <BlockGroup>
+              <Block layout='horizontal' gap={5}>
+                <img onClick={(e) => this.setState({ sortMenuAnchorEl:  e.currentTarget})} src={sortLogo} alt="sort_logo" />
+                <span>Sort</span>
+              </Block>
               <Menu 
                 id="sort-menu"
                 anchorEl={sortMenuAnchorEl}
                 keepMounted
                 open={Boolean(sortMenuAnchorEl)}
-                onClose={this.handleClosingSortingtMenu}>
-
+                onClose={() => this.setState({ sortMenuAnchorEl: null })}
+                >
                 {Constants.SORTING_OPTIONS.map((sortOpt, index) => (
                   <MenuItem key={index}
-                    onClick={() => {this.handleClosingSortingtMenu(); this.handleSort(movies, sortOpt.SORTING_NAME)}}>
+                    onClick={() =>  this.handleSort(movies, sortOpt.SORTING_NAME)}>
                     {sortOpt.TEXT_TITLE}
                   </MenuItem>
                 ))}
               </Menu>
-          </div>
+            </BlockGroup>
 
-          <div className="filter-movies-container">
-            <img onClick={this.handleFilterMenuClick} className="filter-logo" src={filterLogo} alt="filter_logo" />
-            <span className="filter-text dropbtn">Filter</span>
+          <BlockGroup>
+            <Block layout='horizontal' gap={5}>
+              <img onClick={(e) => this.setState({ filterMenuAnchorEl:  e.currentTarget})} src={filterLogo} alt="filter_logo" />
+              <span>Filter</span>
+            </Block>
               <Menu 
                 id="filter-menu"
                 anchorEl={filterMenuAnchorEl}
                 keepMounted
                 open={Boolean(filterMenuAnchorEl)}
-                onClose={this.handleClosingFiltertMenu}>
-
+                onClose={() => this.setState({ filterMenuAnchorEl: null})}
+              >
                 {Constants.FILTER_TYPES.map((filterType) =>(
                   <MenuItem key={filterType.FILTER_NAME}
-                    onClick={() => {this.handleClosingFiltertMenu(); this.handleFilter(movies, filterType.FILTER_NAME)}}>
+                    onClick={() => this.handleFilter(movies, filterType.FILTER_NAME)}>
                       {filterType.TEXT_TITLE}
                   </MenuItem>
                 ))}
-
               </Menu>
-          </div>
+          </BlockGroup>
+
         </MovieFiltersContainer>
 
         </MoviesListControllers>
 
-        <div className="movies-genres-selector-container">
-          <GenersText>Genres:</GenersText>
-          <GenresFiltersContainer>
-          {genres?.map(genre => (
-            <span onClick={() => this.handleFilteringByGenres(genre.id)} 
-              className={`movie-genre + ${this.state.selectedGenres.includes(genre.id) ? "selected-genre" : ""}`} 
-              key={genre.id}>
-              {genre.name}
-            </span>
-          )) }
-          </GenresFiltersContainer>
-        </div> 
+          <GenresContainer>
+            <GenersText>Genres:</GenersText>
+            <GenresFiltersContainer>
+            {genres?.map(genre => (
+              <MovieGenre
+                key={genre.id}
+                selectedGenre={this.state.selectedGenres.includes(genre.id)}
+                onClick={() => this.handleFilteringByGenres(genre.id)}
+              >
+                {genre.name}
+              </MovieGenre>
+            )) }
+            </GenresFiltersContainer>
+          </GenresContainer> 
         
-          <div className="movies-list-container">
+          <Block layout='horizontal' justify='center' wrap>
             {movies?.map(movie => (
               <Link to={`/movie-overview/${movie.id}`} key={movie.id}>
                 <Movie
@@ -199,14 +203,14 @@ class DiscoverMovies extends Component {
               </Movie>
             </Link>
             )) }
-          </div>
+          </Block>
         
         <Loader pendingState={this.props.pendingState} />
         <MoreMoviesLoader loadMorePendingState={this.props.loadMorePendingState} movies={this.props.movies} />
         <Error errorText={Constants.ERROR_TEXT.FETCH_MOVIES_ERROR_TEXT} error={this.props.errorState} />
 
-      </DiscoverMoviesContainer>
-     );
+      </BlockGroup>
+    );
   }
 }
 
