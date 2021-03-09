@@ -22,21 +22,21 @@ const Cast = (props) => {
 
   return (
     <Card className={classes.root} elevation={3}>
-        <CardMedia
-          className={classes.profileMedia}
-          image={props.actor.profile_path ? 
-            `https://image.tmdb.org/t/p/w185/${props.actor.profile_path}` 
+      <CardMedia
+        className={classes.profileMedia}
+        image={props.actor.profile_path ? 
+              `https://image.tmdb.org/t/p/w185/${props.actor.profile_path}` 
             : UnknowActorImage
           }
-          title={props.actor.name}
-        />
+        title={props.actor.name}
+      />
         <CardContent>
           <Typography variant="h6">{props.actor.name}</Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.actor.character}
           </Typography>
         </CardContent>
-    </Card>
+      </Card>
   );
 }
 
