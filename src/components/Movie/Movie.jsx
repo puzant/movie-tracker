@@ -91,7 +91,6 @@ const MovieTitle = styled.div`
   width: 160px; 
   white-space: nowrap; 
   overflow: hidden;
-  text-overflow: ellipsis;
 `
 
 const MovieReleaseDate = styled.div`
