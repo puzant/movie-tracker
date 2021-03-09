@@ -4,6 +4,7 @@ import { handleActions } from 'redux-actions';
 export const initialState = {
   isAuth: false,
   loginSuccess: false,
+  loginError: false,
   accountId: null,
   sessionId: null
 }
