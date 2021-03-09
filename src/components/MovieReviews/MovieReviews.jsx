@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar';
 import styled from 'styled-components'
@@ -6,8 +6,8 @@ import utils from '../../utils/utils'
 
 const MovieReviews = ({reviews}) => {
 
-  const randomColor = utils.generateRandomColorValue()
   const [hidden, setVisibility] = useState(true)
+  let randomColor = utils.generateRandomColorValue()
 
   return (
     <RootContainer>
