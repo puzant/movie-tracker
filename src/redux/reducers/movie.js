@@ -3,21 +3,21 @@ import { GET_MOVIE_ACTIONS, REVIEWS_SUCCESS } from '../actionTypes/movieOverview
 
 export const initialState = {
   movie: [],
-  moviePending: false,
-  movieError: false,
+  pending: false,
+  error: false,
   genres: [],
   movieReviews: []
 }
 
-const fetchMoviePending = (state) => ({...state, moviePending: true})
+const fetchMoviePending = (state) => ({...state, pending: true})
 const fetchMovieSuccess = (state, {payload}) => {
   return ({
     ...state, 
     movie: payload.movie,
-    moviePending: false
+    pending: false
   })
 }
-const fetchMovieError = (state) => ({...state, movieError: true})
+const fetchMovieError = (state) => ({...state, error: true})
 const fetchMovieReviewsSuccess = (state, {payload}) => ({...state, movieReviews: payload.reviews})
 
 const movieActionHandler = {
