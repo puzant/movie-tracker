@@ -1,8 +1,8 @@
 import axios from './axiosInstance'
 
- const getRequestToken = () => axios.get(`/authentication/token/new`)
+const getRequestToken = () => axios.get(`/authentication/token/new`)
 
- const login = (username, password, requestToken) => {
+const login = (username, password, requestToken) => {
   return axios.post('/authentication/token/validate_with_login', {
     username: username,
     password: password,
@@ -10,7 +10,7 @@ import axios from './axiosInstance'
   })
 }
 
- const createSession = (requestToken) => {
+const createSession = (requestToken) => {
   return axios.post('/authentication/session/new', {
     request_token: requestToken
   })
@@ -18,7 +18,7 @@ import axios from './axiosInstance'
 
 const getAccount = (sessionId) => axios.get(`/account?session_id=${sessionId}`)
 
- const deleteSession = (sessionId) => {
+const deleteSession = (sessionId) => {
   return axios.delete('/authentication/session', {session_id: sessionId})
 }
 
