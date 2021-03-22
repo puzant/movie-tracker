@@ -1,21 +1,19 @@
-/** TODO: Refator to functional component */
-import React, { Component } from 'react';
-import Movie from '../Movie/Movie'
+import styled from 'styled-components'
+import React, { Component } from 'react'
+import Movie from '../movie/movie'
 import sortLogo from '../../assets/sort.svg'
 import filterLogo from '../../assets/filter.svg'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import moviesActions from '../../redux/actions/discoverMoviesActions'
-import { Link } from "react-router-dom";
-import debounce from "lodash.debounce";
-import './style.css'
-import PropTypes from 'prop-types';
+import { Link } from "react-router-dom"
+import debounce from "lodash.debounce"
+import PropTypes from 'prop-types'
 import Loader from '../loader/loader'
 import Error from '../error/error'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import Constants from '../../constants/Constants'
-import styled from 'styled-components'
 import { Block, BlockGroup } from '../layout/block/block'
 
 const MoviesListControllers = styled.div`
@@ -25,8 +23,6 @@ const MoviesListControllers = styled.div`
   align-items: center;
   width: 82%;
 `
-
-const MovieFiltersContainer = styled(Block)``
 
 const DiscoverMoviesText = styled.div`
   font-weight: bold;
@@ -38,13 +34,12 @@ const GenersText = styled.div`
 `
 
 const GenresFiltersContainer = styled.div`
-  width: 85%;
   overflow: scroll;
   display: flex; 
   flex-wrap: wrap;
   justify-content: flex-start;
   @media (max-width: 600px) {
-    width: 300px;
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -73,6 +68,17 @@ const GenresContainer = styled.div`
   width: 82%;
 `
 
+const StyledLink = styled(Link)`
+  color: #111;
+  text-decoration: none;
+`
+
+const FilterContainer = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 class DiscoverMovies extends Component {  
   constructor(props) {
     super(props);
@@ -96,6 +102,13 @@ class DiscoverMovies extends Component {
     this.props.fetchMoviesGenres()
   }
 
+  isGenreSelected(genreId) {
+    for (let i=0; i<this.state.selectedGenres.length; i++) {
+      if (this.state.selectedGenres[i] === genreId) return true
+    }
+    return false
+  }
+
   handleSort(movies, sortingType) {
     this.props.sortMovies(movies, sortingType)
     this.setState({ sortMenuAnchorEl:  null})
@@ -106,9 +119,9 @@ class DiscoverMovies extends Component {
     this.setState({ filterMenuAnchorEl: null })
   }
 
-  handleFilteringByGenres = id => {
+  handleFilteringByGenres = (genreId) => {
     this.setState({ 
-      selectedGenres: [...this.state.selectedGenres, id]
+      selectedGenres: [...this.state.selectedGenres, genreId]
     }, () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres))
   }
 
@@ -121,7 +134,7 @@ class DiscoverMovies extends Component {
     )
 
     const { genres, movies } = this.props
-    const { filterMenuAnchorEl, sortMenuAnchorEl } = this.state
+    const { filterMenuAnchorEl, sortMenuAnchorEl, selectedGenres } = this.state
 
     return (
       <BlockGroup marginTop='20' gap={15}>
@@ -130,9 +143,8 @@ class DiscoverMovies extends Component {
 
           <DiscoverMoviesText>Discover new Movies</DiscoverMoviesText>
 
-          <MovieFiltersContainer layout='horizontal' align='center' gap={15}>
-
-            <BlockGroup>
+          <Block layout='horizontal' align='center' gap={15}>
+            <FilterContainer>
               <Block layout='horizontal' gap={5}>
                 <img onClick={(e) => this.setState({ sortMenuAnchorEl:  e.currentTarget})} src={sortLogo} alt="sort_logo" />
                 <span>Sort</span>
@@ -151,57 +163,56 @@ class DiscoverMovies extends Component {
                   </MenuItem>
                 ))}
               </Menu>
-            </BlockGroup>
+            </FilterContainer>
 
-          <BlockGroup>
-            <Block layout='horizontal' gap={5}>
-              <img onClick={(e) => this.setState({ filterMenuAnchorEl:  e.currentTarget})} src={filterLogo} alt="filter_logo" />
-              <span>Filter</span>
-            </Block>
-              <Menu 
-                id="filter-menu"
-                anchorEl={filterMenuAnchorEl}
-                keepMounted
-                open={Boolean(filterMenuAnchorEl)}
-                onClose={() => this.setState({ filterMenuAnchorEl: null})}
-              >
-                {Constants.FILTER_TYPES.map((filterType) =>(
-                  <MenuItem key={filterType.FILTER_NAME}
-                    onClick={() => this.handleFilter(movies, filterType.FILTER_NAME)}>
-                      {filterType.TEXT_TITLE}
-                  </MenuItem>
-                ))}
-              </Menu>
-          </BlockGroup>
-
-        </MovieFiltersContainer>
+            <FilterContainer>
+              <Block layout='horizontal' gap={5}>
+                <img onClick={(e) => this.setState({ filterMenuAnchorEl:  e.currentTarget})} src={filterLogo} alt="filter_logo" />
+                <span>Filter</span>
+              </Block>
+                <Menu 
+                  id="filter-menu"
+                  anchorEl={filterMenuAnchorEl}
+                  keepMounted
+                  open={Boolean(filterMenuAnchorEl)}
+                  onClose={() => this.setState({ filterMenuAnchorEl: null})}
+                >
+                  {Constants.FILTER_TYPES.map((filterType) =>(
+                    <MenuItem key={filterType.FILTER_NAME}
+                      onClick={() => this.handleFilter(movies, filterType.FILTER_NAME)}>
+                        {filterType.TEXT_TITLE}
+                    </MenuItem>
+                  ))}
+                </Menu>
+            </FilterContainer>
+          </Block>
 
         </MoviesListControllers>
 
           <GenresContainer>
             <GenersText>Genres:</GenersText>
             <GenresFiltersContainer>
-            {genres?.map(genre => (
-              <MovieGenre
-                key={genre.id}
-                selectedGenre={this.state.selectedGenres.includes(genre.id)}
-                onClick={() => this.handleFilteringByGenres(genre.id)}
-              >
-                {genre.name}
-              </MovieGenre>
-            )) }
+              {genres?.map(genre => (
+                <MovieGenre
+                  key={genre.id}
+                  selectedGenre={this.isGenreSelected(genre.id)}
+                  onClick={() => this.handleFilteringByGenres(genre.id)}
+                >
+                  {genre.name}
+                </MovieGenre>
+              )) }
             </GenresFiltersContainer>
           </GenresContainer> 
         
           <Block layout='horizontal' justify='center' wrap>
             {movies?.map(movie => (
-              <Link to={`/movie-overview/${movie.id}`} key={movie.id}>
+              <StyledLink to={`/movie-overview/${movie.id}`} key={movie.id}>
                 <Movie
                   movie={movie}
                   key={movie.id}
                 >
               </Movie>
-            </Link>
+            </StyledLink>
             )) }
           </Block>
         
