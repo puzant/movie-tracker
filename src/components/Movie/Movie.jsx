@@ -3,6 +3,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Skeleton from '@material-ui/lab/Skeleton';
 import styled from 'styled-components'
+import { Block } from '../layout/block/block'
 
 const MoviePoster = (props = {}) => {
 
@@ -32,8 +33,10 @@ const Movie = (props) => {
     
       <MovieTitleRatingContainer>
       
-        <MovieTitle title={props.movie.title}>{props.movie.title}</MovieTitle>
-        <MovieReleaseDate>{props.movie.release_date}</MovieReleaseDate>
+        <Block gap={5}>
+          <MovieInfo title={props.movie.title}>{props.movie.title}</MovieInfo>
+          <MovieInfo>{props.movie.release_date}</MovieInfo>
+        </Block>
 
         <MovieRating>
           {props.movie.vote_count &&
@@ -85,19 +88,6 @@ const MovieContainer = styled.div`
   }
 `
 
-const MovieTitle = styled.div`
-  margin-top: 4px;
-  font-weight: bold;
-  width: 160px; 
-  white-space: nowrap; 
-  overflow: hidden;
-`
-
-const MovieReleaseDate = styled.div`
-  font-weight: bold;
-  margin-top: 10px;
-`
-
 const MovieTitleRatingContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,4 +98,13 @@ const MovieTitleRatingContainer = styled.div`
 const MovieRating = styled.div`
   margin-top: 4px;
   font-weight: bold;
+`
+
+const MovieInfo = styled.div`
+  margin-top: 4px;
+  font-weight: bold;
+  width: 160px; 
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
