@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import brokenImage from '../../assets/ambient-1.png'
 import styled from 'styled-components'
 
