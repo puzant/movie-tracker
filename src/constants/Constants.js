@@ -49,12 +49,6 @@ export default {
     JAPANESE: 'jp',
     KOREAN: 'ko',
   },
-  VALIDATION_TEXT: {
-    INCORRECT_USERNAME: "We couldn't find your username.",
-    INCORRECT_PASSWORD: "The entered password is incorrect",
-    EMPTY_USERNAME_FEILD: "Please enter a username",
-    EMPTY_PASSOWRD_FEILD: "Please enter a password",
-  },
   MOVIE_OVERVIEW_USER_ACTIONS_ICONS: {
     FAVORITE_MOVIE: <Favorite />,
     WATCHLIST_MOVIE: <Bookmark />,
