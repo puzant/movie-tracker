@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import {bindActionCreators} from 'redux'
-import searchMoviesActions from '../../redux/actions/searchMoviesActions'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Link } from "react-router-dom"
+import PropTypes from 'prop-types'
 import queryString from 'query-string'
+import searchMoviesActions from '../../redux/actions/searchMoviesActions'
 import Loader from '../loader/loader'
-import Movie from '../Movie/Movie'
+import Movie from '../movie/movie'
 import emptyResultsLogo from '../../assets/empty-results.png'
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
 import { Block } from '../layout/block/block'
 
 class SearchResults extends Component {
