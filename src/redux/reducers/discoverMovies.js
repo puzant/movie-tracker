@@ -102,21 +102,16 @@ const filterMovies = (state, {payload}) => {
 }
 
 const filterBasedOnGenres = (state, {payload}) => {
-  let filteredMoviesByGenres = []
 
-  state.movies.map((movie) => {
-    for(let i=0; i<movie.genre_ids.length; i++) {
-      if(payload.genersId.includes(movie.genre_ids[i])) 
-        filteredMoviesByGenres.push(movie)
+  let filteredMovies = state.movies.filter((movie) => {
+    for (let i=0; i<payload.genre.length; i++) {
+      return movie.genre_ids.includes(payload.genre[i])
     }
   })
 
-  let uniqFilteredGenres = [...new Set(filteredMoviesByGenres)]
-
-  //  TODO: we shouldn't reset the movies list based on the Genres filter, preserve the orignal list as well
   return {
     ...state,
-    movies: uniqFilteredGenres
+    movies: filteredMovies
   }
 }
 
