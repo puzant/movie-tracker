@@ -8,7 +8,6 @@ export const Block = styled.div`
   align-items: ${({ align }) => (align ? align : 'initial')};
   gap: ${({ gap }) => (gap ? gap : 0)}px;
   margin-top: ${({ marginTop }) => (marginTop ? marginTop : 0)}px;
-
   ${({ zeroMinWidth }) =>
     zeroMinWidth &&
     css`

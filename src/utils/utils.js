@@ -3,16 +3,16 @@ import Constants from '../constants/Constants'
 const sortInDescendingOrder = (data, key) => {
   return data.sort((a,b) => {
     return key === Constants.TMDB_API_DATA.RELEASE_DATE ?
-     new Date(b[key]) - new Date(a[key]) 
-     : b[key] - a[key]
+      new Date(b[key]) - new Date(a[key]) 
+      : b[key] - a[key]
   })
 }
 
 const sortInAscendingOrder = (data, key) => {
   return data.sort((a,b) => {
     return key === Constants.TMDB_API_DATA.RELEASE_DATE ?
-     new Date(a[key]) - new Date(b[key]) 
-     : a[key] - b[key]
+      new Date(a[key]) - new Date(b[key]) 
+      : a[key] - b[key]
   })
 }
 

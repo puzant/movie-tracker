@@ -12,16 +12,16 @@ const fetchMovieSuccess = createAction(GET_MOVIE_ACTIONS.SUCCESS, (movie) => ({m
 const fechMoviePending = createAction(GET_MOVIE_ACTIONS.PENDING)
 
 const fetchMovieById = (movieId) => {
- return async dispatch => {
-   try {
-     dispatch(fechMoviePending())
-     const movieByIdResponse = await api.getMovieById(movieId)
-     return dispatch(fetchMovieSuccess(movieByIdResponse.data))
-   } catch(error) {
+  return async dispatch => {
+    try {
+      dispatch(fechMoviePending())
+      const movieByIdResponse = await api.getMovieById(movieId)
+      return dispatch(fetchMovieSuccess(movieByIdResponse.data))
+    } catch(error) {
       //  dispatch(fetchMoviesError(error))
       //  TODO: create an action type for error
-   }
- }
+    }
+  }
 }
 
 /*
