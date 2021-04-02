@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import {connect} from 'react-redux'
 import upcomingMoviesActions from '../../redux/actions/upcomingMoviesActions'
 import { bindActionCreators } from 'redux'
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Constants from '../../constants/Constants'
-import Movie from '../Movie/Movie'
+import Movie from '../movie/movie'
 import Loader from '../loader/loader'
 import Error from '../error/error'
 import { Block, BlockGroup } from '../layout/block/block'
 
-export const UpComingMovies = (props) => {
-
-  const { upcomingMovies, error, pending, fetchUpcomingMovies } = props
+export const UpComingMovies = ({ upcomingMovies, error, pending, fetchUpcomingMovies}) => {
   
   useEffect(() => {
     fetchUpcomingMovies()
@@ -23,9 +22,9 @@ export const UpComingMovies = (props) => {
         
       <Block justify='center' layout='horizontal' wrap>
         {upcomingMovies && upcomingMovies.map((ucm) => (
-          <Link to={`/movie-overview/${ucm.id}`} key={ucm.id}>
+          <StyledLink to={`/movie-overview/${ucm.id}`} key={ucm.id}>
             <Movie movie={ucm} key={ucm.id} />
-          </Link>
+          </StyledLink>
         ))}
       </Block>
 
@@ -36,6 +35,11 @@ export const UpComingMovies = (props) => {
   )
 
 }
+
+const StyledLink = styled(Link)`
+  color: #111;
+  text-decoration: none;
+`
 
 const mapStateToProps = (state) => {
   return {
