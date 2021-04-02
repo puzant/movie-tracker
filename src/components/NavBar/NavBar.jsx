@@ -1,88 +1,64 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Routes from '../../root/routes'
-import '../../assets/App.css'
-import { NavLink, BrowserRouter as Router } from "react-router-dom";
+import { NavLink, BrowserRouter as Router } from 'react-router-dom'
 import Constants from '../../constants/Constants'
 import MenuDrawer from './menuDrawer'
+import { Block } from '../layout/block/block'
 
 export const Navbar = () => {
 
-  const [name, setName] = React.useState("")
-  const [navItems, setNavItems] = React.useState([])
+  const [searchValue, setSearchValue] = React.useState("")
+  const [navigationLinks, setNavigationLinks] = React.useState([])
 
   const handleChange = (e) => {
-    setName(e.target.value)
+    setSearchValue(e.target.value)
   }
 
   useEffect(() => {
-    setNavItems(Constants.NAVBAR_ITEMS)
-  }, [name, navItems])
+    setNavigationLinks(Constants.NAVBAR_ITEMS)
+  }, [searchValue, navigationLinks])
 
-  const NavItem = () => (
-    <NavigationItemsContinaer>
-
+  const NavItems = () => (
+    <Block layout='horizontal'>
       <DrawerMenuuContainer>
-        <MenuDrawer navItems={navItems} />
+        <MenuDrawer navItems={navigationLinks} />
       </DrawerMenuuContainer>
       
-      {navItems.map((item, index) => (
-        !item.requireAuth &&
-            <StyledLink key={index} exact activeStyle={{fontWeight: "bold", color: "#133254"}} to={item.routePath}>
-              <span>{item.icon}</span>
-              <span>{item.navItemName}</span>
-            </StyledLink>
+      {navigationLinks.map((link, index) => (
+        !link.requireAuth &&
+          <StyledLink key={index} exact activeStyle={{fontWeight: "bold", color: "#133254"}} to={link.routePath}>
+            <span>{link.icon}</span>
+            <span>{link.navItemName}</span>
+          </StyledLink>
       ))}
-
-    </NavigationItemsContinaer>
+    </Block>
   )
 
   return (
     <Router>
-      <MainAppContainer>
-        <MainAppNavbar>
-             
-          <NavItem />
-             
-            <MoviesSearchBarContainer>
-              <SearchBar value={name} onChange={handleChange} type="text" placeholder="Enter Movie Name" />
-              <NavLink to={{pathname: 'search-results', search:`?search=${name}`}}>
-                <SearchButton disabled={name.length === 0}>Search</SearchButton>
-              </NavLink>
-            </MoviesSearchBarContainer>       
-             
-        </MainAppNavbar>
-      </MainAppContainer>
-
+      <MainContainer layout='horizontal' justify='space-between' align='center'>
+        <NavItems />
+        <SearchMoviesContainer layout='horizontal' align='center' gap={4} nowrap>
+          <SearchBar value={searchValue} onChange={handleChange} type='text' placeholder='Enter Movie Name' />
+            <NavLink to={{pathname: 'search-results', search:`?search=${searchValue}`}}>
+              <SearchButton disabled={!searchValue.length}>Search</SearchButton>
+            </NavLink>
+          </SearchMoviesContainer>
+      </MainContainer>
       <Routes />
-
     </Router>
   )
 
 }
 
-const NavigationItemsContinaer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-`
-const MainAppContainer = styled.div`
+const MainContainer = styled(Block)`
   list-style-type: none;
-  margin: 0;
   padding: 10px;
-  overflow: hidden;
-  background: #00c6ff;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+  background: #00c6ff;
+  background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);
+  background: linear-gradient(to right, #0072ff, #00c6ff);
   font-weight: bold;
-`
-
-const MainAppNavbar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 `
 
 const DrawerMenuuContainer = styled.div`
@@ -93,16 +69,17 @@ const DrawerMenuuContainer = styled.div`
   }
 `
 
+const SearchMoviesContainer = styled(Block)``
+
 const SearchBar = styled.input`
   background: #f8fcfe;
-  border-radius: 1px;
   box-shadow: 0 0 3px #fff inset;
   color: #111;
   padding: 12px 10px;
-  width: 225px;
   border: 1px solid #fff;
-  border-radius: 5px;
+  border-radius: 20px;
   margin-right: 6px;
+  width: 220px;
   transition: .5s;
   opacity: .5;
   &:focus {
@@ -112,21 +89,6 @@ const SearchBar = styled.input`
   &::placeholder {
     color: #111;
   }
-  @media (max-width: 600px) {
-    width: 100%;
-  }
-`
-
-const MoviesSearchBarContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 30%;
-  align-items: center;
-  @media (max-width: 600px) {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
 `
 
 const SearchButton = styled.button`
@@ -135,7 +97,7 @@ const SearchButton = styled.button`
   color: #111;
   padding: 12px;
   border: 1px solid #fff;
-  border-radius: 5px;
+  border-radius: 20px;
   transition: .5s;
   &:disabled {
     opacity: 0.5;
