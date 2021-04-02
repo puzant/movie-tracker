@@ -80,7 +80,7 @@ const fetchMoreMovies = (pageNumber) => {
 
 const filter = createAction(FILTER_MOVIES_ACTIONS.FILTER_MOVIES, (movies, filterType) => ({movies, filterType}))
 const sort = createAction(SORTING_MOVIES_ACTIONS.SORT_MOVIES, (movies, sortingType) => ({movies, sortingType}))
-const filterByGenres = createAction(FILTER_MOVIES_ACTIONS.FILTER_BASED_ON_GENRES, (genersId) => ({genersId}))
+const filterByGenres = createAction(FILTER_MOVIES_ACTIONS.FILTER_BASED_ON_GENRES, (genre) => ({genre}))
 
 const filterMovies = (movies, filterType) => {
   return dispatch => {
@@ -94,9 +94,9 @@ const sortMovies = (movies, sortingType) => {
   }
 }
 
-const filterMoviesBasedByGenres = (genersId) => {
+const filterMoviesBasedByGenres = (genreId) => {
   return dispatch => {
-    dispatch(filterByGenres(genersId))
+    dispatch(filterByGenres(genreId))
   }
 }
 
