@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from '@material-ui/core/Avatar'
 import styled from 'styled-components'
-import utils from '../../utils/utils' 
 
-const MovieReviews = ({reviews}) => {
+const MovieReviews = ({reviews, avatarRandomColor}) => {
 
-  const [hidden, setVisibility] = useState(true)
-  let randomColor = utils.generateRandomColorValue()
+  const [visible, setVisibility] = useState(null)
 
   return (
-    <RootContainer>
+    <Root>
 
       <MovieReviewsTitle>Movie Reviews</MovieReviewsTitle>
 
-      {reviews.length === 0 &&
-          <NoMovieReviewText>
-            There are no reviews for this movie
-          </NoMovieReviewText>
+      {!reviews.length &&
+        <NoMovieReviewText>
+          There are no reviews for this movie
+        </NoMovieReviewText>
       }
 
       <MovieReviewContainer>
@@ -25,17 +23,17 @@ const MovieReviews = ({reviews}) => {
         reviews.map((r) => (
           <ReviewBox key={r.id}>
             <UserContainer>
-              <UserAvatar randomColor={randomColor}>{r.author[0]}</UserAvatar>
+              <UserAvatar avatarRandomColor={avatarRandomColor}>{r.author[0]}</UserAvatar>
               <UserName>{r.author}</UserName>
             </UserContainer>
             <ReviewContent>
               <>
-                {hidden ? `${r.content.substr(0, 250).trim()} ...` : r.content}
+                {visible == r.id ? r.content : `${r.content.substr(0, 250).trim()} ...`}
                 {
-                hidden ? 
-                  <ShowMoreBtn onClick={() => setVisibility(false)}>read more</ShowMoreBtn>
+                visible === r.id ? 
+                  <ReviewButton onClick={() => setVisibility(null)}>read less</ReviewButton>
                   :
-                  <ShowMoreBtn onClick={() => setVisibility(true)}>read less</ShowMoreBtn>
+                  <ReviewButton onClick={() => setVisibility(r.id)}>read more</ReviewButton>
                 }
               </>
             </ReviewContent>
@@ -44,7 +42,7 @@ const MovieReviews = ({reviews}) => {
       }
       </MovieReviewContainer>
 
-    </RootContainer>
+    </Root>
   )
 }
 
@@ -52,7 +50,7 @@ MovieReviews.propTypes = {
   movieReviews: PropTypes.array
 }
 
-const RootContainer = styled.div`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,10 +87,10 @@ const UserName = styled.div`
 `
 
 const UserAvatar = styled(Avatar)`
-  background-color: ${props =>  '#' + props.randomColor + '!important'};
+  background-color: ${props =>  '#' + props.avatarRandomColor + '!important'};
 `
 
-const ShowMoreBtn = styled.a`
+const ReviewButton = styled.a`
   color: #4ebdb6;
   text-decoration: underLine;
   cursor: pointer;
