@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import styled from 'styled-components'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Drawer from '@material-ui/core/Drawer'
 import Button from '@material-ui/core/Button'
@@ -57,12 +58,12 @@ export default function MenuDrawer(props) {
       <List>
         {props.navItems.map((item, index) => (
           !item.requireAuth &&
-          <NavLink key={index} exact activeStyle={{fontWeight: "bold", color: "#00c6ff"}} to={item.routePath}>
+          <StyledLink key={index} exact activeStyle={{fontWeight: "bold", color: "#00c6ff"}} to={item.routePath}>
             <MenuItem button>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.navItemName} />
             </MenuItem>
-          </NavLink>
+          </StyledLink>
         ))}
       </List>
     </div>
@@ -83,3 +84,8 @@ export default function MenuDrawer(props) {
     </div>
   );
 }
+
+const StyledLink = styled(NavLink)`
+  text-decoration: none;
+  color: #111;
+`
