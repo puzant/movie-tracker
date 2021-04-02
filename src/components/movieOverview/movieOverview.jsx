@@ -1,34 +1,21 @@
 // TODO: Refactor to functional component
-import React, { Component, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from "react-router-dom"
 import { bindActionCreators } from 'redux'
 import movieOverviewActions from '../../redux/actions/movieOverviewActions'
 import { connect } from 'react-redux'
 import MovieReviews from '../movieReviews/movieReviews'
 import Loader from '../loader/loader'
 import Constants from '../../constants/Constants'
-import Tooltip from '@material-ui/core/Tooltip';
-import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip'
+import Fab from '@material-ui/core/Fab'
 import Cast from '../cast/cast'
-import Movie from '../Movie/Movie'
+import Movie from '../movie/movie'
 import styled from 'styled-components'
 import { Block, BlockGroup } from '../layout/block/block'
+import utils from '../../utils/utils' 
 
-// const MovieOverview = (props) => {
-  
-//   useEffect(() => {
-//     props.fetchMovieById(params.movieId)
-//     props.fetchMovieReviews(params.movieId)
-//   }, [])
-
-//   return (
-//     <BlockGroup layout='vertical' justify='center'>
-      
-//     </BlockGroup>>
-//   )
-// }
-
-class MovieOverview extends Component {
+class MovieOverview extends React.Component {
 
   componentDidMount() {
     const { match: { params } } = this.props;
@@ -39,30 +26,29 @@ class MovieOverview extends Component {
   movieLanguage() {
     switch(this.props.movie?.original_language) {
       case Constants.MOVIE_LANGUAGE_CODE.ENGLISH:
-        return "English"
+        return 'English'
       case Constants.MOVIE_LANGUAGE_CODE.FRENCH:
-        return "French"
+        return 'French'
       case Constants.MOVIE_LANGUAGE_CODE.JAPANESE:
-        return "japanese"
+        return 'japanese'
       case Constants.MOVIE_LANGUAGE_CODE.KOREAN:
-        return "korean"
+        return 'korean'
       default:
-        return "English"
+        return 'English'
     }
   }
 
   render() { 
 
-    let { movie, pending, movieReviews } = this.props
-
+    const { movie, pending, movieReviews } = this.props
     const MAX_NUMBER_OF_ACTORS = 7
-
     const actors = movie.credits?.cast?.slice(0, MAX_NUMBER_OF_ACTORS) ?? [];
+    const randomColor = utils.generateRandomColorValue()
 
-    const MovieInfo = (props) => (
+    const MovieInfo = ({text, value}) => (
       <MovieInfoContainer>
-        <MovieInfoText>{props.text}: </MovieInfoText>
-        <span>{props.value}</span>
+        <MovieInfoText>{text}: </MovieInfoText>
+        <span>{value}</span>
       </MovieInfoContainer>
     )
 
@@ -106,21 +92,21 @@ class MovieOverview extends Component {
 
             <Block layout='horizontal' gap={10} marginTop={10}>
               <Tooltip title="login to add to your favorite list" aria-label="add">
-                <Fab color="primary">
+                <StyledFab color="primary">
                   {Constants.MOVIE_OVERVIEW_USER_ACTIONS_ICONS.FAVORITE_MOVIE}
-                </Fab>
+                </StyledFab>
               </Tooltip>
 
               <Tooltip title="login to add to your watchlist" aria-label="add">
-                <Fab color="primary">
+                <StyledFab color="primary">
                   {Constants.MOVIE_OVERVIEW_USER_ACTIONS_ICONS.WATCHLIST_MOVIE}
-                </Fab>
+                </StyledFab>
               </Tooltip>
 
               <Tooltip title="login to add to rate this movie" aria-label="add">
-                <Fab color="primary">
+                <StyledFab color="primary">
                   {Constants.MOVIE_OVERVIEW_USER_ACTIONS_ICONS.RATE_MOVIE}
-                </Fab>
+                </StyledFab>
               </Tooltip>
             </Block>
 
@@ -141,16 +127,16 @@ class MovieOverview extends Component {
           </BlockGroup>
         }
 
-        {!pending && <MovieReviews reviews={movieReviews} />}
+        {!pending && <MovieReviews avatarRandomColor={randomColor} reviews={movieReviews} />}
 
         {!pending && 
           <Block>
             <SectionTitle>Recommendations</SectionTitle>
             <RecommendationsList>
               {movie.recommendations?.results?.map((rm) => (
-                <Link to={`/movie-overview/${rm.id}`} key={rm.id}>
+                <StyledLink to={`/movie-overview/${rm.id}`} key={rm.id}>
                   <Movie movie={rm} />
-                </Link>
+                </StyledLink>
               ))}
             </RecommendationsList>
           </Block>
@@ -260,4 +246,13 @@ const MovieDescriptionContainer = styled.div`
   @media (max-width: 600px) {
     text-align: center;
   }
+`
+
+const StyledLink = styled(Link)`
+  color: #111;
+  text-decoration: none;
+`
+
+const StyledFab = styled(Fab)`
+background-color: #418baf !important;
 `
