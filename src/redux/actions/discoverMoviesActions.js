@@ -61,15 +61,15 @@ const fetchMoreMoviesSuccess = createAction(GET_MORE_MOVIES_ACTIONS.SUCCESS, (mo
 const fetchMoreMoviesError = createAction(GET_MORE_MOVIES_ACTIONS.ERROR, (error) => ({error}))
 
 const fetchMoreMovies = (pageNumber) => {
- return async dispatch => {
-   try {
-     dispatch(fetcMorehMoviesPending())
-     const getMoreMoviesResposne = await api.getMoreMovies(pageNumber)
-     dispatch(fetchMoreMoviesSuccess(getMoreMoviesResposne.data.results))
-   } catch(error) {
-       dispatch(fetchMoreMoviesError(error))
-   }
- }
+  return async dispatch => {
+    try {
+      dispatch(fetcMorehMoviesPending())
+      const getMoreMoviesResposne = await api.getMoreMovies(pageNumber)
+      dispatch(fetchMoreMoviesSuccess(getMoreMoviesResposne.data.results))
+      } catch(error) {
+        dispatch(fetchMoreMoviesError(error))
+    }
+  }
 }
 
 /*
