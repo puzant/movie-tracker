@@ -1,4 +1,4 @@
-export interface Movie {
+export interface IMovie {
   adult: boolean
   backdrop_path: string
   id: string
@@ -9,6 +9,8 @@ export interface Movie {
   vote_count: string
   release_date: string
   genre_ids: string[]
+  poster_path: string
+  title: string
 }
 
 export interface Actor {
@@ -21,7 +23,7 @@ export interface Actor {
   character: string
 }
 
-export interface review {
+export interface Review {
   author: string
   content: string
   id: string
