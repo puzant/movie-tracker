@@ -25,7 +25,7 @@ export const Login = ({loginUser, loginSuccess, loginError}: LoginProps) => {
     setPasswordValue(e.target.value)
   }
 
-  const handleUserLogin = (): void => {
+  const handleUserLogin = () => {
     loginUser(usernameValue, passwordValue)
   }
 
