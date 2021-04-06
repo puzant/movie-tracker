@@ -11,9 +11,9 @@ const loginSuccess = createAction(LOGIN_ACTIONS.LOGIN_SUCCESS)
 const loginFailure = createAction(LOGIN_ACTIONS.LOGIN_FAILURE)
 
 const loginUser = (username: string, password: string) => {
-  let requestToken: null, 
-      sessionId: null, 
-      accountId: null
+  let requestToken: string, 
+      sessionId: string, 
+      accountId: string
   return async (dispatch: any) => {
 
     try {

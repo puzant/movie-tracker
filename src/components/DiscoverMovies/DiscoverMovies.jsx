@@ -19,7 +19,7 @@ import { Block, BlockGroup } from '../layout/block/block'
 const MoviesListControllers = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: auto;
+  margin: 20px auto;
   align-items: center;
   width: 82%;
 `
@@ -137,7 +137,7 @@ class DiscoverMovies extends Component {
     const { filterMenuAnchorEl, sortMenuAnchorEl, selectedGenres } = this.state
 
     return (
-      <BlockGroup marginTop='20' gap={15}>
+      <BlockGroup gap={15}>
 
         <MoviesListControllers>
 
@@ -204,7 +204,7 @@ class DiscoverMovies extends Component {
             </GenresFiltersContainer>
           </GenresContainer> 
         
-          <Block layout='horizontal' justify='center' wrap>
+          <Block layout='horizontal' justify='center' wrapped>
             {movies?.map(movie => (
               <StyledLink to={`/movie-overview/${movie.id}`} key={movie.id}>
                 <Movie

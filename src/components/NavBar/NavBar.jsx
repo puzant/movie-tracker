@@ -39,12 +39,12 @@ export const Navbar = () => {
     <Router>
       <MainContainer layout='horizontal' justify='space-between' align='center'>
         <NavItems />
-        <SearchMoviesContainer layout='horizontal' align='center' gap={4} nowrap>
+        <Block layout='horizontal'>
           <SearchBar value={searchValue} onChange={handleChange} type='text' placeholder='Enter Movie Name' />
-            <NavLink to={{pathname: 'search-results', search:`?search=${searchValue}`}}>
-              <SearchButton disabled={!searchValue.length}>Search</SearchButton>
-            </NavLink>
-          </SearchMoviesContainer>
+          <NavLink to={{pathname: 'search-results', search:`?search=${searchValue}`}}>
+            <SearchButton disabled={!searchValue.length}>Search</SearchButton>
+          </NavLink>
+        </Block>
       </MainContainer>
       <Routes />
     </Router>
@@ -69,8 +69,6 @@ const DrawerMenuuContainer = styled.div`
   }
 `
 
-const SearchMoviesContainer = styled(Block)``
-
 const SearchBar = styled.input`
   background: #f8fcfe;
   box-shadow: 0 0 3px #fff inset;
@@ -79,7 +77,8 @@ const SearchBar = styled.input`
   border: 1px solid #fff;
   border-radius: 20px;
   margin-right: 6px;
-  width: 220px;
+  min-width: 220px;
+  width: 100%;
   transition: .5s;
   opacity: .5;
   &:focus {

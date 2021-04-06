@@ -1,9 +1,10 @@
 // TODO: Refactor to functional component
-import React from 'react'
-import { Link } from "react-router-dom"
-import { bindActionCreators } from 'redux'
-import movieOverviewActions from '../../redux/actions/movieOverviewActions'
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import { Link, useParams } from "react-router-dom"
 import { connect } from 'react-redux'
+import movieOverviewActions from '../../redux/actions/movieOverviewActions'
+import { bindActionCreators } from 'redux'
 import MovieReviews from '../movieReviews/movieReviews'
 import Loader from '../loader/loader'
 import Constants from '../../constants/Constants'
@@ -11,9 +12,9 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Fab from '@material-ui/core/Fab'
 import Cast from '../cast/cast'
 import Movie from '../movie/movie'
-import styled from 'styled-components'
 import { Block, BlockGroup } from '../layout/block/block'
 import utils from '../../utils/utils' 
+// import { IMovie, Review } from '../../api/Models'
 
 class MovieOverview extends React.Component {
 
@@ -54,7 +55,7 @@ class MovieOverview extends React.Component {
 
     const RenderMovieRunTime = () => 
       movie.runtime ? (
-        <Block layout='horizontal' marginTop='10'>
+        <Block layout='horizontal'>
           <MovieInfoText>Run Time: </MovieInfoText>
           <span>{ `${Math.floor(movie.runtime / 60)}h ${Math.floor(movie.runtime % 60)}m` }</span>
         </Block>
@@ -119,7 +120,7 @@ class MovieOverview extends React.Component {
         {!pending && 
           <BlockGroup>
             <SectionTitle>Top Cast</SectionTitle>
-            <Block layout='horizontal' justify='center' wrap>
+            <Block layout='horizontal' justify='center' wrapped>
               {movie.credits?.cast?.length > 0 && actors.map((actor) => (
                 <Cast key={actor.cast_id} actor={actor} />
               ))}
@@ -214,7 +215,7 @@ const MovieOverviewContainer = styled.div`
 `
 
 const MovieInfoContainer = styled.div`
-  margin-top: 10px;
+  /* margin-top: 10px; */
 `
 
 const MovieInfoText = styled.span`
@@ -256,3 +257,141 @@ const StyledLink = styled(Link)`
 const StyledFab = styled(Fab)`
 background-color: #418baf !important;
 `
+
+
+//  convert to functional component 
+
+// export interface MovieOverviewProps {
+//   fetchMovieById: () => void
+//   fetchMovieReviews: () => void
+//   movie: IMovie
+//   movieReviews: Review[]
+//   pending: boolean
+// }
+// export const MovieOverview = ({ movie, pending, movieReviews, fetchMovieById, fetchMovieReviews }) => {
+
+//   const params = useParams()
+  
+//   useEffect(() => {
+//     fetchMovieById(params.movieId)
+//     // fetchMovieReviews(params.movieId)
+//   }, [])
+
+//   const MAX_NUMBER_OF_ACTORS = 7
+//   const actors = movie?.credits?.cast?.slice(0, MAX_NUMBER_OF_ACTORS) ?? [];
+//   const randomColor = utils.generateRandomColorValue()
+
+//   return (
+//     <BlockGroup layout='vertical' justify='center'>
+
+//     </BlockGroup>   
+//   )
+// }
+
+// const mapStateToProps = (state) => { 
+//   return {
+//     movie: state.movie.movie,
+//     pending: state.movie.pending,
+//     movieReviews: state.movie.movieReviews
+//   }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators(movieOverviewActions, dispatch)
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(MovieOverview)
+
+// const SectionTitle = styled.div`
+//   align-self: center;
+//   font-size: 24px;
+//   margin: 20px 0 20px 0;
+// `
+
+// const RecommendationsList = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+// `
+
+// const MovieTitle = styled.span`
+//   font-size: 30px;
+//   font-weight: bold;
+// `
+
+// const MovieReleaseDate = styled.span`
+//   margin-top: 4px;
+//   opacity: .8;
+// `
+
+// const MovieTagLine = styled.div`
+//   font-style: italic;
+//   margin-top: 3px;
+// `
+
+// const MovieOverviewContainer = styled.div`
+//   display: flex;
+//   padding: 80px;
+//   background-color: #fff;
+//   color: #111;
+//   box-shadow: -2px 4px 30px -1px #000000bf;
+//   background: ${props => `url(https://image.tmdb.org/t/p/w1280/${props.backdropPath})`};
+//   background-size: cover;
+//   background-position: center, center;
+//   box-shadow: inset 0 0 0 100vw rgb(0 0 0 / 70%);
+//   color: #fff;
+//   @media (max-width: 600px) {
+//     padding: 20px;
+//     margin: 0px;
+//     display: flex;
+//     flex-direction: column;
+//     color: #fff;
+//     line-height: 1.6rem;
+//     margin: auto;
+//     border-radius: 0px;
+//   }
+// `
+
+// const MovieInfoContainer = styled.div`
+//   margin-top: 10px;
+// `
+
+// const MovieInfoText = styled.span`
+//   color: #a0d2eb;
+//   font-weight: bold;
+// `
+
+// const MoviePosterContainer = styled.div`
+//   @media (max-width: 600px) {
+//     margin: 10px 0 10px 0;
+//     display: flex;
+//     justify-content: center;
+//   }
+// `
+
+// const MoviePoster = styled.img`
+//   height: 450px;
+//   width: 300px;
+//   border-radius: 5px;
+//   @media (max-width: 600px) {
+//     height: 280px;
+//     width: 180px;
+//   }
+// `
+
+// const MovieDescriptionContainer = styled.div`
+//   margin-left: 20px;
+//   line-height: 1.7rem;
+//   @media (max-width: 600px) {
+//     text-align: center;
+//   }
+// `
+
+// const StyledLink = styled(Link)`
+//   color: #111;
+//   text-decoration: none;
+// `
+
+// const StyledFab = styled(Fab)`
+// background-color: #418baf !important;
+// `

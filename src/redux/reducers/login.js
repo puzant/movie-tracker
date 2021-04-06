@@ -9,6 +9,8 @@ export const initialState = {
   sessionId: null
 }
 
-const loginActionsHandler = {}
+const loginActionsHandler = {
+  
+}
 
 export default handleActions(loginActionsHandler, initialState)
