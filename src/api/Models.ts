@@ -8,9 +8,23 @@ export interface IMovie {
   vote_average: string
   vote_count: string
   release_date: string
-  genre_ids: string[]
+  genres: MovieGenre[]
   poster_path: string
   title: string
+  runtime: number
+  credits: {
+    cast: Actor[]
+  }
+  status: string
+  tagline: string
+  recommendations: {
+    results: IMovie[]
+  }
+}
+
+export interface MovieGenre {
+  id: number 
+  name: string
 }
 
 export interface Actor {
