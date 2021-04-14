@@ -47,6 +47,11 @@ export interface Review {
 }
 
 export interface User {
+  avatar: {
+    gravatar: {
+      hash: string
+    }
+  }
   id: string
   include_adult: boolean
   name: string 
