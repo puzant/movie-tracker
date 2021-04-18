@@ -57,3 +57,10 @@ export interface User {
   name: string 
   username: string
 }
+
+export interface FavoriteMovies {
+  page: number
+  results: IMovie[]
+  totalPages: number 
+  total_results: number 
+}
