@@ -1,11 +1,10 @@
-import React from 'react';
-import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
-import Skeleton from '@material-ui/lab/Skeleton';
+import React from 'react'
+import Rating from '@material-ui/lab/Rating'
+import Box from '@material-ui/core/Box'
+import Skeleton from '@material-ui/lab/Skeleton'
 import styled from 'styled-components'
 import { Block } from '../layout/block/block'
-import { IMovie } from '../../api/Models';
-
+import { IMovie } from '../../api/Models'
 export interface MovieProps {
   movie: IMovie
 }
@@ -76,7 +75,7 @@ const MoviePosterContainer = styled.div``
 const MoviePosterImage = styled.img<{
   imageLoaded: boolean
 }>`
-  display: ${imageLoaded => !imageLoaded ? 'none' : 'inline'};
+  display: ${props => !props.imageLoaded ? 'none' : 'inline'};
 `
 
 const MovieContainer = styled.div`

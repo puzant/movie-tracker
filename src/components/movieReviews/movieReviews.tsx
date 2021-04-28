@@ -34,7 +34,7 @@ const MovieReviews = ({reviews, avatarRandomColor}: MovieReviewsProps) => {
             </UserContainer>
             <ReviewContent>
               <>
-                {visible == review.id ? review.content : `${review.content.substr(0, 250).trim()} ...`}
+                {visible === review.id ? review.content : `${review.content.substr(0, 250).trim()} ...`}
                 {
                 visible === review.id ? 
                   <ReviewButton onClick={() => setVisibility(null)}>read less</ReviewButton>
@@ -95,7 +95,7 @@ const UserName = styled.div`
 const UserAvatar = styled(Avatar)<{
   avatarRandomColor: string
 }>`
-  background-color: ${avatarRandomColor => `#` + avatarRandomColor + '!important'};
+  background-color: ${props => `#` + props.avatarRandomColor + '!important'};
 `
 
 const ReviewButton = styled.a`

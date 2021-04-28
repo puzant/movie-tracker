@@ -7,20 +7,17 @@ export const Profile = () => {
 
   return (
     <Root>
-
       <OuterContainer>
         <AvatarContainer>
           <UserAvatar>P</UserAvatar>
           <Username>Puzant</Username>
         </AvatarContainer>
       </OuterContainer>
-
     </Root>
   )
 }
 
 const Root = styled.div`
-
 `
 
 const OuterContainer = styled.div`

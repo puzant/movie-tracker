@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import {connect} from 'react-redux'
-import upcomingMoviesActions from '../../redux/actions/upcomingMoviesActions'
-import { bindActionCreators } from 'redux'
+import { useDispatch, RootStateOrAny, useSelector } from "react-redux"
+import { fetchUpcomingMovies } from '../../redux/actions/upcomingMoviesActions'
 import { Link } from 'react-router-dom'
 import Constants from '../../constants/Constants'
 import Movie from '../movie/movie'
@@ -12,22 +11,23 @@ import { Block, BlockGroup } from '../layout/block/block'
 import { IMovie } from '../../api/Models'
 
 export interface UpcomingMoviesProps {
-  upcomingMovies: IMovie[]
-  error: boolean 
-  pending: boolean
-  fetchUpcomingMovies: () => void
+  upcoming: {
+    pending: boolean 
+    error: boolean
+    upcomingMovies: IMovie[]
+  }
 }
 
-export const UpComingMovies = ({
-  upcomingMovies,
-  error,
-  pending,
-  fetchUpcomingMovies
-}: UpcomingMoviesProps) => {
+export const UpcomingMovies = () => {
+
+  const dispatch = useDispatch()
+  const upcomingMovies = useSelector((state: UpcomingMoviesProps) => state.upcoming.upcomingMovies)
+  const pending = useSelector((state: UpcomingMoviesProps) => state.upcoming.pending)
+  const error = useSelector((state: UpcomingMoviesProps) => state.upcoming.error)
   
   useEffect(() => {
-    fetchUpcomingMovies()
-  }, [])
+    dispatch(fetchUpcomingMovies())
+  }, [dispatch])
 
   return (
     <BlockGroup gap={10}>
@@ -52,17 +52,3 @@ const StyledLink = styled(Link)`
   color: #111;
   text-decoration: none;
 `
-
-const mapStateToProps = (state: any) => {
-  return {
-    upcomingMovies: state.upcoming.upcomingMovies,
-    pending: state.upcoming.pending,
-    error: state.upcoming.error
-  }
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators(upcomingMoviesActions, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpComingMovies);
