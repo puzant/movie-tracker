@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { SEARCH_MOVIES_ACTIONS } from '../actionTypes/searchMoviesActionTypes'
-import api from '../../api/api'
+import { getMovieByQuery } from '../../api/movie'
 import { IMovie } from '../../api/Models'
 
 /*
@@ -18,7 +18,7 @@ const fetchMovieByQuery = (query: string) => {
   return async (dispatch: any) => {
     try {
       dispatch(fetchMovieByQueryPending())
-      const movieByQueryResponse = await api.getMovieByQuery(query)
+      const movieByQueryResponse = await getMovieByQuery(query)
       if (!movieByQueryResponse.data.results.length)
         return dispatch(emptySearchResults())
       
