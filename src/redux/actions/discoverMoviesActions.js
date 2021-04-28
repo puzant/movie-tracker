@@ -6,7 +6,7 @@ import {
     FILTER_MOVIES_ACTIONS,
     SORTING_MOVIES_ACTIONS 
   } from '../actionTypes/discoverMoviesActionTypes'
-import api from '../../api/api'
+import { getMovies, getMovieGenres, getMoreMovies } from '../../api/movie'
 
 /*
  |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ const fetchMovies = () => {
   return async dispatch => {
     try {
       dispatch(fetchMoviesPending());
-      const getMoviesResponse = await api.getMovies()
+      const getMoviesResponse = await getMovies()
       const results = await dispatch(fetchMoviesSuccess(getMoviesResponse.data.results))
       return results 
     } catch(error) {
@@ -42,7 +42,7 @@ const fetchMoviesGenresSuccess = createAction(GET_MOVIES_GENRES, (genres) => ({g
 const fetchMoviesGenres = () => {
   return async dispatch => {
     try {
-      const getGenresResponse = await api.getMovieGenres()
+      const getGenresResponse = await getMovieGenres()
       return dispatch(fetchMoviesGenresSuccess(getGenresResponse.data.genres))
     } catch(error) {
       console.log(error)
@@ -64,7 +64,7 @@ const fetchMoreMovies = (pageNumber) => {
   return async dispatch => {
     try {
       dispatch(fetcMorehMoviesPending())
-      const getMoreMoviesResposne = await api.getMoreMovies(pageNumber)
+      const getMoreMoviesResposne = await getMoreMovies(pageNumber)
       dispatch(fetchMoreMoviesSuccess(getMoreMoviesResposne.data.results))
       } catch(error) {
         dispatch(fetchMoreMoviesError(error))
