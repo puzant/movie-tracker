@@ -35,12 +35,12 @@ export default {
     MOVIE_POPULARITY: 'popularity'
   },
   NAVBAR_ITEMS: [
-    {navItemName: 'Discover', routePath: '/', icon: <DiscoverIcon />, requireAuth: false},
-    {navItemName: 'Upcoming', routePath: '/upcoming-movies', icon: <UpcomingIcon />, requireAuth: false},
-    {navItemName: 'TV Shows', routePath: '/tv', icon: <TvICon />, requireAuth: false},
-    {navItemName: 'People', routePath: '/people', icon: <EmojiPeople />, requireAuth: false},
-    {navItemName: 'Profile', routePath: '/profile', icon: <ProfileIcon />, requireAuth: true},
-    {navItemName: 'Login', routePath: '/login', icon: <UserLogIn />, requireAuth: false}
+    {navItemName: 'Discover', routePath: '/', icon: <DiscoverIcon />},
+    {navItemName: 'Upcoming', routePath: '/upcoming-movies', icon: <UpcomingIcon />},
+    {navItemName: 'TV Shows', routePath: '/tv', icon: <TvICon />},
+    {navItemName: 'People', routePath: '/people', icon: <EmojiPeople />},
+    {navItemName: 'Profile', routePath: '/profile', icon: <ProfileIcon />},
+    {navItemName: 'Login', routePath: '/login', icon: <UserLogIn />}
   ],
   //  ISO 639-1 Code
   MOVIE_LANGUAGE_CODE: {
