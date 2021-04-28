@@ -16,6 +16,8 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Constants from '../../constants/Constants'
 import { Block, BlockGroup } from '../layout/block/block'
 
+const Root = styled.div``
+
 const MoviesListControllers = styled.div`
   display: flex;
   justify-content: space-between;
@@ -78,6 +80,57 @@ const FilterContainer = styled.div`
     cursor: pointer;
   }
 `
+
+// const DiscoverMovies = ({ fetchMovies, fetchMoviesGenres, sortMovies, filterMovies, filterMoviesBasedByGenres,  movies, genres }) => {
+
+//   let pagesCounter = 2
+//     // Binds our scroll event handler
+//     window.onscroll = debounce(() => {
+//       if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+//         this.props.fetchMoreMovies(pagesCounter)
+//         pagesCounter++
+//       }
+//     }, 100);
+
+//   React.useEffect(() => {
+//     fetchMovies()
+//     fetchMoviesGenres()
+//   }, [])
+
+//   const [selectedGenres, setSelectedGenres] = React.useState([])
+//   const [filterMenuAnchorEl, setFilterMenuAnchorEL] = React.useState(null)
+//   const [sortMenuAnchorEl, setSortMenuAnchorEl] = React.useState(null)
+
+//   const isGenreSelected = (genreId) => {
+//     for (let i=0; i<this.state.selectedGenres.length; i++) {
+//       if (this.state.selectedGenres[i] === genreId) return true
+//     }
+//     return false
+//   }
+
+//   const handleSort = (movies, sortingType) => {
+//     sortMovies(movies, sortingType)
+//     setSortMenuAnchorEl(null)
+//   }
+
+//   const handleFilter = (movies, filterType) => {
+//     filterMovies(movies, filterType)
+//     setFilterMenuAnchorEL(null)
+//   }
+
+//   const handleFilteringByGenres = (genreId) => {
+//     // this.setState({ 
+//     //   selectedGenres: [...this.state.selectedGenres, genreId]
+//     // }, () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres))
+//   }
+
+//   return (
+//     <Root>
+
+//     </Root>
+//   )
+
+// }
 
 class DiscoverMovies extends Component {  
   constructor(props) {
