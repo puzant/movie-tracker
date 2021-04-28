@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import discoverMoviesReducer, { initialState as discoverInitialState } from './discoverMovies'
 import movieReducer, { initialState as movieInitialState } from './movie'
 import searchReducer, { initialState as searchInitialState } from './search'
-import loginReducer, { initialState as loginInitialReducer } from './login'
+import authReducer, { initialState as authInitialReducer } from './auth'
 import upcomingMoviesReducer, { initialState as upcomingInitialState } from './upcomingMovies'
 
 export const initialState = {
@@ -10,7 +10,7 @@ export const initialState = {
   upcoming: upcomingInitialState,
   search: searchInitialState,
   movie: movieInitialState,
-  login: loginInitialReducer,
+  login: authInitialReducer,
 }
 
 export default combineReducers({
@@ -18,5 +18,5 @@ export default combineReducers({
   upcoming: upcomingMoviesReducer,
   search: searchReducer,
   movie: movieReducer,
-  login: loginReducer,
+  auth: authReducer,
 })
