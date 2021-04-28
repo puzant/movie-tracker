@@ -2,20 +2,41 @@ import React from 'react'
 import styled from 'styled-components'
 import Alert from '@material-ui/lab/Alert'
 import { bindActionCreators } from 'redux'
-import loginActions from '../../redux/actions/loginActions'
+import authActions from '../../redux/actions/authActions'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { useHistory } from 'react-router-dom'
 
 export interface LoginProps {
   loginUser: (username: string, password: string) => void
-  loginSuccess: boolean
-  loginError: boolean
+  success: boolean
+  error: any
 }
 
-export const Login = ({loginUser, loginSuccess, loginError}: LoginProps) => {
+const schema = zod.object({
+  username: zod
+    .string()
+    .nonempty({ message: 'Username is required' }),
+  password: zod.string().nonempty({ message: 'Password is required' })
+})
 
+
+export const Login = ({loginUser, success, error}: LoginProps) => {
+  
+  const history = useHistory()
   const [usernameValue, setUsernameValue] = React.useState<string>('')
   const [passwordValue, setPasswordValue] = React.useState<string>('')
+  const { register, handleSubmit, formState, errors } = useForm({
+    resolver: zodResolver(schema),
+    mode: 'onChange'
+  })
+  const { isValid } = formState
+
+  React.useEffect(() => {
+    if (success) history.push('/')
+  }, [success, history])
 
   const handleUsernameValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsernameValue(e.target.value)
@@ -25,37 +46,52 @@ export const Login = ({loginUser, loginSuccess, loginError}: LoginProps) => {
     setPasswordValue(e.target.value)
   }
 
-  const handleUserLogin = () => {
-    loginUser(usernameValue, passwordValue)
+  const handleUserLogin = async () => {
+    await loginUser(usernameValue, passwordValue)
   }
-
+  
   return (
     <Root>
-
-      { loginSuccess && <Redirect to='/' /> }
-
       <LoginText>Login to your account</LoginText>
       <NoticeText>
-        This app gets its data from the TMDD APIs. To view your account information, login with your TMDb credentials in the form below. To create one, 
+        This app gets its data from the TMDD APIs.
+        To view your account information, login with your TMDb
+        credentials in the form below. To create one,
         <CreateNewAccountLink href="https://www.themoviedb.org/signup" target="_blank"> Click here</CreateNewAccountLink>
       </NoticeText>
 
-      {loginError && <Alert severity="error">Username & Password are required</Alert>}
+      {error && <Alert severity="error">An error occured while trying to login</Alert>}
 
-      <InputForm>
-        <LabelName>Username</LabelName>
-        <StyledInput onChange={handleUsernameValueChange} type="text"/>
-      </InputForm>
+      <LoginForm onSubmit={handleSubmit(handleUserLogin)}>
+        <InputForm>
+          <LabelName>Username</LabelName>
+          <StyledInput 
+            name="username"
+            onChange={handleUsernameValueChange} 
+            type="text"
+            ref={register({ required: true })}
+          />
+          {errors.username && <FormError>{errors.username.message}</FormError>}
+        </InputForm>
 
-      <InputForm>
-        <LabelName>Password</LabelName>
-        <StyledInput onChange={handlePasswordValueChange} type="password"/>
-      </InputForm>
+        <InputForm>
+          <LabelName>Password</LabelName>
+          <StyledInput 
+            name="password"
+            onChange={handlePasswordValueChange} 
+            type="password"
+            ref={register({ required: true })}
+          />
+          {errors.password && <FormError>{errors.password.message}</FormError>}
+        </InputForm>
 
-      <LoginButtonContainer>
-        <LoginButton onClick={handleUserLogin}>Login</LoginButton>
-      </LoginButtonContainer>
-
+        <LoginButtonContainer>
+          <LoginButton disabled={!isValid}>
+            Login
+          </LoginButton>
+        </LoginButtonContainer>
+      </LoginForm>
+      
     </Root>
   )
 
@@ -83,7 +119,11 @@ const LoginButtonContainer = styled.div`
   margin-top: 18px;
 `
 
-const LoginButton = styled.div`
+const LoginButton = styled.button<{
+  disabled: boolean
+}>`
+  outline: none;
+  border: none;
   border-color: #01b4e4;
   background-color: #01b4e4;
   color: #fff;
@@ -91,13 +131,18 @@ const LoginButton = styled.div`
   border-radius: 5px;
   font-weight: bold;
   border-radius: 14px;
-&:hover {
-  cursor: pointer;
-}
+  &:hover {
+    cursor: pointer;
+  }
+  &[disabled] {
+    opacity: .3;
+    cursor: not-allowed;
+  }
 `
 
 const CreateNewAccountLink = styled.a`
   color: #00c6ff;
+  text-decoration: none;
 `
 
 const LabelName = styled.div`
@@ -115,7 +160,7 @@ const StyledInput = styled.input`
   border: 1px solid #abb3ba;
   color: #292b2c;
   padding: 12px;
-  border-radius: 1.25rem;
+  border-radius: 5px;
   line-height: 1.5;
   vertical-align: middle;
 &:focus {
@@ -123,15 +168,24 @@ const StyledInput = styled.input`
 }
 `
 
+const LoginForm = styled.form``
+
+const FormError = styled.span`
+  font-size: 12px;
+  color: #f04e4f;
+  margin-top: 10px;
+  font-weight: bold;
+`
+
 const mapStateToProps = (state: any) => { 
   return {
-    loginSuccess: false,
-    loginError: false,
+    success: state.auth.success,
+    error: state.auth.error,
   }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators(loginActions, dispatch)
+  return bindActionCreators(authActions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
