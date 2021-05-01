@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MenuDrawer(props) {
+export const MenuDrawer = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,

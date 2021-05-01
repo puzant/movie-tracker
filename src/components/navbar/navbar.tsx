@@ -6,7 +6,7 @@ import authActions from '../../redux/actions/authActions'
 import Routes from '../../root/routes'
 import { NavLink, BrowserRouter as Router } from 'react-router-dom'
 import Constants from '../../constants/Constants'
-import MenuDrawer from './menuDrawer'
+import { MenuDrawer } from './menuDrawer'
 import { Block } from '../layout/block/block'
 import MeetingRoom from '@material-ui/icons/MeetingRoom'
 
@@ -129,9 +129,6 @@ const SearchBar = styled.input`
   }
   &::placeholder {
     color: #111;
-  }
-  @media (max-width: 768px) {
-    
   }
 `
 
