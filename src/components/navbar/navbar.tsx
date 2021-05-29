@@ -1,9 +1,8 @@
-import React, { useEffect, ReactNode } from 'react'
+import React, { useEffect, ReactNode, ReactElement } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import authActions from '../../redux/actions/authActions'
-import Routes from '../../root/routes'
 import { NavLink, BrowserRouter as Router } from 'react-router-dom'
 import Constants from '../../constants/Constants'
 import { MenuDrawer } from './menuDrawer'
@@ -19,9 +18,10 @@ interface NavigationLink {
 interface NavbarProps {
   isAuthenticated: boolean
   logout: () => void
+  children: ReactElement | ReactElement[]
 }
 
-export const Navbar = ({ isAuthenticated, logout }: NavbarProps) => {
+export const Navbar = ({ isAuthenticated, logout, children }: NavbarProps) => {
 
   const accountId = localStorage.getItem('accountId')
   const [searchValue, setSearchValue] = React.useState<string>("")
@@ -89,7 +89,7 @@ export const Navbar = ({ isAuthenticated, logout }: NavbarProps) => {
           </NavLink>
         </Block>
       </MainContainer>
-      <Routes />
+      {children}
     </Router>
   )
 

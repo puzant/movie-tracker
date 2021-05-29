@@ -1,10 +1,13 @@
 import React from 'react'
-import Navbar from './components/navbar/navbar'
+import { Layout } from './components/common/layout/layout'
+import Routes from './root/routes'
 
 export const App = () => {
   return (
     <>
-      <Navbar />
+      <Layout>
+        <Routes />
+      </Layout>
     </>
   );
 }
