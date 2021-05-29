@@ -7,7 +7,7 @@ import Routes from '../../root/routes'
 import { NavLink, BrowserRouter as Router } from 'react-router-dom'
 import Constants from '../../constants/Constants'
 import { MenuDrawer } from './menuDrawer'
-import { Block } from '../layout/block/block'
+import { Block } from '../common/block/block'
 import MeetingRoom from '@material-ui/icons/MeetingRoom'
 
 interface NavigationLink {
