@@ -5,8 +5,8 @@ import {
     GET_MOVIES_GENRES,
     FILTER_MOVIES_ACTIONS,
     SORTING_MOVIES_ACTIONS 
-  } from '../actionTypes/discoverMoviesActionTypes'
-import { getMovies, getMovieGenres, getMoreMovies } from '../../api/movie'
+  } from '../actionTypes'
+import { getMovies, getMovieGenres, getMoreMovies } from 'api'
 
 /*
  |--------------------------------------------------------------------------

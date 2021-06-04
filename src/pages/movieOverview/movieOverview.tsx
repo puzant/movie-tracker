@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Link, useParams } from "react-router-dom"
-import { connect } from 'react-redux'
-import movieOverviewActions from '../../redux/actions/movieOverviewActions'
+import { Link, useParams } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import MovieReviews from '../../components/movieReviews/movieReviews'
-import Loader from '../../components/loader/loader'
-import Constants from '../../constants/Constants'
-import Tooltip from '@material-ui/core/Tooltip'
-import Fab from '@material-ui/core/Fab'
-import Cast from '../../components/cast/cast'
-import Movie from '../../components/movie/movie'
-import Rating from '@material-ui/lab/Rating'
-import { Block, BlockGroup } from '../../components/common/block/block'
-import utils from '../../utils/utils' 
-import { IMovie, Review, Actor, MovieGenre } from '../../api/Models'
+import { connect } from 'react-redux'
+import movieOverviewActions from 'redux/actions/movieOverviewActions'
+
+import { IMovie, Review, Actor, MovieGenre } from 'api/Models'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
+import Tooltip from '@material-ui/core/Tooltip'
+import Fab from '@material-ui/core/Fab'
+import Rating from '@material-ui/lab/Rating'
+
+import MovieReviews from 'components/movieReviews/movieReviews'
+import Loader from 'components/loader/loader'
+import Constants from 'constants/Constants'
+import Cast from 'components/cast/cast'
+import Movie from 'components/movie/movie'
+import { Block, BlockGroup } from 'components/common/block/block'
+
+import utils from 'utils/utils' 
 
 interface MovieInfoProp {
   text: string 
@@ -73,21 +77,6 @@ export const MovieOverview = ({
     fetchMovieReviews(movieId)
   }, [])
 
-  const movieLanguage = () => {
-    switch(movie?.original_language) {
-      case Constants.MOVIE_LANGUAGE_CODE.ENGLISH:
-        return 'English'
-      case Constants.MOVIE_LANGUAGE_CODE.FRENCH:
-        return 'French'
-      case Constants.MOVIE_LANGUAGE_CODE.JAPANESE:
-        return 'japanese'
-      case Constants.MOVIE_LANGUAGE_CODE.KOREAN:
-        return 'korean'
-      default:
-        return 'English'
-    }
-  }
-
   return ( 
     <BlockGroup layout='vertical' justify='center'>
 
@@ -128,7 +117,7 @@ export const MovieOverview = ({
               
               <MovieInfo text="Status" value={movie.status} />
               <MovieInfo text="Genres" value={movie?.genres?.map((genre: MovieGenre) => genre.name).join(', ')}></MovieInfo>
-              <MovieInfo text="Language" value={movieLanguage()} />
+              <MovieInfo text="Language" value={utils.getMovieLanguage(movie.original_language)} />
               <RenderMovieRunTime runtime={movie.runtime} />
               <MovieInfo text="About The Movie" value={movie.overview} />
             </Block>
@@ -197,6 +186,7 @@ const mapStateToProps = (state: any) => {
   return {
     movie: state.movie.movie,
     pending: state.movie.pending,
+    error: state.movie.error,
     movieReviews: state.movie.movieReviews
   }
 }
@@ -206,7 +196,6 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieOverview)
-
 
 const SectionTitle = styled.div`
   align-self: center;

@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
-import { UPCOMING_MOVIES_ACTIONS } from '../actionTypes/upcomingMoviesActionTypes'
-import { getUpcomingMovies } from '../../api/movie'
-import { IMovie } from '../../api/Models'
+import { UPCOMING_MOVIES_ACTIONS } from '../actionTypes'
+import { getUpcomingMovies } from 'api'
+import { IMovie } from 'api/Models'
 
 /*
   |--------------------------------------------------------------------------

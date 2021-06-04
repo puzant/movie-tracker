@@ -1,15 +1,17 @@
 import { createAction } from 'redux-actions';
-import { GET_MOVIE_ACTIONS, REVIEWS_SUCCESS } from '../actionTypes/movieOverviewActionTypes'
-import { getMovieById, getMovieReviews } from '../../api/movie'
-import { IMovie, Review } from '../../api/Models'
+import { GET_MOVIE_ACTIONS, REVIEWS_SUCCESS } from '../actionTypes'
+import { getMovieById, getMovieReviews } from 'api'
+import { IMovie, Review } from 'api/Models'
+
 /*
- |--------------------------------------------------------------------------
- | Get Movie
- |--------------------------------------------------------------------------
- */
+  |--------------------------------------------------------------------------
+  | Get Movie By Id
+  |--------------------------------------------------------------------------
+*/
 
 const fetchMovieSuccess = createAction(GET_MOVIE_ACTIONS.SUCCESS, (movie: IMovie) => ({movie}))
 const fechMoviePending = createAction(GET_MOVIE_ACTIONS.PENDING)
+const fetchMovieError = createAction(GET_MOVIE_ACTIONS.ERROR, (error: any) => ({error}))
 
 const fetchMovieById = (movieId: string) => {
   return async (dispatch: any) => {
@@ -18,17 +20,16 @@ const fetchMovieById = (movieId: string) => {
       const movieByIdResponse = await getMovieById(movieId)
       return dispatch(fetchMovieSuccess(movieByIdResponse.data))
     } catch(error) {
-      //  dispatch(fetchMoviesError(error))
-      //  TODO: create an action type for error
+        dispatch(fetchMovieError(error))
     }
   }
 }
 
 /*
- |--------------------------------------------------------------------------
- | Get Movies Reviews
- |--------------------------------------------------------------------------
- */
+  |--------------------------------------------------------------------------
+  | Get Movies Reviews
+  |--------------------------------------------------------------------------
+*/
 
 const fetchMovieReviewsSuccess = createAction(REVIEWS_SUCCESS, (reviews: Review[]) => ({reviews}))
 

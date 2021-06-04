@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useDispatch, RootStateOrAny, useSelector } from "react-redux"
-import { fetchUpcomingMovies } from '../../redux/actions/upcomingMoviesActions'
 import { Link } from 'react-router-dom'
-import Constants from '../../constants/Constants'
-import Movie from '../../components/movie/movie'
-import Loader from '../../components/loader/loader'
-import Error from '../../components/error/error'
-import { Block, BlockGroup } from '../../components/common/block/block'
-import { IMovie } from '../../api/Models'
+
+import { useDispatch, useSelector } from "react-redux"
+import { fetchUpcomingMovies } from 'redux/actions/upcomingMoviesActions'
+
+import { IMovie } from 'api/Models'
+
+import Constants from 'constants/Constants'
+
+import Movie from 'components/movie/movie'
+import Loader from 'components/loader/loader'
+import Error from 'components/error/error'
+import { Block, BlockGroup } from 'components/common/block/block'
 
 export interface UpcomingMoviesProps {
   upcoming: {

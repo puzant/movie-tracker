@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import { Link } from "react-router-dom"
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom"
-import styled from 'styled-components'
+import searchMoviesActions from 'redux/actions/searchMoviesActions'
+
+import { IMovie } from 'api/Models';
+
 import queryString from 'query-string'
-import searchMoviesActions from '../../redux/actions/searchMoviesActions'
-import Loader from '../../components/loader/loader'
-import Movie from '../../components/movie/movie'
-import emptyResultsLogo from '../../assets/empty-results.png'
-import { Block } from '../../components/common/block/block'
-import { IMovie } from '../../api/Models';
+
+import Loader from 'components/loader/loader'
+import Movie from 'components/movie/movie'
+import emptyResultsLogo from 'assets/empty-results.png'
+import { Block } from 'components/common/block/block'
 
 export interface SearchResultsProps {
   searchResults: IMovie[]
