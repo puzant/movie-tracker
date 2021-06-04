@@ -23,6 +23,7 @@ const fetchMovieReviewsSuccess = (state, {payload}) => ({...state, movieReviews:
 const movieActionHandler = {
   [GET_MOVIE_ACTIONS.PENDING]: fetchMoviePending,
   [GET_MOVIE_ACTIONS.SUCCESS]: fetchMovieSuccess,
+  [GET_MOVIE_ACTIONS.ERROR]: fetchMovieError,
   [REVIEWS_SUCCESS]: fetchMovieReviewsSuccess
 }
 
