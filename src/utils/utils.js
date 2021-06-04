@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Constants from '../constants/Constants'
 
 const sortInDescendingOrder = (data, key) => {
@@ -16,10 +17,31 @@ const sortInAscendingOrder = (data, key) => {
   })
 }
 
+const getMovieLanguage = (language) => {
+  switch(language) {
+    case Constants.MOVIE_LANGUAGE_CODE.ENGLISH:
+      return 'English'
+    case Constants.MOVIE_LANGUAGE_CODE.FRENCH:
+      return 'French'
+    case Constants.MOVIE_LANGUAGE_CODE.JAPANESE:
+      return 'japanese'
+    case Constants.MOVIE_LANGUAGE_CODE.KOREAN:
+      return 'korean'
+    default:
+      return 'English'
+  }
+}
+
+const formatReviewDate = (creationDate) => {
+  return moment(creationDate).format('MMMM Do YYYY')
+}
+
 const generateRandomColorValue = () => Math.floor(Math.random()*16777215).toString(16)
 
 export default {
   sortInDescendingOrder,
   sortInAscendingOrder,
-  generateRandomColorValue
+  generateRandomColorValue,
+  getMovieLanguage,
+  formatReviewDate
 }
