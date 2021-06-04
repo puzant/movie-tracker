@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions'
-import auth from '../../api/authentication'
+import { getRequestToken, login, createSession, getAccount, deleteSession } from 'api'
 import authActionTypes from '../actionTypes/authActionTypes'
 
 /*
@@ -17,26 +17,26 @@ const loginUser = (username: string, password: string) => {
       accountId: string
   return async (dispatch: any) => {
     try {
-      const requestTokenResponse = await auth.getRequestToken()
+      const requestTokenResponse = await getRequestToken()
       requestToken = requestTokenResponse.data.request_token  
     } catch(error) {
     }
 
     try {
-      const loginResponse = await auth.login(username, password, requestToken)
+      const loginResponse = await login(username, password, requestToken)
     } catch(error) {
       dispatch(loginFailure(error))
     }
     
     try {
-      const sessionResponse = await auth.createSession(requestToken)  
+      const sessionResponse = await createSession(requestToken)  
       sessionId = sessionResponse.data.session_id
       localStorage.setItem('sessionId', sessionId)
     } catch(error) {
     }
 
     try {
-      const userAccountResponse = await auth.getAccount(sessionId)
+      const userAccountResponse = await getAccount(sessionId)
       accountId = userAccountResponse.data.id
       localStorage.setItem('accountId', accountId)
       dispatch(loginSuccess(accountId, sessionId))

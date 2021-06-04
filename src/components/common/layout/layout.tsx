@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
-import Navbar from '../../header/header'
+import Navbar from '../../navbar/navbar'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 interface LayoutProps {
   children: ReactElement | ReactElement[]
@@ -9,9 +10,10 @@ interface LayoutProps {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <Root>
-      <Navbar>
+      <Router>
+        <Navbar />
         {children}
-      </Navbar>
+      </Router>
     </Root>
   )
 }

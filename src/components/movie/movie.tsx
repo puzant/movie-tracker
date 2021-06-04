@@ -1,10 +1,13 @@
 import React from 'react'
+import styled from 'styled-components'
+
+import { IMovie } from 'api/Models'
+
 import Rating from '@material-ui/lab/Rating'
 import Box from '@material-ui/core/Box'
 import Skeleton from '@material-ui/lab/Skeleton'
-import styled from 'styled-components'
+
 import { Block } from '../common/block/block'
-import { IMovie } from '../../api/Models'
 export interface MovieProps {
   movie: IMovie
 }

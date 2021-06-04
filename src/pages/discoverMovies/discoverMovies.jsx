@@ -1,20 +1,26 @@
-import styled from 'styled-components'
 import React, { Component } from 'react'
-import Movie from '../../components/movie/movie'
-import sortLogo from '../../assets/sort.svg'
-import filterLogo from '../../assets/filter.svg'
+import styled from 'styled-components'
+import { Link } from "react-router-dom"
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import moviesActions from '../../redux/actions/discoverMoviesActions'
-import { Link } from "react-router-dom"
+import moviesActions from 'redux/actions/discoverMoviesActions'
+
 import debounce from "lodash.debounce"
 import PropTypes from 'prop-types'
-import Loader from '../../components/loader/loader'
-import Error from '../../components/error/error'
-import Menu from '@material-ui/core/Menu'
+
+import Constants from 'constants/Constants'
+
+import Movie from 'components/movie/movie'
+import Loader from 'components/loader/loader'
+import Error from 'components/error/error'
+import { Block, BlockGroup } from 'components/common/block/block'
+
 import MenuItem from '@material-ui/core/MenuItem'
-import Constants from '../../constants/Constants'
-import { Block, BlockGroup } from '../../components/common/block/block'
+import Menu from '@material-ui/core/Menu'
+
+import sortLogo from 'assets/sort.svg'
+import filterLogo from 'assets/filter.svg'
 
 const Root = styled.div``
 

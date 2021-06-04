@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import Avatar from '@material-ui/core/Avatar'
 import styled from 'styled-components'
-import { Review } from '../../api/Models'
+
+import Avatar from '@material-ui/core/Avatar'
+import { Review } from 'api/Models'
+
+import { Block } from 'components/common/block/block'
+import utils from 'utils/utils' 
 
 export interface MovieReviewsProps {
   reviews: Review[]
@@ -30,7 +33,10 @@ const MovieReviews = ({reviews, avatarRandomColor}: MovieReviewsProps) => {
           <ReviewBox key={review.id}>
             <UserContainer>
               <UserAvatar avatarRandomColor={avatarRandomColor}>{review.author[0]}</UserAvatar>
-              <UserName>{review.author}</UserName>
+              <Block align='flex-start' gap={6}>
+                <UserName>{review.author}</UserName>
+                <span>Written by {review.author} on {utils.formatReviewDate(review.created_at)}</span>
+              </Block>
             </UserContainer>
             <ReviewContent>
               <>
@@ -50,10 +56,6 @@ const MovieReviews = ({reviews, avatarRandomColor}: MovieReviewsProps) => {
 
     </Root>
   )
-}
-
-MovieReviews.propTypes = {
-  movieReviews: PropTypes.array
 }
 
 const Root = styled.div`
@@ -84,18 +86,19 @@ const UserContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 8px;
 `
 
 const UserName = styled.div`
   font-weight: bold;
   font-size: 20px;
-  margin-left: 10px;
 `
 
-const UserAvatar = styled(Avatar)<{
+const UserAvatar = styled(Avatar)
+<{
   avatarRandomColor: string
 }>`
-  background-color: ${props => `#` + props.avatarRandomColor + '!important'};
+  background-color: ${props => `#${props.avatarRandomColor} !important`};
 `
 
 const ReviewButton = styled.a`

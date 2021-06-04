@@ -1,6 +1,6 @@
 import React from 'react'
-import loader from '../../assets/loader-dotted.gif'
 import styled from 'styled-components'
+import loader from 'assets/loader-dotted.gif'
 
 export interface LoaderProps {
   pendingState: boolean
