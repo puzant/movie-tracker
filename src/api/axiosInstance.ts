@@ -15,4 +15,9 @@ axiosInstance.interceptors.request.use((config: any) => {
   return Promise.reject(error)
 })
 
+// https://stackoverflow.com/questions/60293587/change-axios-response-schema
+axiosInstance.interceptors.response.use((response: any) => {
+  return response.data
+})
+
 export default axiosInstance
