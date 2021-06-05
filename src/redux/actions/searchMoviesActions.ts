@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { SEARCH_MOVIES_ACTIONS } from '../actionTypes'
+import { SEARCH_MOVIES_ACTIONS } from '../actionTypes/searchMoviesActionTypes'
 import { getMovieByQuery } from 'api'
 import { IMovie } from 'api/Models'
 

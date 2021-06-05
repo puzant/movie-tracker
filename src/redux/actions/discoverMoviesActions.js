@@ -23,7 +23,7 @@ const fetchMovies = () => {
     try {
       dispatch(fetchMoviesPending());
       const getMoviesResponse = await getMovies()
-      const results = await dispatch(fetchMoviesSuccess(getMoviesResponse.data.results))
+      const results = await dispatch(fetchMoviesSuccess(getMoviesResponse.results))
       return results 
     } catch(error) {
         return dispatch(fetchMoviesError(error))
@@ -43,7 +43,7 @@ const fetchMoviesGenres = () => {
   return async dispatch => {
     try {
       const getGenresResponse = await getMovieGenres()
-      return dispatch(fetchMoviesGenresSuccess(getGenresResponse.data.genres))
+      return dispatch(fetchMoviesGenresSuccess(getGenresResponse.genres))
     } catch(error) {
       console.log(error)
     }

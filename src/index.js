@@ -6,9 +6,15 @@ import {Provider} from 'react-redux'
 import * as serviceWorker from './serviceWorker'
 import store from './redux/store'
 
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
+
 const render = () => ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </Provider>, 
   document.getElementById('root')
 )

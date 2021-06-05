@@ -18,7 +18,7 @@ const fetchMovieById = (movieId: string) => {
     try {
       dispatch(fechMoviePending())
       const movieByIdResponse = await getMovieById(movieId)
-      return dispatch(fetchMovieSuccess(movieByIdResponse.data))
+      return dispatch(fetchMovieSuccess(movieByIdResponse))
     } catch(error) {
         dispatch(fetchMovieError(error))
     }
@@ -36,7 +36,7 @@ const fetchMovieReviewsSuccess = createAction(REVIEWS_SUCCESS, (reviews: Review[
 const fetchMovieReviews = (movieId: string) => {
   return async (dispatch: any) => {
     const movieReviewsResponse = await getMovieReviews(movieId)
-  dispatch(fetchMovieReviewsSuccess(movieReviewsResponse.data.results))
+  dispatch(fetchMovieReviewsSuccess(movieReviewsResponse.results))
   }
 }
 
