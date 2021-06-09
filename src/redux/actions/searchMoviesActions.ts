@@ -4,9 +4,9 @@ import { getMovieByQuery } from 'api'
 import { IMovie } from 'api/Models'
 
 /*
- |--------------------------------------------------------------------------
- | Get Movie By Query
- |--------------------------------------------------------------------------
+  |--------------------------------------------------------------------------
+  | Get Movie By Query
+  |--------------------------------------------------------------------------
  */
 
 const fetchMovieByQuerySuccess = createAction(SEARCH_MOVIES_ACTIONS.SUCCESS, (searchResults: IMovie[]) => ({searchResults}))

@@ -110,7 +110,8 @@ export const MovieOverview = ({
                   component='span' 
                   ml={0.75} 
                   fontWeight="fontWeightMedium" 
-                  fontSize="h6.fontSize">
+                  fontSize="h6.fontSize"
+                >
                   {Number(movie.vote_average) / 2}
                 </Box>
               </MovieInfoContainer>
