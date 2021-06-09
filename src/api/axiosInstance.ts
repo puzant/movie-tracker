@@ -15,4 +15,10 @@ axiosInstance.interceptors.request.use((config: any) => {
   return Promise.reject(error)
 })
 
+axiosInstance.interceptors.response.use((response: any) => {
+  return response
+}, (error: any) => {
+  return Promise.reject(error)
+})
+
 export default axiosInstance
