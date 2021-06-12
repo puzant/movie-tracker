@@ -2,20 +2,21 @@
 
 ![preview](src/app-preview.png)
 
-- This App usese:
-  - ReactJs for rendering the view
-  - Redux for state mangement 
-  - React-Router-DOM for routing
-  - Styled-Components for styling with JS 
-  - React Material Design library
+## Used Technologies
+- ReactJs for rendering the view
+- Redux for state mangement 
+- React-Router-DOM for routing
+- Styled-Components for styling with JS 
+- React Material Design library
 
-- This App consists of 6 sections
-  - Discover Movies 
-  - Movie OverView
-  - Movie Search Results
-  - Upcoming Movies
-  - Profile
-  - Login
+## This App consists of 6 sections
+- Discover Movies 
+- Movie OverView
+- Movie Search Results
+- Upcoming Movies
+- People
+- Profile
+- Login
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
