@@ -1,15 +1,17 @@
-# Movie Tracker App
+# Movie Tracker App 🎥
 
 ![preview](src/app-preview.png)
 
-## Used Technologies
-- ReactJs for rendering the view
-- Redux for state mangement 
-- React-Router-DOM for routing
-- Styled-Components for styling with JS 
-- React Material Design library
+## Used Technologies 🧑‍💻
+- `TypeScript`
+- `reactJs`
+- `redux`
+- `react-router-dom`
+- `styled-components`
+- `react material UI`
+- `react-hook-form`
 
-## This App consists of 6 sections
+## This App consists of seven pages 📄
 - Discover Movies 
 - Movie OverView
 - Movie Search Results
@@ -17,6 +19,7 @@
 - People
 - Profile
 - Login
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
