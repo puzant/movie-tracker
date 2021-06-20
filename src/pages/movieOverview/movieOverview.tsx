@@ -57,7 +57,7 @@ const RenderMovieRunTime = ({ runtime }: { runtime: number }) => {
   );
 };
 
-export const MovieOverview = ({
+const MovieOverview = ({
   fetchMovieById,
   fetchMovieReviews,
   movie,
@@ -201,7 +201,10 @@ const mapDispatchToProps = (dispatch: any) => {
   return bindActionCreators(movieOverviewActions, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieOverview);
+export const MovieOverviewConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MovieOverview);
 
 const SectionTitle = styled.div`
   align-self: center;

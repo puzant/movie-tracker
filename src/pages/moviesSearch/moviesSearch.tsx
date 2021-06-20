@@ -6,12 +6,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import searchMoviesActions from "redux/actions/searchMoviesActions";
 
-import { createStructuredSelector } from "reselect";
 import {
-  getSearchResults,
-  getPendingSearch,
-  getErrorSearch,
-  getEmptySearch,
+  selectSearchResults,
+  selectPendingSearch,
+  selectErrorSearch,
+  selectEmptySearch,
 } from "redux/selectors/search";
 
 import { IMovie } from "api/Models";
@@ -65,10 +64,10 @@ const MoviesSearch = ({
 
 const mapStateToProps = (state: any) => {
   return {
-    searchResults: getSearchResults(state),
-    searchResultsPending: getPendingSearch(state),
-    searchResultsError: getErrorSearch(state),
-    emptySearchResults: getEmptySearch(state),
+    searchResults: selectSearchResults(state),
+    searchResultsPending: selectPendingSearch(state),
+    searchResultsError: selectErrorSearch(state),
+    emptySearchResults: selectEmptySearch(state),
   };
 };
 
@@ -76,7 +75,10 @@ const mapDispatchToProps = (dispatch: any) => {
   return bindActionCreators(searchMoviesActions, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesSearch);
+export const MoviesSearchConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoviesSearch);
 
 const StyledLink = styled(Link)`
   color: #111;
