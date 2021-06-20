@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { Link } from "react-router-dom"
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import moviesActions from 'redux/actions/discoverMoviesActions'
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import moviesActions from "redux/actions/discoverMoviesActions";
 
-import debounce from "lodash.debounce"
-import PropTypes from 'prop-types'
+import debounce from "lodash.debounce";
+import PropTypes from "prop-types";
 
-import Constants from 'constants/Constants'
+import Constants from "constants/Constants";
 
-import Movie from 'components/movie/movie'
-import Loader from 'components/loader/loader'
-import Error from 'components/error/error'
-import { Block, BlockGroup } from 'components/common/block/block'
+import Movie from "components/movie/movie";
+import Loader from "components/loader/loader";
+import Error from "components/error/error";
+import { Block, BlockGroup } from "components/common/block/block";
 
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
-import sortLogo from 'assets/sort.svg'
-import filterLogo from 'assets/filter.svg'
+import sortLogo from "assets/sort.svg";
+import filterLogo from "assets/filter.svg";
 
-const Root = styled.div``
+const Root = styled.div``;
 
 const MoviesListControllers = styled.div`
   display: flex;
@@ -30,20 +30,20 @@ const MoviesListControllers = styled.div`
   margin: 20px auto;
   align-items: center;
   width: 82%;
-`
+`;
 
 const DiscoverMoviesText = styled.div`
   font-weight: bold;
   font-size: 20px;
-`
+`;
 
 const GenersText = styled.div`
   font-weight: bold;
-`
+`;
 
 const GenresFiltersContainer = styled.div`
   overflow: scroll;
-  display: flex; 
+  display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   @media (max-width: 600px) {
@@ -53,39 +53,39 @@ const GenresFiltersContainer = styled.div`
     align-items: center;
     overflow: scroll;
   }
-`
+`;
 
 const MovieGenre = styled.span`
   border: 1px solid #0000003b;
   color: #000000de;
-  background: ${props => props.selectedGenre && '#f5f0f0'};
+  background: ${(props) => props.selectedGenre && "#f5f0f0"};
   margin: 4px;
   padding: 8px;
   border-radius: 15px;
-  transition: .5s;
+  transition: 0.5s;
   &:hover {
     cursor: pointer;
     background: #f5f0f0;
   }
-`
+`;
 
 const GenresContainer = styled.div`
   display: flex;
   margin: auto;
   flex-direction: column;
   width: 82%;
-`
+`;
 
 const StyledLink = styled(Link)`
   color: #111;
   text-decoration: none;
-`
+`;
 
 const FilterContainer = styled.div`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 // const DiscoverMovies = ({ fetchMovies, fetchMoviesGenres, sortMovies, filterMovies, filterMoviesBasedByGenres,  movies, genres }) => {
 
@@ -125,7 +125,7 @@ const FilterContainer = styled.div`
 //   }
 
 //   const handleFilteringByGenres = (genreId) => {
-//     // this.setState({ 
+//     // this.setState({
 //     //   selectedGenres: [...this.state.selectedGenres, genreId]
 //     // }, () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres))
 //   }
@@ -138,86 +138,101 @@ const FilterContainer = styled.div`
 
 // }
 
-class DiscoverMovies extends Component {  
+class DiscoverMovies extends Component {
   constructor(props) {
     super(props);
-    let pagesCounter = 2
+    let pagesCounter = 2;
     // Binds our scroll event handler
     window.onscroll = debounce(() => {
-      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        this.props.fetchMoreMovies(pagesCounter)
-        pagesCounter++
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        this.props.fetchMoreMovies(pagesCounter);
+        pagesCounter++;
       }
     }, 100);
     this.state = {
       selectedGenres: [],
       filterMenuAnchorEl: null,
-      sortMenuAnchorEl: null
-    }
+      sortMenuAnchorEl: null,
+    };
   }
-  
+
   componentDidMount() {
-    this.props.fetchMovies()
-    this.props.fetchMoviesGenres()
+    this.props.fetchMovies();
+    this.props.fetchMoviesGenres();
   }
 
   isGenreSelected(genreId) {
-    for (let i=0; i<this.state.selectedGenres.length; i++) {
-      if (this.state.selectedGenres[i] === genreId) return true
+    for (let i = 0; i < this.state.selectedGenres.length; i++) {
+      if (this.state.selectedGenres[i] === genreId) return true;
     }
-    return false
+    return false;
   }
 
   handleSort(movies, sortingType) {
-    this.props.sortMovies(movies, sortingType)
-    this.setState({ sortMenuAnchorEl:  null})
+    this.props.sortMovies(movies, sortingType);
+    this.setState({ sortMenuAnchorEl: null });
   }
 
   handleFilter(movies, filterType) {
-    this.props.filterMovies(movies, filterType)
-    this.setState({ filterMenuAnchorEl: null })
+    this.props.filterMovies(movies, filterType);
+    this.setState({ filterMenuAnchorEl: null });
   }
 
   handleFilteringByGenres = (genreId) => {
-    this.setState({ 
-      selectedGenres: [...this.state.selectedGenres, genreId]
-    }, () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres))
-  }
+    this.setState(
+      {
+        selectedGenres: [...this.state.selectedGenres, genreId],
+      },
+      () => this.props.filterMoviesBasedByGenres(this.state.selectedGenres)
+    );
+  };
 
   render() {
-
     const MoreMoviesLoader = (props) => (
-      <Block align='center'>
-        {props.loadMorePendingState && <Loader pendingState={props.loadMorePendingState} />}
+      <Block align="center">
+        {props.loadMorePendingState && (
+          <Loader pendingState={props.loadMorePendingState} />
+        )}
       </Block>
-    )
+    );
 
-    const { genres, movies } = this.props
-    const { filterMenuAnchorEl, sortMenuAnchorEl, selectedGenres } = this.state
+    const { genres, movies } = this.props;
+    const { filterMenuAnchorEl, sortMenuAnchorEl, selectedGenres } = this.state;
 
     return (
       <BlockGroup gap={15}>
-
         <MoviesListControllers>
-
           <DiscoverMoviesText>Discover new Movies</DiscoverMoviesText>
 
-          <Block layout='horizontal' align='center' gap={15}>
+          <Block layout="horizontal" align="center" gap={15}>
             <FilterContainer>
-              <Block layout='horizontal' gap={5}>
-                <img onClick={(e) => this.setState({ sortMenuAnchorEl:  e.currentTarget})} src={sortLogo} alt="sort_logo" />
+              <Block layout="horizontal" gap={5}>
+                <img
+                  onClick={(e) =>
+                    this.setState({ sortMenuAnchorEl: e.currentTarget })
+                  }
+                  src={sortLogo}
+                  alt="sort_logo"
+                />
                 <span>Sort</span>
               </Block>
-              <Menu 
+              <Menu
                 id="sort-menu"
                 anchorEl={sortMenuAnchorEl}
                 keepMounted
                 open={Boolean(sortMenuAnchorEl)}
                 onClose={() => this.setState({ sortMenuAnchorEl: null })}
-                >
+              >
                 {Constants.SORTING_OPTIONS.map((sortOpt, index) => (
-                  <MenuItem key={index}
-                    onClick={() =>  this.handleSort(movies, sortOpt.SORTING_NAME)}>
+                  <MenuItem
+                    key={index}
+                    onClick={() =>
+                      this.handleSort(movies, sortOpt.SORTING_NAME)
+                    }
+                  >
                     {sortOpt.TEXT_TITLE}
                   </MenuItem>
                 ))}
@@ -225,79 +240,89 @@ class DiscoverMovies extends Component {
             </FilterContainer>
 
             <FilterContainer>
-              <Block layout='horizontal' gap={5}>
-                <img onClick={(e) => this.setState({ filterMenuAnchorEl:  e.currentTarget})} src={filterLogo} alt="filter_logo" />
+              <Block layout="horizontal" gap={5}>
+                <img
+                  onClick={(e) =>
+                    this.setState({ filterMenuAnchorEl: e.currentTarget })
+                  }
+                  src={filterLogo}
+                  alt="filter_logo"
+                />
                 <span>Filter</span>
               </Block>
-                <Menu 
-                  id="filter-menu"
-                  anchorEl={filterMenuAnchorEl}
-                  keepMounted
-                  open={Boolean(filterMenuAnchorEl)}
-                  onClose={() => this.setState({ filterMenuAnchorEl: null})}
-                >
-                  {Constants.FILTER_TYPES.map((filterType) =>(
-                    <MenuItem key={filterType.FILTER_NAME}
-                      onClick={() => this.handleFilter(movies, filterType.FILTER_NAME)}>
-                        {filterType.TEXT_TITLE}
-                    </MenuItem>
-                  ))}
-                </Menu>
+              <Menu
+                id="filter-menu"
+                anchorEl={filterMenuAnchorEl}
+                keepMounted
+                open={Boolean(filterMenuAnchorEl)}
+                onClose={() => this.setState({ filterMenuAnchorEl: null })}
+              >
+                {Constants.FILTER_TYPES.map((filterType) => (
+                  <MenuItem
+                    key={filterType.FILTER_NAME}
+                    onClick={() =>
+                      this.handleFilter(movies, filterType.FILTER_NAME)
+                    }
+                  >
+                    {filterType.TEXT_TITLE}
+                  </MenuItem>
+                ))}
+              </Menu>
             </FilterContainer>
           </Block>
-
         </MoviesListControllers>
 
-          <GenresContainer>
-            <GenersText>Genres:</GenersText>
-            <GenresFiltersContainer>
-              {genres?.map(genre => (
-                <MovieGenre
-                  key={genre.id}
-                  selectedGenre={this.isGenreSelected(genre.id)}
-                  onClick={() => this.handleFilteringByGenres(genre.id)}
-                >
-                  {genre.name}
-                </MovieGenre>
-              )) }
-            </GenresFiltersContainer>
-          </GenresContainer> 
-        
-          <Block layout='horizontal' justify='center' wrapped>
-            {movies?.map(movie => (
-              <StyledLink to={`/movie-overview/${movie.id}`} key={movie.id}>
-                <Movie
-                  movie={movie}
-                  key={movie.id}
-                >
-              </Movie>
-            </StyledLink>
-            )) }
-          </Block>
-        
-        <Loader pendingState={this.props.pendingState} />
-        <MoreMoviesLoader loadMorePendingState={this.props.loadMorePendingState} movies={this.props.movies} />
-        <Error errorText={Constants.ERROR_TEXT.FETCH_MOVIES_ERROR_TEXT} error={this.props.errorState} />
+        <GenresContainer>
+          <GenersText>Genres:</GenersText>
+          <GenresFiltersContainer>
+            {genres?.map((genre) => (
+              <MovieGenre
+                key={genre.id}
+                selectedGenre={this.isGenreSelected(genre.id)}
+                onClick={() => this.handleFilteringByGenres(genre.id)}
+              >
+                {genre.name}
+              </MovieGenre>
+            ))}
+          </GenresFiltersContainer>
+        </GenresContainer>
 
+        <Block layout="horizontal" justify="center" wrapped>
+          {movies?.map((movie) => (
+            <StyledLink to={`/movie-overview/${movie.id}`} key={movie.id}>
+              <Movie movie={movie} key={movie.id}></Movie>
+            </StyledLink>
+          ))}
+        </Block>
+
+        <Loader pendingState={this.props.pendingState} />
+        <MoreMoviesLoader
+          loadMorePendingState={this.props.loadMorePendingState}
+          movies={this.props.movies}
+        />
+        <Error
+          errorText={Constants.ERROR_TEXT.FETCH_MOVIES_ERROR_TEXT}
+          error={this.props.errorState}
+        />
       </BlockGroup>
     );
   }
 }
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
   return {
     movies: state.discover.movies,
     pendingState: state.discover.pending,
     loadMorePendingState: state.discover.loadMorePending,
     loadMoreMoviesError: state.discover.loadMoreError,
     errorState: state.discover.error,
-    genres: state.discover.genres
-  }
-}
+    genres: state.discover.genres,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(moviesActions, dispatch)
-}
+  return bindActionCreators(moviesActions, dispatch);
+};
 
 DiscoverMovies.propTypes = {
   movies: PropTypes.array,
@@ -306,6 +331,9 @@ DiscoverMovies.propTypes = {
   loadMoreMoviesError: PropTypes.bool,
   errorState: PropTypes.bool,
   genres: PropTypes.array,
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiscoverMovies)
+export const DiscoverMoviesConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DiscoverMovies);

@@ -1,5 +1,5 @@
 export const UPCOMING_MOVIES_ACTIONS = {
-  SUCCESS: "getUpcomingMoviesSuccess",
-  PENDING: "getUpcomingMoviesPending",
-  ERROR: "getUpcomingMoviesError"
-}
+  SUCCESS: "GET_UPCOMING_MOVIES_SUCCESS",
+  PENDING: "GET_UPCOMING_MOVIES_REQUEST",
+  ERROR: "GET_UPCOMING_MOVIES_ERROR",
+};
