@@ -2,19 +2,19 @@ import { createSelector } from "reselect";
 
 const selectMoviesSearch = (state: any) => state.search;
 
-export const getSearchResults = createSelector(
+export const selectSearchResults = createSelector(
   [selectMoviesSearch],
-  (movie) => movie.searchResults
+  (search) => search.searchResults
 );
-export const getPendingSearch = createSelector(
+export const selectPendingSearch = createSelector(
   [selectMoviesSearch],
-  (movie) => movie.pending
+  (search) => search.pending
 );
-export const getErrorSearch = createSelector(
+export const selectErrorSearch = createSelector(
   [selectMoviesSearch],
-  (movie) => movie.error
+  (search) => search.error
 );
-export const getEmptySearch = createSelector(
+export const selectEmptySearch = createSelector(
   [selectMoviesSearch],
-  (movie) => movie.empty
+  (search) => search.empty
 );
