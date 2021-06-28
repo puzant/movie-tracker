@@ -1,8 +1,8 @@
 import { createSelector } from "reselect";
 
-const selectUpcomingMovies = (state: any) => state.upcomingMovies;
+const selectUpcomingMovies = (state: any) => state.upcoming;
 
 export const selectUpcomingMoives = createSelector(
   [selectUpcomingMovies],
-  (movies) => movies.upcomingMovies
+  (upcomingMovies) => upcomingMovies.data
 );

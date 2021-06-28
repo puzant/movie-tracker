@@ -2,7 +2,7 @@ import { handleActions } from "redux-actions";
 import { UPCOMING_MOVIES_ACTIONS } from "../actionTypes/upcomingMoviesActionTypes";
 
 export const initialState = {
-  upcomingMovies: [],
+  data: [],
   pending: false,
   error: false,
 };
@@ -15,7 +15,7 @@ const fetchUpcomingMoviesPending = (state) => ({
 const fetchUpcomingMoviesSuccess = (state, { payload }) => {
   return {
     ...state,
-    upcomingMovies: payload.upcomingMovies,
+    data: payload.upcomingMovies,
     pending: false,
     error: false,
   };

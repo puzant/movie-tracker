@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import upcomingMoviesActions from "redux/actions/upcomingMoviesActions";
+import { selectUpcomingMoives } from "redux/selectors/upcomingMovies";
 
 import { IMovie } from "api/Models";
 
@@ -18,12 +19,12 @@ import { Block, BlockGroup } from "components/common/block/block";
 export interface UpcomingMoviesProps {
   pending: boolean;
   error: boolean;
-  upcomingMovies: IMovie[];
+  data: IMovie[];
   fetchUpcomingMovies: () => void;
 }
 
 const UpcomingMovies = ({
-  upcomingMovies,
+  data,
   fetchUpcomingMovies,
   pending,
   error,
@@ -35,8 +36,8 @@ const UpcomingMovies = ({
   return (
     <BlockGroup gap={10}>
       <Block justify="center" layout="horizontal" wrapped>
-        {upcomingMovies &&
-          upcomingMovies?.map((ucm: IMovie) => (
+        {data &&
+          data?.map((ucm: IMovie) => (
             <StyledLink to={`/movie-overview/${ucm.id}`} key={ucm.id}>
               <Movie movie={ucm} key={ucm.id} />
             </StyledLink>
@@ -59,7 +60,7 @@ const StyledLink = styled(Link)`
 
 const mapStateToProps = (state: any) => {
   return {
-    upcomingMovies: state.upcoming.upcomingMovies,
+    data: selectUpcomingMoives(state),
     pending: state.upcoming.pending,
     error: state.upcoming.error,
   };
