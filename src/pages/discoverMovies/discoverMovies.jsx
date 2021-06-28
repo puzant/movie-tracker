@@ -63,6 +63,7 @@ const MovieGenre = styled.span`
   padding: 8px;
   border-radius: 15px;
   transition: 0.5s;
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
     background: #f5f0f0;
